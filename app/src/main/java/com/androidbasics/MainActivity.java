@@ -22,6 +22,16 @@ public class MainActivity extends AppCompatActivity {
       btn1.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+
+              if (getSupportFragmentManager().getFragments() !=null &&getSupportFragmentManager().getFragments().size()>0){
+                  for (int i=0; i<getSupportFragmentManager().getFragments().size();i++){
+                      Fragment fragment=getSupportFragmentManager().getFragments().get((i));
+                      if (fragment!=null){
+                          getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                      }
+                  }
+              }
+
               FragmentManager fragmentManager=  getSupportFragmentManager();
               FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
               fragmentTransaction.add(R.id.wrapper,new Tab1());
@@ -33,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (getSupportFragmentManager().getFragments() !=null &&getSupportFragmentManager().getFragments().size()>0){
+                    for (int i=0; i<getSupportFragmentManager().getFragments().size();i++){
+                        Fragment fragment=getSupportFragmentManager().getFragments().get((i));
+                        if (fragment!=null){
+                            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+                        }
+                    }
+                }
+
                 FragmentManager fragmentManager=  getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                 fragmentTransaction.add(R.id.wrapper,new Tab2());
