@@ -16,7 +16,7 @@ import com.google.gson.GsonBuilder;
 
 public class MainActivity extends AppCompatActivity
 {
-   private static final String url="http://10.0.2.2/volley_demo/fetch_demo.php";
+   private static final String url="http://192.168.43.54/volley_demo/fetch_demo.php";
    RecyclerView recview;
     @Override
     protected void onCreate(Bundle savedInstanceState)

@@ -36,8 +36,9 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     public void onBindViewHolder(@NonNull myviewholder holder, int position)
     {
          Datum datum=data[position];
-         holder.tv.setText(datum.getName());
-         Glide.with(holder.img.getContext()).load("http://10.0.2.2/volley_demo/images/"+datum.getImage()).into(holder.img);
+         holder.name.setText(datum.getName());
+         holder.desig.setText(datum.getDesig());
+         Glide.with(holder.img.getContext()).load("http://192.168.43.54/volley_demo/images/"+datum.getImage()).into(holder.img);
     }
 
     @Override
@@ -48,12 +49,13 @@ public class myadapter extends RecyclerView.Adapter<myadapter.myviewholder>
     public class myviewholder extends RecyclerView.ViewHolder
    {
         ImageView img;
-        TextView tv;
+        TextView name,desig;
        public myviewholder(@NonNull View itemView)
        {
            super(itemView);
            img=(ImageView)itemView.findViewById(R.id.imageholder);
-           tv=(TextView)itemView.findViewById(R.id.theader);
+           name=(TextView)itemView.findViewById(R.id.name);
+           desig=(TextView)itemView.findViewById(R.id.desig);
        }
    }
 }
