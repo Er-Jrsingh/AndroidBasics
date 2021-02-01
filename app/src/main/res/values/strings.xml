@@ -2,4 +2,9 @@
     <string name="app_name">AndroidBasics</string>
     <string name="tab_1">Tab 1</string>
     <string name="tab_2">Tab 2</string>
+    <string name="header">Sign Up</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="enter_username">Enter UserName</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="insert">Submit</string>
 </resources>

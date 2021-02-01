@@ -4,6 +4,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ff717e"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/header"
+                android:textColor="#29020A"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:background="#E84756"
+                />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_marginTop="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/t1"
+                android:textSize="20sp"
+                android:hint="@string/enter_your_name"/>
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_marginTop="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/t2"
+                android:textSize="20sp"
+                android:hint="@string/enter_username"
+                />
+
+            <EditText
+                android:layout_width="300dp"
+                android:layout_marginTop="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/t3"
+                android:textSize="20sp"
+                android:hint="@string/enter_password"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:textColor="#FFFFFF"
+                android:background="#F84444"
+                android:text="@string/insert"
+                android:id="@+id/submit"
+                android:textSize="12sp"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
