@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="Frag1">Hello Frag 1</string>
+    <string name="Frag2">Hello Frag 2</string>
+    <string name="Frag3">Hello Frag 3</string>
+    <string name="chat">Chat</string>
+    <string name="call">Call</string>
+    <string name="status">Status</string>
 </resources>
