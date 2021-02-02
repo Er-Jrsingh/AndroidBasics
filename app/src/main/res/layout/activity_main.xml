@@ -1,9 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@color/white"
     tools:context=".MainActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/enter_your_name"
+        android:id="@+id/t1"
+        android:textColor="#000"
+        android:autofillHints="name"
+        android:inputType="text" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:layout_marginTop="20sp"
+        android:hint="@string/enter_your_designation"
+        android:id="@+id/t2"
+        android:textColor="#000"
+        tools:ignore="Auto,TextFields"
+        android:autofillHints="Designation" />
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
+        app:srcCompat="@drawable/ic_baseline_add_a_photo_24"
+        tools:ignore="ContentDescription,VectorDrawableCompat" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/browse_image"
+        android:id="@+id/browse"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:text="@string/upload_to_server"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:id="@+id/upload"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 </androidx.appcompat.widget.LinearLayoutCompat>
