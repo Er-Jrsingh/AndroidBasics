@@ -2,4 +2,6 @@
     <string name="app_name">AndroidBasics</string>
     <string name="tab_1">Tab 1</string>
     <string name="tab_2">Tab 2</string>
+    <string name="welcome">Hola! I Am Home Screen</string>
+    <string name="logoo">logoo</string>
 </resources>
