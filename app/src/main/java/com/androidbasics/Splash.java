@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Splash extends AppCompatActivity {
 
     @Override
@@ -15,9 +18,21 @@ public class Splash extends AppCompatActivity {
 
         /*          Method  First       */
 
-        SystemClock.sleep(2000);
-        startActivity(new Intent(this,MainActivity.class));
-        finish();
+//        SystemClock.sleep(2000);
+//        startActivity(new Intent(this,MainActivity.class));
+//        finish();
+
+        /*          Method  Second       */
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent =new Intent(Splash.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        },3000);
 
     }
 }
