@@ -24,15 +24,32 @@ public class Splash extends AppCompatActivity {
 
         /*          Method  Second       */
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent =new Intent(Splash.this,MainActivity.class);
-                startActivity(intent);
-                finish();
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Intent intent =new Intent(Splash.this,MainActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        },3000);
+
+        /*          Method  Third       */
+
+        Thread thread=new Thread(){
+            public void run(){
+                try {
+                    sleep(1000);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                finally {
+                    Intent intent=new Intent(Splash.this,MainActivity.class);
+                    startActivity(intent);
+                }
             }
-        },3000);
+        };thread.start();
 
     }
 }
