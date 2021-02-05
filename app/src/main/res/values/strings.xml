@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="app_name" >Android Basics</string>
+    <string name="head_txt">Welcome To Java World</string>
+    <string name="btn_txt">Nxt</string>
+    <string name="img">img</string>
+    <string name="pranama">Pranama</string>
+    <string name="spimg" />
 </resources>
