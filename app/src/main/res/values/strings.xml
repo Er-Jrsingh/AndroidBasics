@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="app_name">Android Basics</string>
+    <string name="txt">Welcome To Image Slider</string>
 </resources>
