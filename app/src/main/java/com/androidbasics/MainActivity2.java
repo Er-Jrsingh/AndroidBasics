@@ -6,18 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity2 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
     }
-
-    public void nxty(View view) {
-        Intent intent=new Intent(this,MainActivity2.class);
+    public void prev(View view) {
+        Intent intent=new Intent(this,MainActivity.class);
         startActivity(intent);
-        overridePendingTransition(R.anim.right_slide_in,R.anim.left_slide_out);
+        overridePendingTransition(R.anim.left_slide_in,R.anim.right_slide_out);
 
     }
 }
