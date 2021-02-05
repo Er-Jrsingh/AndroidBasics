@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 
 import java.util.Timer;
@@ -36,20 +37,30 @@ public class Splash extends AppCompatActivity {
 
         /*          Method  Third       */
 
-        Thread thread=new Thread(){
-            public void run(){
-                try {
-                    sleep(1000);
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-                finally {
-                    Intent intent=new Intent(Splash.this,MainActivity.class);
-                    startActivity(intent);
-                }
+//        Thread thread=new Thread(){
+//            public void run(){
+//                try {
+//                    sleep(1000);
+//                }
+//                catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//                finally {
+//                    Intent intent=new Intent(Splash.this,MainActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        };thread.start();
+
+        /*          Method  Fourth       */
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
             }
-        };thread.start();
+        }, 5000);
 
     }
 }
