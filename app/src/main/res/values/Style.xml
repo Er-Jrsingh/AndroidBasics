@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="toastTheme">
+        <item name="stTextBold">true</item>
+        <item name="stTextColor">#FAFAFD</item>
+        <!--        <item name="stFont">@font/poppins</item>-->
+        <item name="stTextSize">14sp</item>
+        <item name="stColorBackground">#A50128</item>
+        <item name="stSolidBackground">true</item>
+        <item name="stStrokeWidth">3dp</item>
+        <item name="stStrokeColor">#FD004F</item>
+        <item name="stIconStart">@drawable/ico</item>
+        <item name="stIconEnd">@drawable/ico</item>
+        <item name="stLength">LONG</item> LONG or SHORT
+        <item name="stGravity">center</item> top or center
+        <item name="stRadius">20dp</item>
+    </style>
+</resources>
