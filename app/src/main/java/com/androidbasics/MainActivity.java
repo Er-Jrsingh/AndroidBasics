@@ -10,55 +10,35 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn1;
-    Button btn2;
+    Button tab1;
+    Button tab2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btn1=findViewById(R.id.tab1);
-      btn2=  findViewById(R.id.tab2);
+        tab1 = findViewById(R.id.tab1);
+        tab2 = findViewById(R.id.tab2);
 
-      btn1.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-
-              if (getSupportFragmentManager().getFragments() !=null &&getSupportFragmentManager().getFragments().size()>0){
-                  for (int i=0; i<getSupportFragmentManager().getFragments().size();i++){
-                      Fragment fragment=getSupportFragmentManager().getFragments().get((i));
-                      if (fragment!=null){
-                          getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                      }
-                  }
-              }
-
-              FragmentManager fragmentManager=  getSupportFragmentManager();
-              FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-              fragmentTransaction.add(R.id.wrapper,new Tab1());
-              fragmentTransaction.addToBackStack(null);
-              fragmentTransaction.commit();
-          }
-      });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
+        tab1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                if (getSupportFragmentManager().getFragments() !=null &&getSupportFragmentManager().getFragments().size()>0){
-                    for (int i=0; i<getSupportFragmentManager().getFragments().size();i++){
-                        Fragment fragment=getSupportFragmentManager().getFragments().get((i));
-                        if (fragment!=null){
-                            getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                        }
-                    }
-                }
-
-                FragmentManager fragmentManager=  getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.wrapper,new Tab2());
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+            public void onClick(View view) {
+                Tab1 tb1 = new Tab1();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.wrapper, tb1);
+                transaction.commit();
             }
         });
+
+        tab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tab2 aboutFragment = new Tab2();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.wrapper, aboutFragment);
+                transaction.commit();
+            }
+        });
+
     }
 }
