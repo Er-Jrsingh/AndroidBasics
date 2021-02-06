@@ -24,7 +24,13 @@ public class MainActivity extends AppCompatActivity {
 
                 /*             Method 1         */
 
-                Toast.makeText(getApplicationContext(),"Hola!! Toast",Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(),"Hola!! Toast",Toast.LENGTH_LONG).show();
+
+                /*             Method 2        */
+
+                Toast toast=  Toast.makeText(getApplicationContext(),"Toast",Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP|Gravity.START,50,200);
+                toast.show();
 
             }
         });
