@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Hide Status Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        //Hide Action Bar
+        getSupportActionBar().hide();
     }
 }
