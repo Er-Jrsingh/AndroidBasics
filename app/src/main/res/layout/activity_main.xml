@@ -4,6 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/rect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rectangle"
+        android:layout_margin="20dp"
+
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/round"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/round"
+        android:background="@drawable/rect_btn"
+        android:layout_margin="20dp"
+        android:padding="10dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
