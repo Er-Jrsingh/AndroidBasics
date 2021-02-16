@@ -1,5 +1,15 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="tab_1">Messages</string>
+    <string name="tab_2">Status</string>
+    <string name="tab_3">Calls</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="home">Home</string>
+    <string name="call">Call</string>
+    <string name="setting">Setting</string>
+    <string name="chats">CHATS</string>
+    <string name="status">STATUS</string>
+    <string name="calls">CALLS</string>
+    <string name="header">Computer Science and Engineering</string>
 </resources>
