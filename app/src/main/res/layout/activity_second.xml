@@ -12,12 +12,12 @@
         android:layout_height="wrap_content"
         android:textColor="@color/teal_200"
         android:textStyle="bold"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:layout_marginTop="50sp"
-        android:text="@string/title_home"/>
+        android:text="@string/title_sec"/>
 
     <EditText
-        android:id="@+id/edtHome"
+        android:id="@+id/edtSec"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"/>
@@ -28,10 +28,10 @@
         android:textColor="@color/teal_700"
         android:textSize="16sp"
         android:layout_marginTop="50dp"
-        android:text="@string/home"/>
+        android:text="@string/sec"/>
 
     <TextView
-        android:id="@+id/rtnSec"
+        android:id="@+id/dataHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/purple_500"
@@ -39,10 +39,10 @@
         android:text=""/>
 
     <Button
-        android:id="@+id/nxty"
+        android:id="@+id/btnHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
-        android:text="@string/btn_nxt"/>
+        android:text="@string/btn_home"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

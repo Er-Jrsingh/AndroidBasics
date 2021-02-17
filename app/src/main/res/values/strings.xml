@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="title_home">Welcome To Home</string>
+    <string name="title_sec">Hola! I Am Second Activity</string>
+    <string name="home">Data Return From Second Activity :- </string>
+    <string name="sec">Data From Home Activity :- </string>
+    <string name="btn_nxt">Nxt</string>
+    <string name="btn_home">Go Home</string>
 </resources>
