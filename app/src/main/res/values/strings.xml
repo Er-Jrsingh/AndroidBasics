@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
-    <string name="share">Share</string>
-    <string name="you_entered">You Enterd</string>
-    <string name="write_text">Enter Text Here</string>
+    <string name="url">Url</string>
+    <string name="call">Call</string>
+    <string name="send">Send</string>
+    <string name="write_text">Enter Text To Share</string>
 </resources>
