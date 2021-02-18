@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Uri sms=Uri.parse("smsto:9691177");
                 Intent smsIntent = new Intent(Intent.ACTION_SENDTO,sms);
+                smsIntent.putExtra("sms_body","Hola ! Share My App ");
                 if(smsIntent.resolveActivity(getPackageManager())!=null) {
                     startActivity(smsIntent);
                 }
