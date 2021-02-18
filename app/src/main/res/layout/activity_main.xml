@@ -31,5 +31,15 @@
         android:layout_marginTop="20dp"
         android:text="@string/url"
         />
+    <Button
+        android:id="@+id/sms"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textSize="12sp"
+        android:layout_marginTop="20dp"
+        android:text="@string/sms"
+        />
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

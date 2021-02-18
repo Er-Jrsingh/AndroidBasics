@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.input);
         Button share = findViewById(R.id.share);
         Button url = findViewById(R.id.url);
+        Button sms = findViewById(R.id.sms);
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,15 +41,29 @@ public class MainActivity extends AppCompatActivity {
             @SuppressLint("QueryPermissionsNeeded")
             @Override
             public void onClick(View v) {
-                Uri uri=Uri.parse("https://stackoverflow.com");
-                Intent webIntent = new Intent(Intent.ACTION_VIEW,uri);
+                Uri url=Uri.parse("https://stackoverflow.com");
+                Intent webIntent = new Intent(Intent.ACTION_VIEW,url);
                 if(webIntent.resolveActivity(getPackageManager())!=null) {
                     startActivity(webIntent);
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"App Not Found!!",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
 
+        sms.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("QueryPermissionsNeeded")
+            @Override
+            public void onClick(View v) {
+                Uri sms=Uri.parse("smsto:9691177");
+                Intent smsIntent = new Intent(Intent.ACTION_SENDTO,sms);
+                if(smsIntent.resolveActivity(getPackageManager())!=null) {
+                    startActivity(smsIntent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"App Not Found!!",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
