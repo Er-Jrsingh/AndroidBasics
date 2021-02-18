@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Button share = findViewById(R.id.share);
         Button url = findViewById(R.id.url);
         Button sms = findViewById(R.id.sms);
+        Button email = findViewById(R.id.email);
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,27 @@ public class MainActivity extends AppCompatActivity {
                 smsIntent.putExtra("sms_body","Hola ! Share My App ");
                 if(smsIntent.resolveActivity(getPackageManager())!=null) {
                     startActivity(smsIntent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"App Not Found!!",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        email.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("QueryPermissionsNeeded")
+            @Override
+            public void onClick(View v) {
+
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{ "generalpurposeduke@gmail.com"});
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Hola!!");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "How Are You");
+                emailIntent.setType("message/rfc822");
+
+                if(emailIntent.resolveActivity(getPackageManager())!=null) {
+//                    startActivity(emailIntent);
+                    startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"App Not Found!!",Toast.LENGTH_LONG).show();

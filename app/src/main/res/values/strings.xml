@@ -5,4 +5,5 @@
     <string name="sms">Send Sms</string>
     <string name="send">Send</string>
     <string name="write_text">Enter Text To Share</string>
+    <string name="email">Send Email</string>
 </resources>
