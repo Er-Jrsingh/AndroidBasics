@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
     <string name="url">Open Url</string>
-    <string name="call">Call</string>
+    <string name="dial">Dial</string>
     <string name="sms">Send Sms</string>
-    <string name="send">Send</string>
+    <string name="send">Send Text</string>
     <string name="write_text">Enter Text To Share</string>
     <string name="email">Send Email</string>
 </resources>

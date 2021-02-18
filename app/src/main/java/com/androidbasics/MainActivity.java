@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button url = findViewById(R.id.url);
         Button sms = findViewById(R.id.sms);
         Button email = findViewById(R.id.email);
+        Button call = findViewById(R.id.dial);
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +87,20 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(getApplicationContext(),"App Not Found!!",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        call.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("QueryPermissionsNeeded")
+            @Override
+            public void onClick(View v) {
+
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+"9691778892"));
+
+                try {
+                    startActivity(callIntent);
+                } catch (Exception ex) {
+                    Toast.makeText(getApplicationContext(), "Could not find an activity to place the call.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
