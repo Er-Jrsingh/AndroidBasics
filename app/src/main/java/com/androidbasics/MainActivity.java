@@ -1,6 +1,7 @@
 package com.androidbasics;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         editText = findViewById(R.id.input);
         Button share = findViewById(R.id.share);
+        Button url = findViewById(R.id.url);
 
         share.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
                 sendIntent.setType("text/plain");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, name);
                 startActivity(sendIntent);
+            }
+        });
+        url.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri=Uri.parse("https://stackoverflow.com");
+                Intent webIntent = new Intent(Intent.ACTION_VIEW,uri);
+                startActivity(webIntent);
+
             }
         });
     }
