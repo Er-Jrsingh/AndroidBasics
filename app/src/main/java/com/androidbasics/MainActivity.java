@@ -1,11 +1,13 @@
 package com.androidbasics;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,11 +37,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         url.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("QueryPermissionsNeeded")
             @Override
             public void onClick(View v) {
                 Uri uri=Uri.parse("https://stackoverflow.com");
                 Intent webIntent = new Intent(Intent.ACTION_VIEW,uri);
-                startActivity(webIntent);
+                if(webIntent.resolveActivity(getPackageManager())!=null) {
+                    startActivity(webIntent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"App Not Found!!",Toast.LENGTH_LONG).show();
+                }
 
             }
         });
