@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                TextView textView=findViewById(R.id.new_view_tv);
+                LayoutInflater inflater =getLayoutInflater();       //gives current context(main activity) associated Inflater
+                View view=inflater.inflate(R.layout.new_view,null);
                 LinearLayout linearLayout=findViewById(R.id.linearLayout_main);
-                linearLayout.addView(textView);
+                linearLayout.addView(view);
             }
         });
     }
