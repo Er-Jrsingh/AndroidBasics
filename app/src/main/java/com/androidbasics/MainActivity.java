@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.zip.Inflater;
 
@@ -22,12 +23,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               LayoutInflater layoutInflater=new LayoutInflater() {
-                   @Override
-                   public LayoutInflater cloneInContext(Context newContext) {
-                       return null;
-                   }
-               }
+
+                TextView textView=findViewById(R.id.new_view_tv);
+                LinearLayout linearLayout=findViewById(R.id.linearLayout_main);
+                linearLayout.addView(textView);
             }
         });
     }
