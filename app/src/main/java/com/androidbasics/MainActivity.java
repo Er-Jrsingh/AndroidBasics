@@ -24,9 +24,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 LayoutInflater inflater =getLayoutInflater();       //gives current context(main activity) associated Inflater
-                View view=inflater.inflate(R.layout.new_layout,null);
+                View view =inflater.inflate(R.layout.new_layout,null);
+
+                TextView textView=view.findViewById(R.id.newLayoutTv);  //Extract Text View From Newly Created View(new_layout)
                 LinearLayout linearLayout=findViewById(R.id.linearLayout_main);
-                linearLayout.addView(view);
+                linearLayout.addView(textView);
             }
         });
     }
