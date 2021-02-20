@@ -1,8 +1,5 @@
 package com.androidbasics;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +7,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.zip.Inflater;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,11 +21,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 LayoutInflater inflater =getLayoutInflater();       //gives current context(main activity) associated Inflater
-                View view =inflater.inflate(R.layout.new_layout,null);
+                LinearLayout linearLayout_main=findViewById(R.id.linearLayout_main);
+                View view =inflater.inflate(R.layout.new_view,linearLayout_main); //Here We add  linearLayout_main as parent
 
-                TextView textView=view.findViewById(R.id.newLayoutTv);  //Extract Text View From Newly Created View(new_layout)
-                LinearLayout linearLayout=findViewById(R.id.linearLayout_main);
-                linearLayout.addView(textView);
+//                TextView textView=view.findViewById(R.id.newLayoutTv);  //Extract Text View From Newly Created View(new_layout)
+//                linearLayout.addView(textView);
+
+
+
             }
         });
     }
