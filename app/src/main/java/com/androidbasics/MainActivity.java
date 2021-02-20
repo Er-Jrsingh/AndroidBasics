@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
                 LayoutInflater inflater =getLayoutInflater();       //gives current context(main activity) associated Inflater
                 LinearLayout linearLayout_main=findViewById(R.id.linearLayout_main);
-                View view =inflater.inflate(R.layout.new_view,linearLayout_main); //Here We add  linearLayout_main as parent
+                View view =inflater.inflate(R.layout.new_layout,linearLayout_main); //Here We add  linearLayout_main as parent
 
 //                TextView textView=view.findViewById(R.id.newLayoutTv);  //Extract Text View From Newly Created View(new_layout)
 //                linearLayout.addView(textView);
