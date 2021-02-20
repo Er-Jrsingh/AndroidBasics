@@ -12,5 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textSize="30sp"
+        android:textColor="@color/white"
         android:text="@string/new_linear_layout" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

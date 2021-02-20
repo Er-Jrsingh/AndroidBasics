@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 LayoutInflater inflater =getLayoutInflater();       //gives current context(main activity) associated Inflater
-                View view=inflater.inflate(R.layout.new_view,null);
+                View view=inflater.inflate(R.layout.new_layout,null);
                 LinearLayout linearLayout=findViewById(R.id.linearLayout_main);
                 linearLayout.addView(view);
             }
