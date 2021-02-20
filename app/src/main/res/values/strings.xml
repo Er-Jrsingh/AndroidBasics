@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="backup">Backup</string>
+    <string name="restore">Restore</string>
+    <string name="delete">Delete</string>
+    <string name="setting">Setting</string>
+    <string name="hola_world">Hola!! World</string>
+
+
 </resources>

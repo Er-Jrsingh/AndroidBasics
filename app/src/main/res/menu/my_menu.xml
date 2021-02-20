@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="@string/backup"
+        android:id="@+id/backup"
+        android:orderInCategory="101"
+        android:icon="@drawable/ic_baseline_backup_24"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:title="@string/restore"
+        android:id="@+id/restore"
+        android:orderInCategory="102"
+        android:icon="@drawable/ic_baseline_settings_backup_restore_24"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:title="@string/delete"
+        android:id="@+id/delete"
+        android:orderInCategory="103"
+        android:icon="@drawable/ic_baseline_auto_delete_24"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:title="@string/setting"
+        android:id="@+id/setting"
+        android:orderInCategory="104"
+        android:icon="@drawable/ic_baseline_settings_24"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>
