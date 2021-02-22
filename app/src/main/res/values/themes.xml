@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.AndroidBasics" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#49F4A5</item>
+        <item name="colorPrimary">#00CD6F</item>
         <item name="colorPrimaryVariant">#31ED7F</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->

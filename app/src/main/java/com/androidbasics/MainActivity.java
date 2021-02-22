@@ -6,6 +6,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 
@@ -51,12 +52,19 @@ public class MainActivity extends AppCompatActivity {
         builder.addAction(action);
 
         // Notification BigText Style
-        NotificationCompat.BigTextStyle bigTextStyle=new NotificationCompat.BigTextStyle();
-        bigTextStyle.setBigContentTitle("BigTexty");
-        bigTextStyle.bigText("Hello Ji Kaise Ho Ji  Saare Ke Saare ");
+//        NotificationCompat.BigTextStyle bigTextStyle=new NotificationCompat.BigTextStyle();
+//        bigTextStyle.setBigContentTitle("BigTexty");
+//        bigTextStyle.bigText("Hello Ji Kaise Ho Ji  Saare Ke Saare ");
 
         //pass BigTextStyle To Notification Builder
-        builder.setStyle(bigTextStyle);
+//        builder.setStyle(bigTextStyle);
+
+        // Notification BigPictureStyle
+        NotificationCompat.BigPictureStyle bigPictureStyle=new NotificationCompat.BigPictureStyle();
+        bigPictureStyle.bigPicture(BitmapFactory.decodeResource(getResources(),R.mipmap.capri));
+
+        //pass BigTextStyle To Notification Builder
+        builder.setStyle(bigPictureStyle);
 
         //pass notification to the notification manager with its id to show the notification
         NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

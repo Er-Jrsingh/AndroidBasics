@@ -11,7 +11,7 @@
        android:id="@+id/toolBar"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:background="@color/teal_200"/>
+       android:background="#49F4A5"/>
 
     <TextView
         android:id="@+id/tv"
@@ -20,7 +20,7 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
     android:text="@string/targetText"
-    android:textColor="@color/teal_200"
+    android:textColor="#49F4A5"
         android:textSize="25sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -28,9 +28,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="250dp"
         android:contentDescription="@string/floatact"
-        android:src="@drawable/ic_launcher_foreground"
-        app:maxImageSize="50dp" />
+        android:backgroundTint="#49F4A5"
+        android:src="@mipmap/capri"
+        app:maxImageSize="40dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
