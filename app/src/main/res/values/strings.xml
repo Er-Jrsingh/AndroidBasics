@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="btnHome">Show Notification </string>
+    <string name="targetText">You Are Coming By Clicking Notification</string>
+    <string name="floatact">floatAct</string>
 </resources>
