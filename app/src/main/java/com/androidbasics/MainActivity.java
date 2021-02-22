@@ -50,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
         androidx.core.app.NotificationCompat.Action action=actionBuilder.build();
         builder.addAction(action);
 
+        // Notification BigText Style
+        NotificationCompat.BigTextStyle bigTextStyle=new NotificationCompat.BigTextStyle();
+        bigTextStyle.setBigContentTitle("BigTexty");
+        bigTextStyle.bigText("Hello Ji Kaise Ho Ji  Saare Ke Saare ");
+
+        //pass BigTextStyle To Notification Builder
+        builder.setStyle(bigTextStyle);
+
         //pass notification to the notification manager with its id to show the notification
         NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.notify(NOTIFY_ID,notification);
