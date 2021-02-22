@@ -20,20 +20,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showNotification(View view) {
+        //create notification builder
         NotificationCompat.Builder builder=new  NotificationCompat.Builder(this);
 
         //must For Any Notification
-        builder.setSmallIcon(R.drawable.ic_launcher_foreground);
-        builder.setContentTitle("Hola !!");
+        builder.setSmallIcon(R.drawable.construction_lady);
+        builder.setContentTitle("Hola ! !");
         builder.setContentText("To Kaise Hai Aap Log");
 
+        //create pending intent to launch target activity(no need for artificial backspace)
         Intent intent=new Intent(this,TargetActivity.class);
         intent.putExtra("key",NOTIFY_ID);
         PendingIntent pendingIntent=PendingIntent.getActivity(this,2589,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+
+        //set the pending intent in builder
         builder.setContentIntent(pendingIntent);
+
+        //build notification from the builder
         Notification notification=builder.build();
+
+        //Setup Notification Action(Method 1 Deprecated)
+        builder.addAction(R.mipmap.icon_one,"reply",pendingIntent);
+        builder.addAction(R.mipmap.icon_two,"Mark as Read",pendingIntent);
+
+        //pass notification to the notification manager with its id to show the notification
         NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.notify(NOTIFY_ID,notification);
-
     }
 }
