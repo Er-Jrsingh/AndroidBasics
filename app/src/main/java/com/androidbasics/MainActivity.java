@@ -11,7 +11,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static  final  int NOTIFY_ID=202521232;
+    private static  final  int NOTIFY_ID=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +39,16 @@ public class MainActivity extends AppCompatActivity {
         //build notification from the builder
         Notification notification=builder.build();
 
-        //Setup Notification Action(Method 1 Deprecated)
-        builder.addAction(R.mipmap.icon_one,"reply",pendingIntent);
-        builder.addAction(R.mipmap.icon_two,"Mark as Read",pendingIntent);
+        //Setup Notification Action(Method 1 Deprecated API 23)
+//        builder.addAction(R.mipmap.icon_one,"reply",pendingIntent);
+//        builder.addAction(R.mipmap.icon_two,"Mark as Read",pendingIntent);
+
+        //Setup Notification Action(Method 2)
+
+        NotificationCompat.Action.Builder actionBuilder=new NotificationCompat.Action.Builder(R.mipmap.icon_one,"reply",pendingIntent);
+//        android.support.v4.app.NotificationCompat.Action action=actionBuilder.build();
+        androidx.core.app.NotificationCompat.Action action=actionBuilder.build();
+        builder.addAction(action);
 
         //pass notification to the notification manager with its id to show the notification
         NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
