@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,7 +18,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button captImage ,readContact;
+    private Button captImage ,readContact,netStat;
 //    private boolean mPermission;
     private int REQ_CODE=101;
 
@@ -29,7 +32,15 @@ public class MainActivity extends AppCompatActivity {
         captImage.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { captImage(); }});
         readContact =findViewById(R.id.readContact);
         readContact.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { readContact(); }});
+        netStat =findViewById(R.id.netStatus);
+        netStat.setOnClickListener(new View.OnClickListener() {@Override public void onClick(View v) { internetStatus(); }});
+    }
 
+    private void internetStatus() {
+        ConnectivityManager connectivityManager= (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork=connectivityManager.getActiveNetworkInfo();
+        boolean isConnected=activeNetwork!=null&&activeNetwork.isConnectedOrConnecting();
+        Toast.makeText(this,"Internet On "+isConnected,Toast.LENGTH_SHORT).show();
     }
 
 
