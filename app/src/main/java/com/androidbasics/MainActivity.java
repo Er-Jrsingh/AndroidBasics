@@ -15,7 +15,7 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static  final  int NOTIFY_ID=0;
+    private static int NOTIFY_ID=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +38,10 @@ public class MainActivity extends AppCompatActivity {
         long[] vibrate={500,100,500,100};
         builder.setVibrate(vibrate);
 
-
-
         //create pending intent to launch target activity(no need for artificial backspace)
         Intent intent=new Intent(this,TargetActivity.class);
         intent.putExtra("key",NOTIFY_ID);
-        PendingIntent pendingIntent=PendingIntent.getActivity(this,2589,intent,PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent pendingIntent=PendingIntent.getActivity(this,2589,intent,PendingIntent.FLAG_UPDATE_CURRENT);
 
         //set the pending intent in builder
         builder.setContentIntent(pendingIntent);
@@ -80,5 +78,6 @@ public class MainActivity extends AppCompatActivity {
         //pass notification to the notification manager with its id to show the notification
         NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         manager.notify(NOTIFY_ID,notification);
+        NOTIFY_ID++;
     }
 }
