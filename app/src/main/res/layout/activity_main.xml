@@ -1,9 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/netStatus"
+        android:layout_width="300dp"
+        app:cornerRadius="25dp"
+        android:layout_height="wrap_content"
+        android:text="@string/netStat"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/captureImg"
+        android:layout_width="300dp"
+        app:cornerRadius="25dp"
+        android:layout_height="wrap_content"
+        android:text="@string/capt"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/readContact"
+        android:layout_width="300dp"
+        app:cornerRadius="25dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/cont"
+         />
+
+    <Button
+        android:id="@+id/writeFile"
+        android:layout_width="300dp"
+        app:cornerRadius="25dp"
+        android:layout_height="wrap_content"
+        android:text="@string/file"
+        android:padding="10dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
