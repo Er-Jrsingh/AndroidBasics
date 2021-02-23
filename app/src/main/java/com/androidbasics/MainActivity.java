@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         builder.setSound(soundUri);
         long[] vibrate={500,100,500,100};
         builder.setVibrate(vibrate);
+//        builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+//        builder.setVisibility(NotificationCompat.VISIBILITY_PRIVATE);
+        builder.setVisibility(NotificationCompat.VISIBILITY_SECRET);
 
         //create pending intent to launch target activity(no need for artificial backspace)
         Intent intent=new Intent(this,TargetActivity.class);
