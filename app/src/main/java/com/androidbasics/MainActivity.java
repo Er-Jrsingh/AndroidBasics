@@ -7,6 +7,9 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         builder.setSmallIcon(R.drawable.construction_lady);
         builder.setContentTitle("Hola ! !");
         builder.setContentText("To Kaise Hai Aap Log");
+        //More Properties Of Notification
+        builder.setLights(Color.MAGENTA,200,200);
+        Uri soundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        builder.setSound(soundUri);
+        long[] vibrate={500,100,500,100};
+        builder.setVibrate(vibrate);
+
+
 
         //create pending intent to launch target activity(no need for artificial backspace)
         Intent intent=new Intent(this,TargetActivity.class);
