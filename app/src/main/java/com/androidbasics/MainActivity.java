@@ -3,9 +3,11 @@ package com.androidbasics;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,18 +25,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        initViews();
+
+        mBtnSignin.setOnClickListener(this::submitData);
+
+        mEmailLayout.setErrorTextColor(ColorStateList.valueOf(Color.BLUE));
+        mUsernameLayout.setErrorTextColor(ColorStateList.valueOf(Color.BLUE));
+        mPasswordLayout.setErrorTextColor(ColorStateList.valueOf(Color.BLUE));
+
+
+    }
+
+    private void initViews() {
         mEmailLayout = findViewById(R.id.et_email);
         mPasswordLayout = findViewById(R.id.et_password);
         mUsernameLayout = findViewById(R.id.et_username);
         mBtnSignin = findViewById(R.id.btn_validate);
-
-        mBtnSignin.setOnClickListener(this::submitData);
-
-        mEmailLayout.setErrorTextColor(ColorStateList.valueOf(Color.MAGENTA));
-        mUsernameLayout.setErrorTextColor(ColorStateList.valueOf(Color.MAGENTA));
-        mPasswordLayout.setErrorTextColor(ColorStateList.valueOf(Color.BLUE));
-
-
     }
 
     private boolean validateEmailAddress() {
@@ -43,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (email.isEmpty()) {
             mEmailLayout.setError("Email is required. Can't be empty.");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            mEmailLayout.setError("Invalid Email. Enter valid email address.");
             return false;
         } else {
             mEmailLayout.setError(null);
@@ -57,8 +66,17 @@ public class MainActivity extends AppCompatActivity {
         if (password.isEmpty()) {
             mPasswordLayout.setError("Password is required. Can't be empty.");
             return false;
-        } else if (password.length() < 8) {
-            mPasswordLayout.setError("Password is short. 8 Characters are required.");
+        } else if (!Utils.PASSWORD_UPPERCASE_PATTERN.matcher(password).matches()) {
+            mPasswordLayout.setError("Password is weak. Uppercase character required.");
+            return false;
+        } else if (!Utils.PASSWORD_LOWERCASE_PATTERN.matcher(password).matches()) {
+            mPasswordLayout.setError("Password is weak. Lowercase character required.");
+            return false;
+        } else if (!Utils.PASSWORD_NUMBER_PATTERN.matcher(password).matches()) {
+            mPasswordLayout.setError("Password is weak. Minimum 1 number is required.");
+            return false;
+        } else if (!Utils.PASSWORD_SPECIAL_CHARACTER_PATTERN.matcher(password).matches()) {
+            mPasswordLayout.setError("Password is weak. Minimum 1 Special character is required.");
             return false;
         } else {
             mPasswordLayout.setError(null);
