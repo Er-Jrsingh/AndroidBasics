@@ -6,7 +6,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    Fragi fragi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -14,8 +13,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     public void showFragi(View view) {
-        fragi = new Fragi();
+        Fragi fragi = new Fragi();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragi_container,fragi)
@@ -23,10 +23,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void removeFragi(View view) {
-        if (fragi != null) {
+        Fragi frag = (Fragi) getSupportFragmentManager()
+                .findFragmentById(R.id.fragi_container);
+
+        if (frag != null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .remove(fragi)
+                    .remove(frag)
                     .commit();
         }
     }
