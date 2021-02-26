@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         Fragi fragi = new Fragi();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragi_container,fragi)
+                .add(R.id.fragi_container,fragi,"frag_tag")
                 .commit();
     }
 
     public void removeFragi(View view) {
         Fragi frag = (Fragi) getSupportFragmentManager()
-                .findFragmentById(R.id.fragi_container);
+                .findFragmentByTag("frag_tag");
 
         if (frag != null) {
             getSupportFragmentManager()
