@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tab2">
+    tools:context=".Fragi">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -12,7 +12,7 @@
         android:textSize="40sp"
         android:textColor="@color/white"
         android:gravity="center"
-        android:text="@string/i_m_tab_2"
-        android:background="@color/teal_200"/>
+        android:text="@string/Fragi1"
+        android:background="@color/purple_500"/>
 
 </FrameLayout>

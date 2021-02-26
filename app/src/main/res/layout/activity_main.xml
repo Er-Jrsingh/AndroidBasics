@@ -14,8 +14,8 @@
         >
 
     <Button
-        android:text="@string/tab_1"
-        android:id="@+id/tab1"
+        android:text="@string/Add"
+        android:id="@+id/add"
         android:layout_weight="1"
         android:background="#FD1355"
         android:textColor="@color/white"
@@ -25,9 +25,9 @@
 
         <Button
 
-            android:text="@string/tab_2"
+            android:text="@string/remove"
             android:textColor="@color/white"
-            android:id="@+id/tab2"
+            android:id="@+id/remove"
             android:layout_weight="1"
             android:background="@color/teal_200"
             android:layout_height="wrap_content"
@@ -35,11 +35,13 @@
             tools:ignore="ButtonStyle" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/wrapper"
-        android:layout_marginTop="50dp"
-        android:orientation="vertical" />
+
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        class="com.androidbasics.Fragi"
+        android:layout_gravity="center"
+        tools:layout="@layout/fragi_1"
+        android:id="@+id/xml_fragi" />
 
 </FrameLayout>
