@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 public class Fragi extends Fragment {
 
@@ -21,6 +22,15 @@ public class Fragi extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragi_1, container, false);
+        View view=inflater.inflate(R.layout.fragi_1, container, false);
+        Bundle bundle=getArguments();
+        if (bundle!= null){
+            String name= bundle.getString("key","name missing");
+            TextView textView=view.findViewById(R.id.fragi_tv);
+            textView.setText("Hola ! ! "+ name+" I am Fragment");
+        }
+
+
+        return view;
     }
 }

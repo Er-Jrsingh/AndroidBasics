@@ -3,4 +3,5 @@
     <string name="Fragi1">I Am Fragment</string>
     <string name="Add">Add</string>
     <string name="remove">Remove</string>
+    <string name="edt_name">Enter Your Name</string>
 </resources>

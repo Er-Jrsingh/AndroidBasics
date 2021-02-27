@@ -45,9 +45,17 @@
 <!--        tools:layout="@layout/fragi_1"-->
 <!--        android:id="@+id/xml_fragi" />-->
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_name"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:hint="@string/edt_name"/>
+
     <FrameLayout
         android:id="@+id/fragi_container"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"/>
