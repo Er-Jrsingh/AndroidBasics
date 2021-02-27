@@ -3,5 +3,7 @@
     <string name="Fragi1">I Am Fragment</string>
     <string name="Add">Add</string>
     <string name="remove">Remove</string>
-    <string name="edt_name">Enter Your Name</string>
+    <string name="edt_name">Enter Your First Name</string>
+    <string name="edt_age">Enter Your Age</string>
+    <string name="edt_lname">Enter Your Last Name</string>
 </resources>
