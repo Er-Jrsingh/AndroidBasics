@@ -2,55 +2,49 @@ package com.androidbasics;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import androidx.annotation.NonNull;
 
-public class PersonBean implements Parcelable {
-    private String  f_name;
-    private String  l_name;
-    private int  age;
+class PersonBean implements Parcelable {
 
-    public PersonBean(String f_name, String l_name, int age) {
-        this.f_name = f_name;
-        this.l_name = l_name;
+    String firstName;
+    String lastName;
+    int age;
+
+    public PersonBean() {
+    }
+
+    public PersonBean(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
     }
 
-    public String getF_name() {
-        return f_name;
+    public String getFirstName() {
+
+        return firstName;
     }
 
-    public String getL_name() {
-        return l_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public int getAge() {
         return age;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.f_name);
-        dest.writeString(this.l_name);
-        dest.writeInt(this.age);
-    }
-
-    public void readFromParcel(Parcel source) {
-        this.f_name = source.readString();
-        this.l_name = source.readString();
-        this.age = source.readInt();
-    }
-
-    protected PersonBean(Parcel in) {
-        this.f_name = in.readString();
-        this.l_name = in.readString();
-        this.age = in.readInt();
-    }
-
-    public static final Parcelable.Creator<PersonBean> CREATOR = new Parcelable.Creator<PersonBean>() {
+    public static final Creator<PersonBean> CREATOR = new Creator<PersonBean>() {
         @Override
         public PersonBean createFromParcel(Parcel source) {
             return new PersonBean(source);
@@ -61,4 +55,30 @@ public class PersonBean implements Parcelable {
             return new PersonBean[size];
         }
     };
+
+    protected PersonBean(Parcel in) {
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.age = in.readInt();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.firstName +
+                "\n" + this.lastName +
+                "\n" + this.age;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.firstName);
+        dest.writeString(this.lastName);
+        dest.writeInt(this.age);
+    }
 }
