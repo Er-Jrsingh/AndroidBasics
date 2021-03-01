@@ -4,4 +4,6 @@
     <string name="tab_2">Tab 2</string>
     <string name="txt">Measuring Screen Size</string>
     <string name="screen_size">Screen Size</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="menu_txt">Hola! Menu Fragment</string>
 </resources>
