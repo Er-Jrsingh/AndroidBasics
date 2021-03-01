@@ -4,6 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt"
+        android:textSize="30sp"
+        android:textColor="@color/purple_500"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/screen_size"
+        android:onClick="showSize"
+        android:layout_marginTop="60dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
