@@ -21,10 +21,10 @@ public class Fragi extends Fragment {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragi_1, container, false);
-        TextView textView=view.findViewById(R.id.fragi_tv);
+        View view = inflater.inflate(R.layout.fragi_1, container, false);
+        TextView textView = view.findViewById(R.id.fragi_tv);
 
 //        Bundle bundle=getArguments();
 //        if (bundle!= null){
@@ -36,11 +36,11 @@ public class Fragi extends Fragment {
 //        TextView textView=view.findViewById(R.id.fragi_tv);
 //        textView.setText("Hola ! ! "+ name+" I am Fragment");
 
-        Bundle bundle=getArguments();
-        if (bundle!= null){
-            PersonBean personBean= bundle.getParcelable("key");
-            textView.setText(personBean.getF_name()+" ");
-            textView.append(personBean.getL_name()+"\n");
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            PersonBean personBean = bundle.getParcelable("key");
+            textView.setText(personBean.getF_name() + " ");
+            textView.append(personBean.getL_name() + "\n");
             textView.append(String.valueOf(personBean.getAge()));
         }
         return view;
@@ -49,4 +49,16 @@ public class Fragi extends Fragment {
 //    public  void  setData(String name){
 //        this.name=name;
 //    }
+
+    /* Creating Factory Method*/
+
+    public static Fragi fragInstance(PersonBean personBean) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("key", personBean);
+        Fragi fragi = new Fragi();
+        fragi.setArguments(bundle);
+
+        return fragi;
+    }
+
 }

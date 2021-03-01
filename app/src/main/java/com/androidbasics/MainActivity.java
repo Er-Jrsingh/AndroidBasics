@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     EditText mFname, mLname, mAge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,20 +26,22 @@ public class MainActivity extends AppCompatActivity {
         /*  Using Parsable  */
 
         String name = mFname.getText().toString();
-        String last= mLname.getText().toString();
-        int age=Integer.valueOf(mAge.getText().toString());
+        String last = mLname.getText().toString();
+        int age = Integer.valueOf(mAge.getText().toString());
 
-        PersonBean personBean=new PersonBean(name,last,age);
-        Bundle bundle=new Bundle();
-        bundle.putParcelable("key",personBean);
-
-
-        Fragi fragi = new Fragi();
-        fragi.setArguments(bundle);
+        PersonBean personBean = new PersonBean(name, last, age);
+//        Bundle bundle=new Bundle();
+//        bundle.putParcelable("key",personBean);
+//        Fragi fragi = new Fragi();
+//        fragi.setArguments(bundle);
 //        fragi.setData(name);
+
+        /* Call Factory Method Of Fragi Class*/
+        Fragi frag = Fragi.fragInstance(personBean);
+
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.fragi_container, fragi, "frag_tag")
+                .add(R.id.fragi_container, frag, "frag_tag")
                 .commit();
     }
 
