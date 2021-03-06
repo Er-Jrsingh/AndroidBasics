@@ -21,4 +21,11 @@
         android:layout_marginTop="20dp"
         android:text="@string/create_file"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_get_img"
+        android:layout_marginTop="20dp"
+        android:text="@string/write_img"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>
