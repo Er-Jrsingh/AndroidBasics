@@ -21,7 +21,7 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity {
 
     private EditText mFileContent;
-    private Button mBtnCreateFile,mBtnImg;
+    private Button mBtnCreateFile,mBtnImg,mBtnReadFile;
     public  static final String FILE_NAME="txt";
     public  static final String IMG_NAME="assetjitu";
 
@@ -38,9 +38,30 @@ public class MainActivity extends AppCompatActivity {
         mFileContent=findViewById(R.id.edt_txt);
         mBtnCreateFile=findViewById(R.id.btn_create);
         mBtnImg=findViewById(R.id.btn_get_img);
+        mBtnReadFile=findViewById(R.id.btn_read_file);
 
         this.mBtnCreateFile.setOnClickListener(this::createFile);
         this.mBtnImg.setOnClickListener(this::writeImg);
+        this.mBtnReadFile.setOnClickListener(this::readFile);
+    }
+
+    private void readFile(View view) {
+        StringBuilder stringBuilder=new StringBuilder();
+        InputStream inputStream=null;
+
+        try {
+            inputStream=openFileInput(FILE_NAME);
+
+            int read;
+            while ((read=inputStream.read())!=-1){
+                stringBuilder.append((char) read);
+            }
+
+            Toast.makeText(this,stringBuilder.toString(),Toast.LENGTH_LONG).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
