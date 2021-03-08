@@ -8,4 +8,6 @@
     <string name="read_file">Read File</string>
     <string name="read_img">Read Image</string>
     <string name="img">img</string>
+    <string name="file_list">Show Files</string>
+    <string name="del_file">Delete Text Files</string>
 </resources>
