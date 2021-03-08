@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,10 +22,11 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity {
 
     private EditText mFileContent;
-    private Button mBtnCreateFile, mBtnImg, mBtnReadFile, mBtnReadImg, mBtnShowFile, mBtnDeleteText;
+    private Button mBtnCreateFile, mBtnImg, mBtnReadFile, mBtnReadImg, mBtnShowFile, mBtnDeleteText,mBtnCreateDir,mBtnShowDir;
     public static final String FILE_NAME = "txt";
     public static final String IMG_NAME = "assetjitu";
     private ImageView mImageView;
+    private static final String DIR_NAME ="my_custom_dir";
 
 
     @Override
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         mImageView = findViewById(R.id.imgView);
         mBtnShowFile = findViewById(R.id.btn_list_file);
         mBtnDeleteText = findViewById(R.id.btn_del_list);
+        mBtnCreateDir = findViewById(R.id.btn_create_dir);
+        mBtnShowDir = findViewById(R.id.btn_show_dir_file);
 
         this.mBtnCreateFile.setOnClickListener(this::createFile);
         this.mBtnImg.setOnClickListener(this::writeImg);
@@ -50,6 +54,37 @@ public class MainActivity extends AppCompatActivity {
         this.mBtnReadImg.setOnClickListener(this::readImg);
         this.mBtnShowFile.setOnClickListener(this::showFiles);
         this.mBtnDeleteText.setOnClickListener(this::deleteText);
+        this.mBtnCreateDir.setOnClickListener(this::createDir);
+        this.mBtnShowDir.setOnClickListener(this::showDirFiles);
+
+    }
+
+    private void createDir(View view) {
+
+        File path=getDir(DIR_NAME,MODE_PRIVATE);
+        File file=new File(path,"hola.txt");
+        String message="Hola!! World";
+
+        try {
+            FileOutputStream fileOutputStream=new FileOutputStream(file);
+            fileOutputStream.write(message.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(this,"Directory Created Successfully",Toast.LENGTH_LONG).show();
+    }
+
+    private void showDirFiles(View view) {
+        File path=getDir(DIR_NAME,MODE_PRIVATE);
+        File file=new File(path,"hola.txt");
+
+        if (file.exists()){
+            Toast.makeText(this,"File Available",Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this,"Fatal : File Not Available",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void showFiles(View view) {

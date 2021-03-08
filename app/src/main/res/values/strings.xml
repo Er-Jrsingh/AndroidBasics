@@ -3,11 +3,13 @@
     <string name="tab_1">Tab 1</string>
     <string name="tab_2">Tab 2</string>
     <string name="enter_text_to_store">Enter Text To Store</string>
-    <string name="create_file">Create File</string>
+    <string name="create_file">Write File</string>
     <string name="write_img">Write Image</string>
     <string name="read_file">Read File</string>
     <string name="read_img">Read Image</string>
     <string name="img">img</string>
     <string name="file_list">Show Files</string>
     <string name="del_file">Delete Text Files</string>
+    <string name="create_dir">Create Directory</string>
+    <string name="dir_file">Show Directory Files</string>
 </resources>
