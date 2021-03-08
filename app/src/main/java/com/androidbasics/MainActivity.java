@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -21,9 +22,10 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity {
 
     private EditText mFileContent;
-    private Button mBtnCreateFile,mBtnImg,mBtnReadFile;
+    private Button mBtnCreateFile,mBtnImg,mBtnReadFile,mBtnReadImg;
     public  static final String FILE_NAME="txt";
     public  static final String IMG_NAME="assetjitu";
+    private ImageView imageView;
 
 
 
@@ -39,10 +41,28 @@ public class MainActivity extends AppCompatActivity {
         mBtnCreateFile=findViewById(R.id.btn_create);
         mBtnImg=findViewById(R.id.btn_get_img);
         mBtnReadFile=findViewById(R.id.btn_read_file);
+        mBtnReadImg=findViewById(R.id.btn_read_img);
+        imageView=findViewById(R.id.imgView);
 
         this.mBtnCreateFile.setOnClickListener(this::createFile);
         this.mBtnImg.setOnClickListener(this::writeImg);
         this.mBtnReadFile.setOnClickListener(this::readFile);
+        this.mBtnReadImg.setOnClickListener(this::readImg);
+    }
+
+    private void readImg(View view) {
+
+        Bitmap bitmap =null;
+        InputStream inputStream=null;
+
+        try {
+            inputStream=openFileInput(IMG_NAME+".jpg");
+            bitmap=BitmapFactory.decodeStream(inputStream);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        imageView.setImageBitmap(bitmap);
     }
 
     private void readFile(View view) {

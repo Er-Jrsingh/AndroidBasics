@@ -6,4 +6,6 @@
     <string name="create_file">Create File</string>
     <string name="write_img">Write Image</string>
     <string name="read_file">Read File</string>
+    <string name="read_img">Read Image</string>
+    <string name="img">img</string>
 </resources>
