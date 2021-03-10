@@ -48,6 +48,34 @@
                     android:text="@string/read_file_private"
                     tools:ignore="ButtonStyle" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Button
+                    android:id="@+id/btn_create_public"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/create_file_public"
+                    tools:ignore="ButtonStyle" />
+
+                <Button
+                    android:id="@+id/btn_read_public"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/read_file_public"
+                    tools:ignore="ButtonStyle" />
+
 
             </LinearLayout>
 
