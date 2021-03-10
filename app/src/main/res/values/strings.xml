@@ -2,4 +2,7 @@
     <string name="app_name">AndroidBasics</string>
     <string name="tab_1">Tab 1</string>
     <string name="tab_2">Tab 2</string>
+    <string name="enter_text_to_store">Enter Text To Store</string>
+    <string name="create_file_private">Create Private File</string>
+    <string name="read_file_private">Read Private File</string>
 </resources>
