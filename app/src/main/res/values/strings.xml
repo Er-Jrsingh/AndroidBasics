@@ -2,4 +2,9 @@
     <string name="app_name">AndroidBasics</string>
     <string name="tab_1">Tab 1</string>
     <string name="tab_2">Tab 2</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="submit">Sign In</string>
+    <string name="user_sign_in">Login Here</string>
+    <string name="home">Welcome To Home Screen</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
