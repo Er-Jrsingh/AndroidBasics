@@ -8,4 +8,5 @@
     <string name="home">Welcome To Home Screen</string>
     <string name="sign_out">Sign Out</string>
     <string name="dark">Dark Mode</string>
+    <string name="settings">Setting</string>
 </resources>
