@@ -7,4 +7,5 @@
     <string name="user_sign_in">Login Here</string>
     <string name="home">Welcome To Home Screen</string>
     <string name="sign_out">Sign Out</string>
+    <string name="dark">Dark Mode</string>
 </resources>

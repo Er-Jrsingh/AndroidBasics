@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/parent_layout"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="UseSwitchCompatOrMaterialXml">
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,6 +32,16 @@
         android:layout_margin="50dp"
         android:onClick="signOut"
         android:text="@string/sign_out"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_700"
+        android:padding="20dp"
+        android:text="@string/dark"
+        />
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
