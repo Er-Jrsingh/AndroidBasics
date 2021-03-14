@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private SwitchCompat aSwitch;
     private View mParent;
     private Button mBtnSetting;
+
+    /*      It Should Be Data Member Because It Is Strong Reference(Don't Destroy until Activity Exists) Where as local Listener is Weak Reference & Destroys With Activity      */
+    private SharedPreferences.OnSharedPreferenceChangeListener mPrefListener;
 
 
     @SuppressLint("SetTextI18n")
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*      Activity Preference(Default Preference Set)      */
+        /*      Activity Preference(Default Preference Set) Valid At Application Level    */
 
         mBtnSetting = findViewById(R.id.settings_btn);
         mBtnSetting.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +84,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        /*      Activity Preference(Default Preference Set)  Attach Listener to Shared Preference File     */
+
+        mPrefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                if (key.equals("user_name")) {
+                    String uName = sharedPreferences.getString(key, "Not Found");
+                    Toast.makeText(getApplicationContext(), uName, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        };
+
+        //  Register with DefaultSharedPreferences File
+        SharedPreferences settingPref = PreferenceManager.getDefaultSharedPreferences(this);
+        settingPref.registerOnSharedPreferenceChangeListener(mPrefListener);
 
     }
 
