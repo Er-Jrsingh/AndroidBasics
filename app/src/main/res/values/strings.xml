@@ -9,4 +9,9 @@
     <string name="sign_out">Sign Out</string>
     <string name="dark">Dark Mode</string>
     <string name="settings">Setting</string>
+    <string name="register">Registration</string>
+    <string name="enter_user_name">Enter User Name</string>
+    <string name="age">Enter Age</string>
+    <string name="save_to_preference">Save To Preference</string>
+    <string name="read_from_preference">Read From Preference</string>
 </resources>

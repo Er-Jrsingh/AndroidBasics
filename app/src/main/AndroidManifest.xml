@@ -10,7 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".SettingsActivity" android:theme="@style/Theme.Settings"/>
+        <activity
+            android:name=".Registration"
+            android:theme="@style/Theme.Register" />
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/Theme.Settings" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/Theme.Login">

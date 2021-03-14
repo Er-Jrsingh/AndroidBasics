@@ -107,7 +107,12 @@ public class MainActivity extends AppCompatActivity {
     public void signOut(View view) {
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
+    public void goToRegistration(View view) {
+        Intent intent = new Intent(MainActivity.this, Registration.class);
         startActivity(intent);
         finish();
     }
