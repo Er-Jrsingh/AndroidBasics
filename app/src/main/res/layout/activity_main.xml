@@ -53,6 +53,12 @@
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:onClick="goToRegistration"/>
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/del"
+        android:onClick="goToDelete"/>
 
 
 

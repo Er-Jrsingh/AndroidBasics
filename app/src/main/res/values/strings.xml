@@ -14,4 +14,7 @@
     <string name="age">Enter Age</string>
     <string name="save_to_preference">Save To Preference</string>
     <string name="read_from_preference">Read From Preference</string>
+    <string name="remove_from_preference">Remove From Preference</string>
+    <string name="remove_all_from_preference">Remove All From Preference</string>
+    <string name="del">Delete Preference</string>
 </resources>

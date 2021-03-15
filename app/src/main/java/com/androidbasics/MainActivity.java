@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         mParent = findViewById(R.id.parent_layout);
         SharedPreferences preferences = getPreferences(MODE_PRIVATE);
         boolean isChecked = preferences.getBoolean(COLOR_KEY, false);
-        mParent.setBackgroundColor(isChecked ? Color.DKGRAY : Color.WHITE);
+        mParent.setBackgroundColor(isChecked ? Color.BLACK : Color.WHITE);
         aSwitch.setChecked(isChecked);
 
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor1 = sharedPreferences.edit();
                 editor1.putBoolean(COLOR_KEY, isChecked);
                 editor1.apply();
-                mParent.setBackgroundColor(isChecked ? Color.DKGRAY : Color.WHITE);
+                mParent.setBackgroundColor(isChecked ? Color.BLACK : Color.WHITE);
             }
         });
 
@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-
                 startActivity(intent);
                 finish();
             }
@@ -113,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToRegistration(View view) {
         Intent intent = new Intent(MainActivity.this, Registration.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void goToDelete(View view) {
+        Intent intent = new Intent(MainActivity.this, DeleteValues.class);
         startActivity(intent);
         finish();
     }

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".DeleteValues"
+            android:theme="@style/Theme.Remove" />
+        <activity
             android:name=".Registration"
             android:theme="@style/Theme.Register" />
         <activity

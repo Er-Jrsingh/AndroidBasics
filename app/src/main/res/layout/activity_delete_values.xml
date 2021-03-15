@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".DeleteValues">
+
+
+    <EditText
+        android:id="@+id/edt_uName_delAct"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_user_name"
+        android:textColorHint="#1DE9B6"
+        tools:ignore="Autofill,TextFields" />
+
+    <EditText
+        android:id="@+id/edt_age_delAct"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/age"
+        android:textColorHint="#1DE9B6"
+        tools:ignore="Autofill,TextFields" />
+
+    <Button
+        android:id="@+id/save_btn_delAct"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="@string/save_to_preference" />
+
+    <Button
+        android:id="@+id/read_btn_delAct"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/read_from_preference" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:onClick="removeFile"
+        android:text="@string/remove_from_preference" />
+
+    <Button
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:onClick="removeAll"
+        android:text="@string/remove_all_from_preference" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
