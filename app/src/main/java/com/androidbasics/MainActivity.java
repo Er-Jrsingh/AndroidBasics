@@ -27,20 +27,21 @@ public class MainActivity extends AppCompatActivity {
 
         mDataList=SampleData.studentModelList;
 
-        for (StudentModel item:mDataList){
-            try {
+        if (mDataSource.getItemCount()==0) {                /*  To Removing Unique Constraint Problem  */
+            for (StudentModel item:mDataList){
+                try {
 
-                mDataSource.insertData(item);
-                Toast.makeText(getApplicationContext(),"Success... "+item,Toast.LENGTH_SHORT).show();
+                    mDataSource.insertData(item);
+                    Toast.makeText(getApplicationContext(),"Success... "+item,Toast.LENGTH_SHORT).show();
 
-            } catch (SQLiteException e) {
-                e.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Failed...",Toast.LENGTH_SHORT).show();
+                } catch (SQLiteException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getApplicationContext(),"Failed...",Toast.LENGTH_SHORT).show();
+                }
             }
-
+        } else {
+            Toast.makeText(this,"Data Already Inserted...",Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     /* when orientation Change db connection may interrupt so below method help us */

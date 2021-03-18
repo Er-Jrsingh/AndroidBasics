@@ -2,6 +2,7 @@ package com.androidbasics;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -49,5 +50,9 @@ public class DataSource {
         long inserted = sqLiteDatabase.insert(Schemas.TABLE_NAME,null,values);
 
         Log.w(TAG,"InsertedItem "+inserted);
+    }
+
+    public long getItemCount(){
+        return DatabaseUtils.queryNumEntries(sqLiteDatabase,Schemas.TABLE_NAME);
     }
 }
