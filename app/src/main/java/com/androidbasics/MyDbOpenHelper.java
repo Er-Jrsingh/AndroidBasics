@@ -8,8 +8,8 @@ import android.util.Log;
 public class MyDbOpenHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME="stu_details.db";
-    public static final int DATABASE_VERSION=8;                                             /*  Always Integer  */
-    private static final String TAG = "db_created";
+    public static final int DATABASE_VERSION=1;                                             /*  Always Integer  */
+    private static final String TAG = "my_tag";
 
     public MyDbOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);                       /*   factory null(Mostly null) Because We don't want to store at Custom Factory  */
