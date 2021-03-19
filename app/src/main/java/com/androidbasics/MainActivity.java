@@ -62,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
 
         mDataSource.updateName("Durga Shankar");
         Toast.makeText(this,"Name Updated",Toast.LENGTH_LONG).show();
+
+        /*      Delete Row        */
+
+        mDataSource.deleteItem();
+        Toast.makeText(this,"Row Deleted ",Toast.LENGTH_LONG).show();
     }
 
 

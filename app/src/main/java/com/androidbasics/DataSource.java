@@ -115,8 +115,20 @@ public class DataSource {
         String where=Schemas.COLUMN_NAME + " LIKE ?";
 
         String[] whereArgs={"Jitu Thakur"};
+
         int update=sqLiteDatabase.update(Schemas.TABLE_NAME,values,where,whereArgs);
 
         Log.d(TAG,"Updated Name : "+update);
+    }
+
+    public void deleteItem(){
+
+        String where = Schemas.COLUMN_NAME+" LIKE ?";
+
+        String[] whereArgs={"Jitesh Thakur"};
+
+        int del = sqLiteDatabase.delete(Schemas.TABLE_NAME,where,whereArgs);
+
+        Log.d(TAG,"Row Deleted : "+del);
     }
 }
