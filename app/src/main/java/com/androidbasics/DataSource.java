@@ -107,4 +107,16 @@ public class DataSource {
         cursor.close();
         return studentModels;
     }
+
+    public void updateName(String name){
+        ContentValues values=new ContentValues(1);
+        values.put(Schemas.COLUMN_NAME,name);
+
+        String where=Schemas.COLUMN_NAME + " LIKE ?";
+
+        String[] whereArgs={"Jitu Thakur"};
+        int update=sqLiteDatabase.update(Schemas.TABLE_NAME,values,where,whereArgs);
+
+        Log.d(TAG,"Updated Name : "+update);
+    }
 }

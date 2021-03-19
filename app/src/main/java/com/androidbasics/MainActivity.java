@@ -58,7 +58,10 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, mDataList.toString(),Toast.LENGTH_SHORT).show();
         Log.w(TAG,mDataList.toString());
 
+        /*      Update Values        */
 
+        mDataSource.updateName("Durga Shankar");
+        Toast.makeText(this,"Name Updated",Toast.LENGTH_LONG).show();
     }
 
 
@@ -121,7 +124,5 @@ public class MainActivity extends AppCompatActivity {
         mDataList=mDataSource.getAllItems(filterName);
         Toast.makeText(this, mDataList.toString(),Toast.LENGTH_LONG).show();
         Log.w(TAG,mDataList.toString());
-
-
     }
 }
