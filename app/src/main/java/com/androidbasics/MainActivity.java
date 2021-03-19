@@ -2,6 +2,7 @@ package com.androidbasics;
 
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 //        MyDbOpenHelper myDbOpenHelper=new MyDbOpenHelper(this);
 //        SQLiteDatabase db=myDbOpenHelper.getWritableDatabase();
 //        Toast.makeText(getApplicationContext(),db.toString(),Toast.LENGTH_SHORT).show();
+
+        /*      Inserting Data To Database     */
 
         mDataSource=new DataSource(this);
         mDataSource.open();
@@ -42,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this,"Data Already Inserted...",Toast.LENGTH_SHORT).show();
         }
+
+        /*      Read Data From Database      */
+
+        mDataList=mDataSource.getAllItems();
+        Toast.makeText(this, mDataList.toString(),Toast.LENGTH_SHORT).show();
+
     }
 
     /* when orientation Change db connection may interrupt so below method help us */

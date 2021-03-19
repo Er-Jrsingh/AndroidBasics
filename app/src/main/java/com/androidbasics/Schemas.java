@@ -15,6 +15,11 @@ public class Schemas {
         Professional Approach:- Primary Key Data Type Should be String  .
     */
 
+    /*      Return Column In Same Order     */
+
+    public static final String[] ALL_COLUMNS=new String[]{COLUMN_ID,COLUMN_NAME,COLUMN_ROLL,COLUMN_DEGREE,COLUMN_BRANCH,COLUMN_MOBILE,COLUMN_IMAGE};
+
+
     public static final String SQL_CREATE="CREATE TABLE "+TABLE_NAME+"(" +
             COLUMN_ID+" TEXT PRIMARY KEY ,"+
             COLUMN_NAME+" TEXT ,"+

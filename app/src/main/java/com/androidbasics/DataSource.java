@@ -2,9 +2,13 @@ package com.androidbasics;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*      This Class Interact With Physical Database    */
@@ -54,5 +58,30 @@ public class DataSource {
 
     public long getItemCount(){
         return DatabaseUtils.queryNumEntries(sqLiteDatabase,Schemas.TABLE_NAME);
+    }
+
+    /*      Code For Reading All Data from Database     */
+
+    public List<StudentModel> getAllItems(){
+
+        List<StudentModel> studentModels=new ArrayList<>();
+
+        Cursor cursor= sqLiteDatabase.query(Schemas.TABLE_NAME,Schemas.ALL_COLUMNS,null,null,null,null,null);              /*   in place of null we write filters & Sorting */
+
+        while (cursor.moveToNext()){
+            StudentModel item= new StudentModel();
+            item.setStudentId(cursor.getString(cursor.getColumnIndex(Schemas.COLUMN_ID)));
+            item.setStudentName(cursor.getString(cursor.getColumnIndex(Schemas.COLUMN_NAME)));
+            item.setStudentRoll(cursor.getInt(cursor.getColumnIndex(Schemas.COLUMN_ROLL)));
+            item.setStudentDegree(cursor.getString(cursor.getColumnIndex(Schemas.COLUMN_DEGREE)));
+            item.setStudentBranch(cursor.getString(cursor.getColumnIndex(Schemas.COLUMN_BRANCH)));
+            item.setStudentMobile(cursor.getString(cursor.getColumnIndex(Schemas.COLUMN_MOBILE)));
+            item.setImages(cursor.getString(cursor.getColumnIndex(Schemas.COLUMN_IMAGE)));
+
+            studentModels.add(item);
+
+        }
+        cursor.close();
+        return studentModels;
     }
 }
