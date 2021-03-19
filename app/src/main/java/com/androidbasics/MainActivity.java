@@ -1,15 +1,21 @@
 package com.androidbasics;
 
+import android.annotation.SuppressLint;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "my_tag";
     private  DataSource mDataSource;
     private List<StudentModel> mDataList;
 
@@ -48,10 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         /*      Read Data From Database      */
 
-        mDataList=mDataSource.getAllItems();
+        mDataList=mDataSource.getAllItems(null);
         Toast.makeText(this, mDataList.toString(),Toast.LENGTH_SHORT).show();
+        Log.w(TAG,mDataList.toString());
+
 
     }
+
 
     /* when orientation Change db connection may interrupt so below method help us */
 
@@ -67,4 +76,52 @@ public class MainActivity extends AppCompatActivity {
         mDataSource.close();
     }
 
+    /*     Create Menu Bar       */
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.filter,menu);
+        return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.show_cse: {
+                getDatabaseList("CSE");
+                break;
+            }
+                case R.id.show_civil: {
+                    getDatabaseList("CIVIL");
+                    break;
+                }
+                case R.id.show_electrical: {
+                    getDatabaseList("ELECTRICAL");
+                    break;
+                }
+            case R.id.show_mining: {
+                    getDatabaseList("MINING");
+                    break;
+                }
+            case R.id.show_mech: {
+                getDatabaseList("MECHANICAL");
+                break;
+            }
+            case R.id.show_all: {
+                    getDatabaseList(null);
+                    break;
+                }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void getDatabaseList(String filterName) {
+        mDataList=mDataSource.getAllItems(filterName);
+        Toast.makeText(this, mDataList.toString(),Toast.LENGTH_LONG).show();
+        Log.w(TAG,mDataList.toString());
+
+
+    }
 }

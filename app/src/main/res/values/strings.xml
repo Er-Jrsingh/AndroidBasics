@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
     <string name="welcome_to_sqlite_world">Welcome To SQLite World</string>
+    <string name="cse">CSE</string>
+    <string name="civil">CIVIL</string>
+    <string name="mech">MECHANICAL</string>
+    <string name="mining">MINING</string>
+    <string name="elecrtical">ELECTRICAL</string>
+    <string name="all">All</string>
 </resources>

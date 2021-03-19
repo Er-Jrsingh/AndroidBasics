@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/cse" android:id="@+id/show_cse"/>
+    <item android:title="@string/civil" android:id="@+id/show_civil"/>
+    <item android:title="@string/elecrtical" android:id="@+id/show_electrical"/>
+    <item android:title="@string/mining" android:id="@+id/show_mining"/>
+    <item android:title="@string/mech" android:id="@+id/show_mech"/>
+    <item android:title="@string/all" android:id="@+id/show_all"/>
+</menu>

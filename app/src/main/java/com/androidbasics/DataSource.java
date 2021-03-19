@@ -62,11 +62,34 @@ public class DataSource {
 
     /*      Code For Reading All Data from Database     */
 
-    public List<StudentModel> getAllItems(){
+    public List<StudentModel> getAllItems(String selection ){
 
         List<StudentModel> studentModels=new ArrayList<>();
 
-        Cursor cursor= sqLiteDatabase.query(Schemas.TABLE_NAME,Schemas.ALL_COLUMNS,null,null,null,null,null);              /*   in place of null we write filters & Sorting */
+        /*      Sorting Code      */
+
+//        Cursor cursor= sqLiteDatabase.query(Schemas.TABLE_NAME,Schemas.ALL_COLUMNS,null,null,null,null,null);              /*   in place of null we write filters & Sorting */
+//        Cursor cursor= sqLiteDatabase.query(Schemas.TABLE_NAME,Schemas.ALL_COLUMNS,null,null,null,null,Schemas.COLUMN_NAME);       /*   Sorting By COLUMN_NAME Alphabet Ascending order  */
+//        Cursor cursor= sqLiteDatabase.query(Schemas.TABLE_NAME,Schemas.ALL_COLUMNS,null,null,null,null,Schemas.COLUMN_NAME+" DESC");       /*   Sorting By COLUMN_NAME Alphabet Descending order */
+
+        /*      Filtering Code      */
+
+        Cursor cursor;
+
+        if (selection==null){
+            cursor = sqLiteDatabase.query(Schemas.TABLE_NAME,Schemas.ALL_COLUMNS,null,null,null,null,Schemas.COLUMN_NAME+" DESC");
+        }else {
+
+            /*      Here Define Mapping for Multiple ?    */
+
+            String[] select={selection};
+
+            /*      Be Careful About Sql Injection So Must Use Placeholder(=?)    */
+            /*      Query= Select * From Students where studentBranch = selection  */
+
+            cursor = sqLiteDatabase.query(Schemas.TABLE_NAME,Schemas.ALL_COLUMNS,Schemas.COLUMN_BRANCH+" = ?",select,null,null,Schemas.COLUMN_NAME);
+
+        }
 
         while (cursor.moveToNext()){
             StudentModel item= new StudentModel();
