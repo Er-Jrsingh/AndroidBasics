@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,5 +132,36 @@ public class DataSource {
         int del = sqLiteDatabase.delete(Schemas.TABLE_NAME,where,whereArgs);
 
         Log.d(TAG,"Row Deleted : "+del);
+    }
+
+    public void doTransaction(){
+        List<StudentModel> dataItems=SampleData.studentModelList;
+
+        try {
+
+            sqLiteDatabase.beginTransaction();
+
+            if (this.getItemCount()==0) {                /*  To Removing Unique Constraint Problem  */
+                for (StudentModel item:dataItems){
+                    try {
+                        if (item.getStudentName().equals("Jitesh Singh")){
+                            throw new Exception("Custom Exception Generated....");
+                        }
+                        this.insertData(item);
+
+                    } catch (SQLiteException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                Log.d(TAG,"Data Already Inserted.. ");
+            }
+            sqLiteDatabase.setTransactionSuccessful();      /*  If  setTransactionSuccessful() not call it means Transaction failed & Rolls Back */
+            sqLiteDatabase.endTransaction();
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqLiteDatabase.endTransaction();
+            Log.d(TAG,"DoTransaction :- "+ e.getMessage());
+        }
     }
 }

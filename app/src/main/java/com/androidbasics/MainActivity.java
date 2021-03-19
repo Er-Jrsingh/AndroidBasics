@@ -1,6 +1,7 @@
 package com.androidbasics;
 
 import android.annotation.SuppressLint;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,22 +36,28 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(),"Database Opened...",Toast.LENGTH_SHORT).show();
 
         mDataList=SampleData.studentModelList;
+//
+//        if (mDataSource.getItemCount()==0) {                /*  To Removing Unique Constraint Problem  */
+//            for (StudentModel item:mDataList){
+//                try {
+//
+//                    mDataSource.insertData(item);
+//                    Toast.makeText(getApplicationContext(),"Success... "+item,Toast.LENGTH_SHORT).show();
+//
+//                } catch (SQLiteException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(getApplicationContext(),"Failed...",Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        } else {
+//            Toast.makeText(this,"Data Already Inserted...",Toast.LENGTH_SHORT).show();
+//        }
 
-        if (mDataSource.getItemCount()==0) {                /*  To Removing Unique Constraint Problem  */
-            for (StudentModel item:mDataList){
-                try {
+        /*     Code For Transaction      */
 
-                    mDataSource.insertData(item);
-                    Toast.makeText(getApplicationContext(),"Success... "+item,Toast.LENGTH_SHORT).show();
+        mDataSource.doTransaction();
+        Toast.makeText(this,"Oooops.. Transaction Failed & Rollback So That Not Inserted Any Data ",Toast.LENGTH_LONG).show();
 
-                } catch (SQLiteException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getApplicationContext(),"Failed...",Toast.LENGTH_SHORT).show();
-                }
-            }
-        } else {
-            Toast.makeText(this,"Data Already Inserted...",Toast.LENGTH_SHORT).show();
-        }
 
         /*      Read Data From Database      */
 
