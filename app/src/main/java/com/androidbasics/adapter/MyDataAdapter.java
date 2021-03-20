@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +23,6 @@ import java.util.List;
 
 public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHolder> {
 
-    public static final String ITEM_KEY = "item_key";
     public static final String TAG = "my_tag";
     private final Context mContext;
     private final List<CityDataItem> mDataList;
@@ -76,9 +76,32 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
             }
         }
 
+        /*      Set On Click Listener      */
+
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext,"You Clicked "+cityDataItem.getCityName(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /*      Set Long Click Listener      */
+
+        holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(mContext,"You Clicked Long "+cityDataItem.getCityName(),Toast.LENGTH_SHORT).show();
+
+                /*  if return false it listen setOnClickListener too(Because if setOnLongClickListener not handle it calls setOnClickListener Mean return statement tells handled successfully or not)  */
+//                return false;
+                return true;
+            }
+        });
+
     }
 
     /*      Return Number of Item */
+
     @Override
     public int getItemCount() {
         return mDataList.size();
@@ -91,12 +114,14 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
 
         ImageView imageView;
         TextView textView;
+        View mView;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView=itemView.findViewById(R.id.imageView);
             textView=itemView.findViewById(R.id.textView);
+            mView=itemView;
 
         }
     }
