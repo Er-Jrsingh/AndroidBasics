@@ -1,6 +1,7 @@
 package com.androidbasics.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidbasics.R;
 import com.androidbasics.model.CityDataItem;
+import com.androidbasics.ui.DetailsActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +25,7 @@ import java.util.List;
 
 public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHolder> {
 
+    public static final String ITEM_KEY = "item_key";
     public static final String TAG = "my_tag";
     private final Context mContext;
     private final List<CityDataItem> mDataList;
@@ -81,7 +84,14 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,"You Clicked "+cityDataItem.getCityName(),Toast.LENGTH_SHORT).show();
+
+                Intent intent=new Intent(mContext, DetailsActivity.class);
+
+//                intent.putExtra(ITEM_KEY,cityDataItem);             /*      We Can Pass Object Directly    */
+
+                intent.putExtra(ITEM_KEY,cityDataItem.getCityId());   /*      Here We Pass Id Because We use UUID but We Can Pass Object Directly also  */
+
+                mContext.startActivity(intent);
             }
         });
 
