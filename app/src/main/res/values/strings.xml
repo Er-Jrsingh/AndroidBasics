@@ -1,5 +1,20 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="tv">Welcome To Thread World</string>
+    <string name="run">Run Code</string>
+    <string name="clr">Clear</string>
+    <string name="dummy_txt">The history of Android begins in October 2003 — well before the term smartphone was widely used and several years before Apple announced
+        its first iPhone and iOS. Android Inc was founded in Palo Alto, California. Its four founders were Rich Miner, Nick Sears, Chris White, and Andy Rubin.
+        At the time, Rubin was quoted as saying that Android Inc was going to develop “smarter mobile devices that are more aware of its owner’s location and preferences.”
+        Rubin revealed in a 2013 speech in Tokyo that Android OS was originally meant to improve the operating systems of digital cameras. But even back then,
+        the market for stand-alone digital cameras was declining. Just a few months later, Android Inc decided to shift gears towards using the OS inside mobile phones.
+
+        In 2005, the next big chapter in Android’s history began when the original company was acquired by Google. Rubin and other founding members stayed on to continue developing the OS under their new owners.
+        The decision was made to use Linux as the basis for the Android OS. That meant that the operating system could be offered to third-party mobile phone manufacturers for free.
+        Google and the Android team felt the company could make money offering other services that used the OS, including apps.
+
+        Rubin stayed at Google as head of the Android team until 2013, when the Mountain View company announced he would be leaving the division.
+        In late 2014, Rubin left Google altogether and launched a startup business incubator before eventually returning to the smartphone business with the ill-fated Essential in 2017.
+
+    </string>
 </resources>
