@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,12 +32,34 @@ public class MainActivity extends AppCompatActivity {
     public void runCode(View view) {
 
         log("Running Code");
+        displayProgressBar(true);
+
+//        Try To Solve Blocking Call Success
+
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this," Hola! myRunnable Runs",Toast.LENGTH_LONG).show();
+                displayProgressBar(false);
+            }
+        };
+
+        Handler handler=new Handler();
+//        postDelayed Release UI Thread To Do Their Work & After 4 sec Execute  myRunnable
+//        postDelayed  delay execution of work packet for specified time and then executes it, that's why we delayed our task without UI Block
+        handler.postDelayed(myRunnable,4000);
+
+
+
+/*
+//         Try To Solve Blocking Call  but failed
 
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
 
-                /*      Blocking Call   Because it call In UI Thread    */
+//      Blocking Call   Because it call In UI Thread
+
                 try {
                     Thread.sleep(4000);
                 } catch (InterruptedException e) {
@@ -46,8 +69,12 @@ public class MainActivity extends AppCompatActivity {
         };
 
         Handler handler=new Handler();
-        /*  post method puts work packet at the end of the work queue.But does not delays its execution that's why we again faces UI BLOCKING   */
+
+//  post method puts work packet at the end of the work queue.But does not delays its execution that's why we again faces UI BLOCKING
+
         handler.post(runnable);
+*/
+
 
 
         /*      Blocking Call     */
