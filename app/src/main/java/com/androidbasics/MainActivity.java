@@ -32,13 +32,31 @@ public class MainActivity extends AppCompatActivity {
 
         log("Running Code");
 
-        /*      Blocking Call     */
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
 
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+                /*      Blocking Call   Because it call In UI Thread    */
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        Handler handler=new Handler();
+        /*  post method puts work packet at the end of the work queue.But does not delays its execution that's why we again faces UI BLOCKING   */
+        handler.post(runnable);
+
+
+        /*      Blocking Call     */
+//        try {
+//            Thread.sleep(4000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
     private void log(String message) {
