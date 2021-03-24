@@ -1,6 +1,5 @@
 package com.androidbasics;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         nLog.setText(R.string.dummy_txt);
 
+/*
+
         mHandler=new Handler(getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -44,12 +44,28 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"HandleMessage : "+ data,Toast.LENGTH_SHORT).show();
             }
         };
+*/
+
     }
 
     public void runCode(View view) {
+        log("Running Code");
+        displayProgressBar(true);
 
+//        Another Way To Create Background Thread
+
+        for (String song:PlayList.songs) {
+
+            BackgroundThread backgroundThread = new BackgroundThread(song);
+            backgroundThread.setName("BackgroundThread To Download...");
+            backgroundThread.start();
+
+        }
+
+/*
 //      Code To Send Message To UI Thread
         sendData();
+ */
 
 /*
 
@@ -141,8 +157,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendData(){
-
-
 
         log("Running Code");
         displayProgressBar(true);
