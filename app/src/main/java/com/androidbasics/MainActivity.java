@@ -52,15 +52,21 @@ public class MainActivity extends AppCompatActivity {
         log("Running Code");
         displayProgressBar(true);
 
-//        Another Way To Create Background Thread
+//        Another Way To Create Background Thread(Note: It Create Multiple Bg Thread,here 3 Thread Because We have 3 songs )
 
-        for (String song:PlayList.songs) {
+ /*       for (String song:PlayList.songs) {
 
             BackgroundThread backgroundThread = new BackgroundThread(song);
             backgroundThread.setName("BackgroundThread To Download...");
             backgroundThread.start();
 
         }
+ */
+        /*      Optimize Download For Better User Experience (Song Download One by One In Single Bg Thread)   */
+
+        BackgroundThread backgroundThread = new BackgroundThread();
+        backgroundThread.setName("BackgroundThread To Download...");
+        backgroundThread.start();
 
 /*
 //      Code To Send Message To UI Thread
