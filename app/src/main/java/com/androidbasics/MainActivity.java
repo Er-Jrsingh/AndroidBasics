@@ -1,9 +1,11 @@
 package com.androidbasics;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -15,9 +17,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MyTag";
+    private static final String MESSAGE_KEY = "message_key";
     private ScrollView mScrollView;
     private TextView nLog;
     private ProgressBar mProgressBar;
+    private Handler mHandler;
 
 
     @Override
@@ -28,9 +32,26 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
         nLog.setText(R.string.dummy_txt);
+
+        mHandler=new Handler(getMainLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+
+                String data= msg.getData().getString(MESSAGE_KEY);
+
+                displayProgressBar(false);
+
+                Toast.makeText(getApplicationContext(),"HandleMessage : "+ data,Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 
     public void runCode(View view) {
+
+//      Code To Send Message To UI Thread
+        sendData();
+
+/*
 
 //        Below Code For Creating Custom Thread
 
@@ -49,14 +70,15 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(TAG,"run: Download Finished..."+Thread.currentThread().getName());
 
-//                displayProgressBar(false);        /*  Commented Because Except UI Thread Any Thread Cannot Access View  */
+//                displayProgressBar(false);        // Commented Because Except UI Thread Any Thread Cannot Access View
             }
         };
 
         Thread thread=new Thread(myRunnable);
-//        thread.run();     /*    Called At UI Thread     */
+//        thread.run();        // Called At UI Thread
         thread.setName("Download Thread");
         thread.start();
+*/
 
 /*
 
@@ -115,6 +137,40 @@ public class MainActivity extends AppCompatActivity {
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }
+
+    }
+
+    private void sendData(){
+
+
+
+        log("Running Code");
+        displayProgressBar(true);
+
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG,"run: Download Starting...");
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                /*  we use This Because We Cannot use Views in Background Thread so that we notify after work completed    */
+
+                Message msg=new Message();
+                Bundle bundle=new Bundle();
+                bundle.putString(MESSAGE_KEY,"Download Finished");
+                msg.setData(bundle);
+                mHandler.sendMessage(msg);
+            }
+        };
+
+        Thread thread=new Thread(myRunnable);
+//        thread.run();        // Called At UI Thread
+        thread.setName("Download Thread");
+        thread.start();
 
     }
 
