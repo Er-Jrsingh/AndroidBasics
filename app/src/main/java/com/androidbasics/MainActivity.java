@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MyTag";
@@ -31,6 +32,36 @@ public class MainActivity extends AppCompatActivity {
 
     public void runCode(View view) {
 
+//        Below Code For Creating Custom Thread
+
+        log("Running Code");
+        displayProgressBar(true);
+
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG,"run: Download Starting...");
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d(TAG,"run: Download Finished..."+Thread.currentThread().getName());
+
+//                displayProgressBar(false);        /*  Commented Because Except UI Thread Any Thread Cannot Access View  */
+            }
+        };
+
+        Thread thread=new Thread(myRunnable);
+//        thread.run();     /*    Called At UI Thread     */
+        thread.setName("Download Thread");
+        thread.start();
+
+/*
+
+//        Below Whole Code For Handling Main(UI) Thread Message Queue Using Handler
+
         log("Running Code");
         displayProgressBar(true);
 
@@ -49,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 //        postDelayed  delay execution of work packet for specified time and then executes it, that's why we delayed our task without UI Block
         handler.postDelayed(myRunnable,4000);
 
+*/
 
 
 /*
