@@ -61,6 +61,30 @@ public class MainActivity extends AppCompatActivity {
         log("Running Code");
         displayProgressBar(true);
 
+    /*        Run Code on UI Thread from Worker Thread runOnUiThread        */
+
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                log("Download Complete");
+                displayProgressBar(false);
+            }
+        });
+
+        thread.start();
+/*
+
 //        Send Message To Handler
         for (String song:PlayList.songs) {
 
@@ -69,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             msg.obj=song;
             mBackgroundThread.mHandler.sendMessage(msg);
         }
+*/
 
 //        Another Way To Create Background Thread(Note: It Create Multiple Bg Thread,here 3 Thread Because We have 3 songs )
 
