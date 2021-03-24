@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView nLog;
     private ProgressBar mProgressBar;
     private Handler mHandler;
+    private BackgroundThread mBackgroundThread;
 
 
     @Override
@@ -30,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
         nLog.setText(R.string.dummy_txt);
+
+        /*      Create & Manage Thread's Work Queue with Handler & Looper       */
+        /*      We Shift The Code Here From runCode(View view) Because UI Thread reached At mBackgroundThread.mHandler.sendMessage(msg)
+                Where as Bg Thread is Only just Initialized Or Preparing So That Occur NullPointerException at mBackgroundThread.mHandler.sendMessage(msg)   */
+
+        mBackgroundThread = new BackgroundThread();
+        mBackgroundThread.setName("BackgroundThread To Download...");
+        mBackgroundThread.start();
 
 /*
 
@@ -52,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
         log("Running Code");
         displayProgressBar(true);
 
+//        Send Message To Handler
+        for (String song:PlayList.songs) {
+
+//        Message.obtain() will not create New Message It Reuse The Reusable Message From Message Pool So that Performance improved
+            Message msg =Message.obtain();
+            msg.obj=song;
+            mBackgroundThread.mHandler.sendMessage(msg);
+        }
+
 //        Another Way To Create Background Thread(Note: It Create Multiple Bg Thread,here 3 Thread Because We have 3 songs )
 
  /*       for (String song:PlayList.songs) {
@@ -62,11 +80,16 @@ public class MainActivity extends AppCompatActivity {
 
         }
  */
-        /*      Optimize Download For Better User Experience (Song Download One by One In Single Bg Thread)   */
+
+/*
+
+//              Optimize Download For Better User Experience (Song Download One by One In Single Bg Thread)
 
         BackgroundThread backgroundThread = new BackgroundThread();
         backgroundThread.setName("BackgroundThread To Download...");
         backgroundThread.start();
+*/
+
 
 /*
 //      Code To Send Message To UI Thread
@@ -162,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void sendData(){
+    private void sendData() {
 
         log("Running Code");
         displayProgressBar(true);
@@ -170,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
         Runnable myRunnable = new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG,"run: Download Starting...");
+                Log.d(TAG, "run: Download Starting...");
                 try {
                     Thread.sleep(4000);
                 } catch (InterruptedException e) {
@@ -179,15 +202,15 @@ public class MainActivity extends AppCompatActivity {
 
                 /*  we use This Because We Cannot use Views in Background Thread so that we notify after work completed    */
 
-                Message msg=new Message();
-                Bundle bundle=new Bundle();
-                bundle.putString(MESSAGE_KEY,"Download Finished");
+                Message msg = new Message();
+                Bundle bundle = new Bundle();
+                bundle.putString(MESSAGE_KEY, "Download Finished");
                 msg.setData(bundle);
                 mHandler.sendMessage(msg);
             }
         };
 
-        Thread thread=new Thread(myRunnable);
+        Thread thread = new Thread(myRunnable);
 //        thread.run();        // Called At UI Thread
         thread.setName("Download Thread");
         thread.start();
