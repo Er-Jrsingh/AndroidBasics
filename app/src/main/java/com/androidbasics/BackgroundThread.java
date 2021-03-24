@@ -8,13 +8,18 @@ public class BackgroundThread extends Thread {
 
     private static final String TAG = "MyTag";
     public DownloadHandler mHandler;
+    private MainActivity mActivity;
 
 //    private final String songName;
+
+
+public BackgroundThread(MainActivity activity) {
+    this.mActivity = activity;
+}
 
 /*
     public BackgroundThread(String songName) {
         this.songName = songName;
-    }
 */
 
     @Override
@@ -23,7 +28,7 @@ public class BackgroundThread extends Thread {
 //        It Creates Looper & Message Queue For Current Thread(Here BackgroundThread)
         Looper.prepare();
 //         It Creates Handler For Current Thread(Here BackgroundThread)
-        mHandler=new DownloadHandler();
+        mHandler=new DownloadHandler(mActivity);
 //        It Loops The Message Queue  Created By Looper.prepare().if we give multiple task it Gives 1 task at a time to handler
         Looper.loop();
 /*

@@ -36,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         /*      We Shift The Code Here From runCode(View view) Because UI Thread reached At mBackgroundThread.mHandler.sendMessage(msg)
                 Where as Bg Thread is Only just Initialized Or Preparing So That Occur NullPointerException at mBackgroundThread.mHandler.sendMessage(msg)   */
 
-        mBackgroundThread = new BackgroundThread();
+//        mBackgroundThread = new BackgroundThread();
+        mBackgroundThread = new BackgroundThread(MainActivity.this);
         mBackgroundThread.setName("BackgroundThread To Download...");
         mBackgroundThread.start();
 
@@ -60,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
     public void runCode(View view) {
         log("Running Code");
         displayProgressBar(true);
+/*
 
-    /*        Run Code on UI Thread from Worker Thread runOnUiThread        */
+//            Run Code on UI Thread from Worker Thread runOnUiThread
 
         Thread thread=new Thread(new Runnable() {
             @Override
@@ -83,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         thread.start();
-/*
+*/
+
 
 //        Send Message To Handler
         for (String song:PlayList.songs) {
@@ -93,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
             msg.obj=song;
             mBackgroundThread.mHandler.sendMessage(msg);
         }
-*/
 
 //        Another Way To Create Background Thread(Note: It Create Multiple Bg Thread,here 3 Thread Because We have 3 songs )
 
@@ -242,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void log(String message) {
+    public void log(String message) {
         Log.i(TAG, message);
         nLog.append(message + "\n");
         scrollTextToEnd();

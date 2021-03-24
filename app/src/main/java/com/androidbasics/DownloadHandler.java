@@ -9,6 +9,12 @@ import androidx.annotation.NonNull;
 public class DownloadHandler extends Handler {
 
     private static final String TAG = "MyTag";
+    private final MainActivity mActivity;
+
+    public DownloadHandler(MainActivity activity) {
+
+        this.mActivity =activity;
+    }
 
     @Override
     public void handleMessage(@NonNull Message msg) {
@@ -17,7 +23,7 @@ public class DownloadHandler extends Handler {
 
     }
 
-    private void downloadSong(String songName) {
+    private void downloadSong(final String songName) {
 
         Log.d(TAG, "downloadSong: "+ songName +" Download Starting...");
 
@@ -26,6 +32,30 @@ public class DownloadHandler extends Handler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        mActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mActivity.log("Download Finished "+songName);
+                mActivity.displayProgressBar(false);
+            }
+        });
+
+/*
+
+//         Below Code Is Similar As Above Code , Actually Above Code Is Similar As Below Code Implicitly
+
+        Handler handler=new Handler(Looper.getMainLooper());
+        handler.post(new Runnable(){
+            @Override
+            public void run() {
+
+                mMainActivity.log("Download Complete");
+                mMainActivity.displayProgressBar(false);
+
+            }});
+*/
+
         Log.d(TAG, "downloadSong: " + songName +" Download Completed...");
 
     }
