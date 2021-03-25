@@ -17,6 +17,7 @@
                 android:layout_height="wrap_content"
                 android:padding="16sp"
                 android:text="@string/tv"
+                android:freezesText="true"
                 android:textSize="16sp" />
     </ScrollView>
 

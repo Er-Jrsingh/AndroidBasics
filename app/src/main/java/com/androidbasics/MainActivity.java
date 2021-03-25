@@ -1,8 +1,8 @@
 package com.androidbasics;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,19 +11,22 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AsyncFragment.MyTaskHandler {
 
     /*  AsyncTask Code Is Similar As ThreadConcept Branch Code Implicitly  */
     /*  AsyncTask Is Bound With Specific(Creator) Activity & Only Its Creator Activity Can Use It So That We Define it as Inner Class   */
     /*  This Code Have Some Bugs Like Memory Leak , Destroy Screen On Orientation Change but Task Still Run On Background(Because It Contain MainActivity Reference Implicitly ) and Memory Leak Occurs  */
+    /*  Now we solve the previous problem using Wrap AsyncTask in Fragment it is not Provided Architecture It is Just Trick Or Hack By Developers   */
 
     public static final String TAG="MyTag";
     public static final String MESSAGE_KEY="message_key";
+    private static final String FRAGMENT_TAG = "FRAGMENT_TAG";
     private ScrollView mScrollView;
     private TextView nLog;
     private ProgressBar mProgressBar;
-    private MyAsyncTask mAsyncTask;
+    private AsyncFragment.MyAsyncTask mAsyncTask;
     private boolean mTaskRunning;
+    private AsyncFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initializeViews();
+
+        FragmentManager manager = getFragmentManager();
+        mFragment=(AsyncFragment)manager.findFragmentByTag(FRAGMENT_TAG);
+
+        if (mFragment==null){
+            mFragment=new AsyncFragment();
+            manager.beginTransaction().add(mFragment,FRAGMENT_TAG).commit();
+        }
+
+
     }
 
     public void runCode(View view) {
@@ -38,20 +51,22 @@ public class MainActivity extends AppCompatActivity {
 //        log("Running Code..");
 //        displayProgressBar(true);
 
+        mFragment.runTask("Red","Green","Orange","Yellow","White");
+
         /*   Cancel a Running Async Task & Handle return Data   */
 
-        if (mTaskRunning && mAsyncTask != null){
-
-            mAsyncTask.cancel(true);
-            mTaskRunning=false;
-
-        }else{
-
-        mAsyncTask = new MyAsyncTask();
-        mAsyncTask.execute("Red","Green","Orange","Yellow","White");
-        mTaskRunning=true;
-
-        }
+//        if (mTaskRunning && mAsyncTask != null){
+//
+//            mAsyncTask.cancel(true);
+//            mTaskRunning=false;
+//
+//        }else{
+//
+//        mAsyncTask = new MyAsyncTask();
+//        mAsyncTask.execute("Red","Green","Orange","Yellow","White");
+//        mTaskRunning=true;
+//
+//        }
 
 //        MyAsyncTask myAsyncTask=new MyAsyncTask();
 //        myAsyncTask.execute("Red","Green","Orange","Yellow","White");
@@ -100,10 +115,15 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar=findViewById(R.id.pro_bar);
     }
 
-    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void handlerTak(String message) {
+        log(message);
+    }
+
+ /*   @SuppressLint("StaticFieldLeak")
     class MyAsyncTask extends AsyncTask<String,String,String> {
 
-        /*  doInBackground runs in separate Background Thread & We Write All Operations Here & It Cant Access Views(UI) Directly     */
+        *//*  doInBackground runs in separate Background Thread & We Write All Operations Here & It Cant Access Views(UI) Directly     *//*
 
         @Override
         protected String doInBackground(String... strings) {
@@ -126,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return "Download Completed... ";        /*  send to onPostExecute & onCancelled(String s)  */
+            return "Download Completed... ";        *//*  send to onPostExecute & onCancelled(String s)  *//*
         }
 
 //        Below Methods Run On UI Thread
@@ -152,4 +172,4 @@ public class MainActivity extends AppCompatActivity {
 //            log(s);
 //        }
     }
-}
+*/}
