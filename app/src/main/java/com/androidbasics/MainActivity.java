@@ -2,6 +2,7 @@ package com.androidbasics;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void log(String message) {
         Log.i(TAG, message);
-        nLog.append(message + "\n");
+        nLog.append("\n"+message + "\n");
         scrollTextToEnd();
     }
 
@@ -81,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar=findViewById(R.id.pro_bar);
     }
 
-    static class MyAsyncTask extends AsyncTask<String,String,String> {
+    @SuppressLint("StaticFieldLeak")
+    class MyAsyncTask extends AsyncTask<String,String,String> {
 
         /*  doInBackground runs in separate Background Thread & We Write All Operations Here & It Cant Access Views(UI) Directly     */
 
@@ -90,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
 
             for (String value:strings){
                 Log.d(TAG,"doInBackground : "+value);
+
+//                Send Message To UI Thread(This Value send to onProgressUpdate)
+                publishProgress(value);
+
                 try {
                     Thread.sleep(3000);
                 } catch (InterruptedException e) {
@@ -97,6 +103,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+
+            log(values[0]);
+
         }
     }
 }
