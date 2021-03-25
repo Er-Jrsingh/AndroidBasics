@@ -42,13 +42,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Bundle bundle=new Bundle();
         bundle.putString(DATA_KEY,"Url That Return Same Data");
 
-        getSupportLoaderManager().initLoader(100, bundle, this).forceLoad();
+//       Loader Architecture By default Cache The Data & Find By Given id(here 100) & Reuse That So That Previous Data Show Repeatedly & By Pass The loadInBackground  ,to overcome we use restartLoader
+
+//        getSupportLoaderManager().initLoader(100, bundle, this).forceLoad();
+
+        getSupportLoaderManager().restartLoader(100, bundle, this).forceLoad();
 
 
 //        getSupportLoaderManager().initLoader(100, null, this).forceLoad();
 
     }
-
 
     public void clearCode(View view) {
         nLog.setText("");
@@ -82,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(@NonNull Loader<String> loader, String data) {
+
+        nLog.append("\n" + data + "\n");
 
     }
 
@@ -120,7 +125,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
             Log.d(TAG, "loadInBackground : Thread Terminated " + Thread.currentThread().getName());
 
-            return null;
+            return "Download Completed...";     // Send To onLoadFinished
+        }
+
+        //In Below Method We Can Modify The return "Download Completed..." Data
+
+        @Override
+        public void deliverResult(@Nullable String data) {
+            data += "Modified By deliverResult ";
+
+            super.deliverResult(data);
         }
     }
 }
