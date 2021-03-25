@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     /*  AsyncTask Code Is Similar As ThreadConcept Branch Code Implicitly  */
     /*  AsyncTask Is Bound With Specific(Creator) Activity & Only Its Creator Activity Can Use It So That We Define it as Inner Class   */
+    /*  This Code Have Some Bugs Like Memory Leak , Destroy Screen On Orientation Change but Task Still Run On Background(Because It Contain MainActivity Reference Implicitly ) and Memory Leak Occurs  */
 
     public static final String TAG="MyTag";
     public static final String MESSAGE_KEY="message_key";
