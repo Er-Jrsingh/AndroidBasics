@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private ScrollView mScrollView;
     private TextView nLog;
     private ProgressBar mProgressBar;
+    private MyAsyncTask mAsyncTask;
+    private boolean mTaskRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +34,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void runCode(View view) {
 
-        log("Running Code..");
-        displayProgressBar(true);
+//        log("Running Code..");
+//        displayProgressBar(true);
 
-        MyAsyncTask myAsyncTask=new MyAsyncTask();
-        myAsyncTask.execute("Red","Green","Orange","Yellow","White");
+        /*   Cancel a Running Async Task & Handle return Data   */
+
+        if (mTaskRunning && mAsyncTask != null){
+
+            mAsyncTask.cancel(true);
+            mTaskRunning=false;
+
+        }else{
+
+        mAsyncTask = new MyAsyncTask();
+        mAsyncTask.execute("Red","Green","Orange","Yellow","White");
+        mTaskRunning=true;
+
+        }
+
+//        MyAsyncTask myAsyncTask=new MyAsyncTask();
+//        myAsyncTask.execute("Red","Green","Orange","Yellow","White");
  /*
         myAsyncTask Can Execute Only one time Below Code Not Valid and Crash At RunTime But We Can Create Another MyAsyncTask obj and again call execute method
         myAsyncTask.execute("Red","Green","Orange","Yellow","White"),Every task Execute In Sequence mean myAsyncTask then myAsyncTask2 and so on
 */
-        MyAsyncTask myAsyncTask2=new MyAsyncTask();
-        myAsyncTask2.execute("Blue","Purple","Violate","Aqua","Brawn");
+//        MyAsyncTask myAsyncTask2=new MyAsyncTask();
+//        myAsyncTask2.execute("Blue","Purple","Violate","Aqua","Brawn");
 
     }
 
@@ -91,9 +108,15 @@ public class MainActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
 
             for (String value:strings){
+
+                if (isCancelled()){
+                    publishProgress("Task Is Canceled..!!");
+                    break;
+                }
+
                 Log.d(TAG,"doInBackground : "+value);
 
-//                Send Message To UI Thread(This Value send to onProgressUpdate)
+//        Send Message To UI Thread(This Value send to onProgressUpdate)
                 publishProgress(value);
 
                 try {
@@ -102,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return "Download Completed... ";        /*  send to onPostExecute */
+            return "Download Completed... ";        /*  send to onPostExecute & onCancelled(String s)  */
         }
 
 //        Below Methods Run On UI Thread
@@ -117,5 +140,15 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             log(s);
         }
+
+        @Override
+        protected void onCancelled() {
+            log("Cancelled..!!");
+        }
+
+        //        @Override
+//        protected void onCancelled(String s) {
+//            log(s);
+//        }
     }
 }
