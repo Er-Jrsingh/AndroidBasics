@@ -18,6 +18,7 @@ import androidx.loader.content.Loader;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
     private static final String TAG = "MyTag";
+    private static final String DATA_KEY = "data_key";
     private ScrollView mScrollView;
     private TextView nLog;
 
@@ -33,7 +34,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     public void runCode(View view) {
 
-        getSupportLoaderManager().initLoader(100, null, this).forceLoad();
+//       Sending Data to Async Task Loader
+
+        Bundle bundle=new Bundle();
+        bundle.putString(DATA_KEY,"Url That Return Same Data");
+
+        getSupportLoaderManager().initLoader(100, bundle, this).forceLoad();
+
+
+//        getSupportLoaderManager().initLoader(100, null, this).forceLoad();
 
     }
 
@@ -60,7 +69,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<String> onCreateLoader(int id, @Nullable Bundle args) {
-        return new MyAsyncTaskLoader(this);
+
+        return new MyAsyncTaskLoader(this,args);
+//        return new MyAsyncTaskLoader(this);
     }
 
     @Override
@@ -74,14 +85,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public static class MyAsyncTaskLoader extends AsyncTaskLoader<String> {
+        private final Bundle mArgs;
 
-        public MyAsyncTaskLoader(@NonNull Context context) {
+        public MyAsyncTaskLoader(@NonNull Context context, Bundle args) {
             super(context);
+
+            this.mArgs=args;
         }
 
         @Nullable
         @Override
         public String loadInBackground() {
+
+            String data=mArgs.getString(DATA_KEY);
+            Log.d(TAG, "loadInBackground URL : " +data );
             Log.d(TAG, "loadInBackground : " + Thread.currentThread().getName());
             try {
                 Thread.sleep(4000);
