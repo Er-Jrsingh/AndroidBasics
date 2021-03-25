@@ -13,6 +13,9 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 /*  AsyncTask cannot Handle Configuration Changes & Memory Leak So That AsyncTaskLoader Is Provided To Solve Problem But it Also Deprecated From Api 28 so Use LiveData & ViewModels  */
 
@@ -70,7 +73,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public Loader<String> onCreateLoader(int id, @Nullable Bundle args) {
 
-        return new MyAsyncTaskLoader(this,args);
+        List<String> songList= Arrays.asList(PlayList.songs);
+        return new MyAsyncTaskLoader(this,args,songList);
+
+
 //        return new MyAsyncTaskLoader(this);
     }
 
@@ -85,12 +91,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     public static class MyAsyncTaskLoader extends AsyncTaskLoader<String> {
-        private final Bundle mArgs;
 
-        public MyAsyncTaskLoader(@NonNull Context context, Bundle args) {
+        private final Bundle mArgs;
+        private final List<String> mSongList;
+
+        public MyAsyncTaskLoader(@NonNull Context context, Bundle args, List<String> songList) {
             super(context);
 
             this.mArgs=args;
+            this.mSongList=songList;
         }
 
         @Nullable
@@ -100,10 +109,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             String data=mArgs.getString(DATA_KEY);
             Log.d(TAG, "loadInBackground URL : " +data );
             Log.d(TAG, "loadInBackground : " + Thread.currentThread().getName());
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+
+            for (String song:mSongList) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            Log.d(TAG, "loadInBackground : Song Downloaded " + song);
             }
             Log.d(TAG, "loadInBackground : Thread Terminated " + Thread.currentThread().getName());
 
