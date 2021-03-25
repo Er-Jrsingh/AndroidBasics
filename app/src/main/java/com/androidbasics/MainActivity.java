@@ -102,14 +102,20 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return null;
+            return "Download Completed... ";        /*  send to onPostExecute */
         }
 
+//        Below Methods Run On UI Thread
         @Override
         protected void onProgressUpdate(String... values) {
 
             log(values[0]);
 
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            log(s);
         }
     }
 }
