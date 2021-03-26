@@ -9,6 +9,7 @@ import com.androidbasics.MainActivity;
 
 //    This Is Started Service Because onBind Return Null,By Default It Always Run On UI Thread So That Screen Face Drop Frames(Screen Freeze),After Close App It Still Run On Background
 //     Here We Create Separate Background Thread So Screen Not Blocked,After Close App It Still Run On Background for Always So We Must Have To Write Stop Code
+//     Here We Implement The Lifecycle Of Service,Here We Can See That onDestroy & onBind Not Called Even after Closing App
 
 
 public class MyDownloadService extends Service {
@@ -20,7 +21,16 @@ public class MyDownloadService extends Service {
     }
 
     @Override
+    public void onCreate() {
+        super.onCreate();
+
+        Log.d(TAG, "onCreate : " + " onCreate Called");
+    }
+
+    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        Log.d(TAG, "onStartCommand : " + " onStartCommand Called");
 
         Log.d(TAG, "Thread Name : " + Thread.currentThread().getName());
 
@@ -48,6 +58,8 @@ public class MyDownloadService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
 
+        Log.d(TAG, "onBind : " + " onBind Called");
+
         return null;
     }
 
@@ -60,5 +72,12 @@ public class MyDownloadService extends Service {
             e.printStackTrace();
         }
         Log.d(TAG, "downloadSong : " + song + " Download Finished ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        Log.d(TAG, "onDestroy : " + " onDestroy Called");
     }
 }
