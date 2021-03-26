@@ -13,7 +13,8 @@ import android.widget.TextView;
 
 import com.androidbasics.services.MyDownloadService;
 
-//    Code(For Nougat(Api 25 & Lower) For Started Service (onBind Return Null),By Default It Run On UI Thread So That Screen Face Drop Frames(Screen Freeze),
+//    Code(For Nougat(Api 25 & Lower) For Started Service (onBind Return Null),By Default It Run On UI Thread So That Screen Face Drop Frames(Screen Freeze)
+//     Here We Stop The Service At clearCode Method(Clear Code Button) Of MainActivity
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void clearCode(View view) {
+
+        Intent intent=new Intent(MainActivity.this,MyDownloadService.class);
+        stopService(intent);
+
         nLog.setText("");
         scrollTextToEnd();
     }
