@@ -15,6 +15,8 @@ import com.androidbasics.services.MyDownloadService;
 
 //    Code(For Nougat(Api 25 & Lower) For Started Service (onBind Return Null),By Default It Run On UI Thread So That Screen Face Drop Frames(Screen Freeze)
 //     Here We Stop The Service At clearCode Method(Clear Code Button) Of MainActivity
+//     Here We Set up Worker Thread, Handler & Looper in Started Service(followed Production Ready Code Approach)
+
 
 public class MainActivity extends AppCompatActivity {
 
