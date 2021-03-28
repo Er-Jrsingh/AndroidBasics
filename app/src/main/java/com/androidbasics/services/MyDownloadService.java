@@ -2,6 +2,7 @@ package com.androidbasics.services;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
@@ -14,12 +15,13 @@ import com.androidbasics.MainActivity;
 //     Here We Implement The Lifecycle Of Service,Here We Can See That onDestroy & onBind Not Called Even after Closing App
 //     Here We Stop The Service Using stopService() At clearCode Method(Clear Code Button) Of MainActivity,Here We can see that onDestroy is Called on Clear Button Pressed & Still downloadSong : Download Finished Called Because Bg Thread is still Running
 //     Here We Set up Worker Thread, Handler & Looper in Started Service(followed Production Ready Code Approach)
+//     use Async Task in Started Service
 
 
 public class MyDownloadService extends Service {
 
     private static final String TAG = "MyTag";
-    private DownloadThread mDownloadThread;
+//    private DownloadThread mDownloadThread;
 
     public MyDownloadService() {
 
@@ -31,11 +33,16 @@ public class MyDownloadService extends Service {
 
         Log.d(TAG, "onCreate : " + " onCreate Called");
 
+/*
+//      Set up Worker Thread, Handler & Looper in Started Service
         mDownloadThread=new DownloadThread();
         mDownloadThread.start();
 
-        /*  Trick to prevent null Handler But it is Not Best Approach so use AsyncTask    */
+        */
+/*  Trick to prevent null Handler But it is Not Best Approach so use AsyncTask    *//*
+
         while (mDownloadThread.mHandler==null){}
+*/
 
     }
 
@@ -46,12 +53,23 @@ public class MyDownloadService extends Service {
 
         Log.d(TAG, "Thread Name : " + Thread.currentThread().getName());
 
+//     use Async Task in Started Service
+
         final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
 
+        MyAsyncTask myAsyncTask= new MyAsyncTask();
+        myAsyncTask.execute(songName);
+
+
+/*
+//       Set up Worker Thread, Handler & Looper in Started Service
+
+        final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
         Message message=Message.obtain();
         message.obj=songName;
         mDownloadThread.mHandler.sendMessage(message);
 
+*/
 
 /*
 
@@ -105,5 +123,37 @@ public class MyDownloadService extends Service {
         super.onDestroy();
 
         Log.d(TAG, "onDestroy : " + " onDestroy Called");
+    }
+
+    static class MyAsyncTask extends AsyncTask<String,String,String>{
+
+        @Override
+        protected String doInBackground(String... songs) {
+
+            Log.d(TAG,"doInBackground : Song Downloaded Started "+songs[0]);
+
+            for (String song:songs){
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                publishProgress(song);
+            }
+
+            return "All Songs Have Been Downloaded";
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+
+            Log.d(TAG,"onProgressUpdate : Song Downloaded "+values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            Log.d(TAG,"onPostExecute : Result Is : "+s);
+        }
     }
 }
