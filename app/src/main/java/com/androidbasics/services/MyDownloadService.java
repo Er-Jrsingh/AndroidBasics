@@ -19,6 +19,8 @@ import com.androidbasics.MainActivity;
 //     onStartCommand Return Flags, Meaning & Use, Handling Being Killed
 //     Stop Started Service with Stop Self & Stop Self Result In Download Handler(Worker Thread).We'll make out Song Download Service to restart for only those songs that are not downloaded. If a song is downloaded and our service crashes and restarts, then that song will not be downloaded again.
 //     Update UI/Main Thread from Service using Result Receiver
+//     Send Data from Service to UI using Broadcast Receiver(Better Approach)
+
 
 public class MyDownloadService extends Service {
 
@@ -48,6 +50,7 @@ public class MyDownloadService extends Service {
         //     Stop Started Service with Stop Self & Stop Self Result
 
         mDownloadThread.mHandler.setDownloadService(this);
+        mDownloadThread.mHandler.setContext(getApplicationContext());
     }
 
     @Override
@@ -57,13 +60,24 @@ public class MyDownloadService extends Service {
 
         Log.d(TAG, "Thread Name : " + Thread.currentThread().getName());
 
+//     Send Data from Service to UI using Broadcast Receiver(Better Approach)
+
+        final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
+        Message message = Message.obtain();
+        message.obj = songName;
+        message.arg1 = startId;
+        mDownloadThread.mHandler.sendMessage(message);
+
+/*
 //     use Async Task in Started Service
 
-//        final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
+        final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
 
-//        MyAsyncTask myAsyncTask = new MyAsyncTask();
-//        myAsyncTask.execute(songName);
+        MyAsyncTask myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute(songName);
+*/
 
+/*
 //     Update UI/Main Thread from Service using Result Receiver
 
         final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
@@ -72,6 +86,7 @@ public class MyDownloadService extends Service {
         message.obj = songName;
         message.arg1 = startId;
         mDownloadThread.mHandler.sendMessage(message);
+ */
 
 /*
 //       Set up Worker Thread, Handler & Looper in Started Service

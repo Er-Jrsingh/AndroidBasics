@@ -1,9 +1,13 @@
 package com.androidbasics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.app.MediaRouteButton;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -21,6 +25,7 @@ import com.androidbasics.services.MyDownloadService;
 //     use Async Task in Started Service
 //     Stop Started Service with Stop Self & Stop Self Result In Download Handler(Worker Thread).We'll make out Song Download Service to restart for only those songs that are not downloaded. If a song is downloaded and our service crashes and restarts, then that song will not be downloaded again.
 //     Update UI/Main Thread from Service using Result Receiver
+//     Send Data from Service to UI using Broadcast Receiver(Better Approach)
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +34,19 @@ public class MainActivity extends AppCompatActivity {
     private TextView nLog;
     private ScrollView mScrollView;
     private ProgressBar mProgressBar;
-    private Handler mHandler;
+//    private Handler mHandler;
+
+
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String songName = intent.getStringExtra(MESSAGE_KEY);
+
+            log(songName + " Downloaded");
+            Log.d(TAG, "onReceive : Thread Name : " + Thread.currentThread().getName());
+            displayProgressBar(false);
+        }
+    };
 
 
     @Override
@@ -39,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
 
-        mHandler = new Handler();
+//        mHandler = new Handler();
     }
 
     public void runCode(View view) {
@@ -59,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
 */
+
+/*
         //     Update UI/Main Thread from Service using Result Receiver
 
         ResultReceiver resultReceiver = new MyDownloadResultReciever(null);
@@ -71,8 +90,29 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
 
         }
+    */
+
+//     Send Data from Service to UI using Broadcast Receiver(Better Approach)
+
+        for (String song : Playlist.songs) {
+
+            Intent intent = new Intent(MainActivity.this, MyDownloadService.class);
+            intent.putExtra(MESSAGE_KEY, song);
+            startService(intent);
+        }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(mReceiver, new IntentFilter(DownloadHandler.SERVICE_MESSAGE));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(mReceiver);
+    }
 
     public void clearCode(View view) {
 
@@ -112,6 +152,9 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.pro_bar);
     }
 
+//     Update UI/Main Thread from Service using Result Receiver
+/*
+
     public class MyDownloadResultReciever extends ResultReceiver {
 
         public MyDownloadResultReciever(Handler handler) {
@@ -149,4 +192,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+*/
 }
