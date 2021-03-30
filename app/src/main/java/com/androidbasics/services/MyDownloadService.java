@@ -18,7 +18,7 @@ import com.androidbasics.MainActivity;
 //     use Async Task in Started Service
 //     onStartCommand Return Flags, Meaning & Use, Handling Being Killed
 //     Stop Started Service with Stop Self & Stop Self Result In Download Handler(Worker Thread).We'll make out Song Download Service to restart for only those songs that are not downloaded. If a song is downloaded and our service crashes and restarts, then that song will not be downloaded again.
-
+//     Update UI/Main Thread from Service using Result Receiver
 
 public class MyDownloadService extends Service {
 
@@ -53,7 +53,7 @@ public class MyDownloadService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Log.d(TAG, "onStartCommand : " + " onStartCommand Called" + "With StartId : " +startId);
+        Log.d(TAG, "onStartCommand : " + " onStartCommand Called" + "With StartId : " + startId);
 
         Log.d(TAG, "Thread Name : " + Thread.currentThread().getName());
 
@@ -63,16 +63,25 @@ public class MyDownloadService extends Service {
 
 //        MyAsyncTask myAsyncTask = new MyAsyncTask();
 //        myAsyncTask.execute(songName);
-//
 
+//     Update UI/Main Thread from Service using Result Receiver
 
+        final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
+        mDownloadThread.mHandler.setReceiver(intent.getParcelableExtra(Intent.EXTRA_RESULT_RECEIVER));
+        Message message = Message.obtain();
+        message.obj = songName;
+        message.arg1 = startId;
+        mDownloadThread.mHandler.sendMessage(message);
+
+/*
 //       Set up Worker Thread, Handler & Looper in Started Service
 
         final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
         Message message = Message.obtain();
         message.obj = songName;
-        message.arg1=startId;
+        message.arg1 = startId;
         mDownloadThread.mHandler.sendMessage(message);
+*/
 
 
 /*

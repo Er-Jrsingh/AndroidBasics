@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.MediaRouteButton;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -18,7 +20,7 @@ import com.androidbasics.services.MyDownloadService;
 //     Here We Set up Worker Thread, Handler & Looper in Started Service(followed Production Ready Code Approach)
 //     use Async Task in Started Service
 //     Stop Started Service with Stop Self & Stop Self Result In Download Handler(Worker Thread).We'll make out Song Download Service to restart for only those songs that are not downloaded. If a song is downloaded and our service crashes and restarts, then that song will not be downloaded again.
-
+//     Update UI/Main Thread from Service using Result Receiver
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,12 +44,27 @@ public class MainActivity extends AppCompatActivity {
         log("Song Downloading Start... ");
         displayProgressBar(true);
 
+/*
+
 //        Send Intent To MyDownloadService.onStartCommand
 
         for (String song : Playlist.songs) {
 
             Intent intent = new Intent(MainActivity.this, MyDownloadService.class);
             intent.putExtra(MESSAGE_KEY, song);
+            startService(intent);
+
+        }
+*/
+        //     Update UI/Main Thread from Service using Result Receiver
+
+        ResultReceiver resultReceiver=new MyDownloadResultReciever(null);
+
+        for (String song : Playlist.songs) {
+
+            Intent intent = new Intent(MainActivity.this, MyDownloadService.class);
+            intent.putExtra(MESSAGE_KEY, song);
+            intent.putExtra(Intent.EXTRA_RESULT_RECEIVER,resultReceiver);
             startService(intent);
 
         }
@@ -90,5 +107,33 @@ public class MainActivity extends AppCompatActivity {
         mScrollView = findViewById(R.id.scroll_view);
         nLog = findViewById(R.id.txt_view);
         mProgressBar = findViewById(R.id.pro_bar);
+    }
+
+    public class MyDownloadResultReciever extends ResultReceiver{
+
+        public MyDownloadResultReciever(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+            super.onReceiveResult(resultCode, resultData);
+
+            if (resultCode==RESULT_OK && resultData != null){
+
+                Log.d(TAG,"onReceiveResult : Thread Name : "+Thread.currentThread().getName());     // It Is Not Running On UI Thread
+
+                String songName=resultData.getString(MESSAGE_KEY);
+
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        log(songName + " Downloaded");
+                        displayProgressBar(false);
+                    }
+                });
+
+            }
+        }
     }
 }

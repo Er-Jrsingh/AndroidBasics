@@ -1,7 +1,9 @@
 package com.androidbasics;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ResultReceiver;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -12,6 +14,7 @@ public class DownloadHandler extends Handler {
 
     private static final String TAG = "MyTag";
     private MyDownloadService mDownloadService;
+    private ResultReceiver mReceiver;
 
     @Override
     public void handleMessage(@NonNull Message msg) {
@@ -26,6 +29,10 @@ public class DownloadHandler extends Handler {
         boolean result = mDownloadService.stopSelfResult(msg.arg1);
 
         Log.d(TAG, "handleMessage : Service Stop Result : " + result + " startId : "+ msg.arg1);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(MainActivity.MESSAGE_KEY,msg.obj.toString());
+        mReceiver.send(MainActivity.RESULT_OK,bundle);
 
     }
 
@@ -46,5 +53,9 @@ public class DownloadHandler extends Handler {
 
     public void setDownloadService(MyDownloadService mDownloadService) {
         this.mDownloadService = mDownloadService;
+    }
+
+    public void setReceiver(ResultReceiver mReceiver) {
+        this.mReceiver = mReceiver;
     }
 }
