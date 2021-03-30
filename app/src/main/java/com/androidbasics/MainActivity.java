@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView nLog;
     private ScrollView mScrollView;
     private ProgressBar mProgressBar;
+    private Handler mHandler;
 
 
     @Override
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initView();
+
+        mHandler = new Handler();
     }
 
     public void runCode(View view) {
@@ -58,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
 */
         //     Update UI/Main Thread from Service using Result Receiver
 
-        ResultReceiver resultReceiver=new MyDownloadResultReciever(null);
+        ResultReceiver resultReceiver = new MyDownloadResultReciever(null);
 
         for (String song : Playlist.songs) {
 
             Intent intent = new Intent(MainActivity.this, MyDownloadService.class);
             intent.putExtra(MESSAGE_KEY, song);
-            intent.putExtra(Intent.EXTRA_RESULT_RECEIVER,resultReceiver);
+            intent.putExtra(Intent.EXTRA_RESULT_RECEIVER, resultReceiver);
             startService(intent);
 
         }
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.pro_bar);
     }
 
-    public class MyDownloadResultReciever extends ResultReceiver{
+    public class MyDownloadResultReciever extends ResultReceiver {
 
         public MyDownloadResultReciever(Handler handler) {
             super(handler);
@@ -119,19 +122,29 @@ public class MainActivity extends AppCompatActivity {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             super.onReceiveResult(resultCode, resultData);
 
-            if (resultCode==RESULT_OK && resultData != null){
+            if (resultCode == RESULT_OK && resultData != null) {
 
-                Log.d(TAG,"onReceiveResult : Thread Name : "+Thread.currentThread().getName());     // It Is Not Running On UI Thread
+                Log.d(TAG, "onReceiveResult : Thread Name : " + Thread.currentThread().getName());     // It Is Not Running On UI Thread
 
-                String songName=resultData.getString(MESSAGE_KEY);
+                String songName = resultData.getString(MESSAGE_KEY);
 
-                MainActivity.this.runOnUiThread(new Runnable() {
+//                MainActivity.this.runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        log(songName + " Downloaded");
+//                        displayProgressBar(false);
+//                    }
+//                });
+
+//          Another Way To Get UI Thread
+                mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         log(songName + " Downloaded");
                         displayProgressBar(false);
                     }
                 });
+
 
             }
         }
