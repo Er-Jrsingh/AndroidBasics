@@ -17,12 +17,13 @@ import com.androidbasics.MainActivity;
 //     Here We Set up Worker Thread, Handler & Looper in Started Service(followed Production Ready Code Approach)
 //     use Async Task in Started Service
 //     onStartCommand Return Flags, Meaning & Use, Handling Being Killed
+//     Stop Started Service with Stop Self & Stop Self Result In Download Handler(Worker Thread).We'll make out Song Download Service to restart for only those songs that are not downloaded. If a song is downloaded and our service crashes and restarts, then that song will not be downloaded again.
 
 
 public class MyDownloadService extends Service {
 
     private static final String TAG = "MyTag";
-//    private DownloadThread mDownloadThread;
+    private DownloadThread mDownloadThread;
 
     public MyDownloadService() {
 
@@ -34,43 +35,45 @@ public class MyDownloadService extends Service {
 
         Log.d(TAG, "onCreate : " + " onCreate Called");
 
-/*
 //      Set up Worker Thread, Handler & Looper in Started Service
-        mDownloadThread=new DownloadThread();
+
+        mDownloadThread = new DownloadThread();
         mDownloadThread.start();
 
-        */
-        /*  Trick to prevent null Handler But it is Not Best Approach so use AsyncTask    *//*
+//          Trick to prevent null Handler But it is Not Best Approach so use AsyncTask
 
-        while (mDownloadThread.mHandler==null){}
-*/
+        while (mDownloadThread.mHandler == null) {
+        }
 
+        //     Stop Started Service with Stop Self & Stop Self Result
+
+        mDownloadThread.mHandler.setDownloadService(this);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Log.d(TAG, "onStartCommand : " + " onStartCommand Called");
+        Log.d(TAG, "onStartCommand : " + " onStartCommand Called" + "With StartId : " +startId);
 
         Log.d(TAG, "Thread Name : " + Thread.currentThread().getName());
 
 //     use Async Task in Started Service
 
-        final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
+//        final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
 
-        MyAsyncTask myAsyncTask = new MyAsyncTask();
-        myAsyncTask.execute(songName);
+//        MyAsyncTask myAsyncTask = new MyAsyncTask();
+//        myAsyncTask.execute(songName);
+//
 
 
-/*
 //       Set up Worker Thread, Handler & Looper in Started Service
 
         final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
-        Message message=Message.obtain();
-        message.obj=songName;
+        Message message = Message.obtain();
+        message.obj = songName;
+        message.arg1=startId;
         mDownloadThread.mHandler.sendMessage(message);
 
-*/
 
 /*
 

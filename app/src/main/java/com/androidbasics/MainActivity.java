@@ -17,7 +17,7 @@ import com.androidbasics.services.MyDownloadService;
 //     Here We Stop The Service At clearCode Method(Clear Code Button) Of MainActivity
 //     Here We Set up Worker Thread, Handler & Looper in Started Service(followed Production Ready Code Approach)
 //     use Async Task in Started Service
-
+//     Stop Started Service with Stop Self & Stop Self Result In Download Handler(Worker Thread).We'll make out Song Download Service to restart for only those songs that are not downloaded. If a song is downloaded and our service crashes and restarts, then that song will not be downloaded again.
 
 
 public class MainActivity extends AppCompatActivity {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clearCode(View view) {
 
-        Intent intent=new Intent(MainActivity.this,MyDownloadService.class);
+        Intent intent = new Intent(MainActivity.this, MyDownloadService.class);
         stopService(intent);
 
         nLog.setText("");
