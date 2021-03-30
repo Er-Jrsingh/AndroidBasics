@@ -10,12 +10,13 @@ import android.util.Log;
 import com.androidbasics.DownloadThread;
 import com.androidbasics.MainActivity;
 
-//    This Is Started Service Because onBind Return Null,By Default It Always Run On UI Thread So That Screen Face Drop Frames(Screen Freeze),After Close App It Still Run On Background
+//     This Is Started Service Because onBind Return Null,By Default It Always Run On UI Thread So That Screen Face Drop Frames(Screen Freeze),After Close App It Still Run On Background
 //     Here We Create Separate Background Thread So Screen Not Blocked,After Close App It Still Run On Background for Always So We Must Have To Write Stop Code
 //     Here We Implement The Lifecycle Of Service,Here We Can See That onDestroy & onBind Not Called Even after Closing App
 //     Here We Stop The Service Using stopService() At clearCode Method(Clear Code Button) Of MainActivity,Here We can see that onDestroy is Called on Clear Button Pressed & Still downloadSong : Download Finished Called Because Bg Thread is still Running
 //     Here We Set up Worker Thread, Handler & Looper in Started Service(followed Production Ready Code Approach)
 //     use Async Task in Started Service
+//     onStartCommand Return Flags, Meaning & Use, Handling Being Killed
 
 
 public class MyDownloadService extends Service {
@@ -39,7 +40,7 @@ public class MyDownloadService extends Service {
         mDownloadThread.start();
 
         */
-/*  Trick to prevent null Handler But it is Not Best Approach so use AsyncTask    *//*
+        /*  Trick to prevent null Handler But it is Not Best Approach so use AsyncTask    *//*
 
         while (mDownloadThread.mHandler==null){}
 */
@@ -57,7 +58,7 @@ public class MyDownloadService extends Service {
 
         final String songName = intent.getStringExtra(MainActivity.MESSAGE_KEY);
 
-        MyAsyncTask myAsyncTask= new MyAsyncTask();
+        MyAsyncTask myAsyncTask = new MyAsyncTask();
         myAsyncTask.execute(songName);
 
 
@@ -92,7 +93,18 @@ public class MyDownloadService extends Service {
         downloadSong(songName);
 */
 
+/*
+
+//        Return Flags, Meaning & Use In onStartCommand
+
+            1. START_STICKY = If app is crashed during execution,We want Restart the Service but don't want intent again(so that intent is null)( Used In Walk Steps count,Music App )
+            2. START_NOT_STICKY = If app is crashed during execution,We don't want to Restart the Service & also don't want to intent again(so that intent is null)
+            3. START_REDELIVER_INTENT = If app is crashed during execution,We want to Restart the Service & also want to redeliver intent again (without stopSelf() Call intents )
+            4. START_STICKY_COMPATIBILITY =
+*/
+
         return Service.START_REDELIVER_INTENT;
+
     }
 
     @Override
@@ -125,14 +137,14 @@ public class MyDownloadService extends Service {
         Log.d(TAG, "onDestroy : " + " onDestroy Called");
     }
 
-    static class MyAsyncTask extends AsyncTask<String,String,String>{
+    static class MyAsyncTask extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... songs) {
 
-            Log.d(TAG,"doInBackground : Song Downloaded Started "+songs[0]);
+            Log.d(TAG, "doInBackground : Song Downloaded Started " + songs[0]);
 
-            for (String song:songs){
+            for (String song : songs) {
                 try {
                     Thread.sleep(4000);
                 } catch (InterruptedException e) {
@@ -147,13 +159,13 @@ public class MyDownloadService extends Service {
         @Override
         protected void onProgressUpdate(String... values) {
 
-            Log.d(TAG,"onProgressUpdate : Song Downloaded "+values[0]);
+            Log.d(TAG, "onProgressUpdate : Song Downloaded " + values[0]);
         }
 
         @Override
         protected void onPostExecute(String s) {
 
-            Log.d(TAG,"onPostExecute : Result Is : "+s);
+            Log.d(TAG, "onPostExecute : Result Is : " + s);
         }
     }
 }
