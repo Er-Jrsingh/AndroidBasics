@@ -1,8 +1,12 @@
 package com.androidbasics;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +17,9 @@ import android.widget.TextView;
 import com.androidbasics.services.MyIntentService;
 
 //          Create & Run Intent Service It Helps To Simplify Started Service Intent Functionality(it create handler, thread , handleMessage StopSelf,etc Implicitly)
-//  Implement Lifecycle of  a IntentService
+//          Implement Lifecycle of  a IntentService
+//          Send Data from Intent Service to UI/Main Thread
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MyTag";
@@ -22,12 +28,37 @@ public class MainActivity extends AppCompatActivity {
     private ScrollView mScrollView;
     private ProgressBar mProgressBar;
 
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String songName = intent.getStringExtra(MESSAGE_KEY);
+            log(songName + " Downloaded");
+            displayProgressBar(false);
+
+            Log.d(TAG, "onReceive :  Thread Name :  " + Thread.currentThread().getName());
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         initView();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(getApplicationContext())
+                .registerReceiver(mReceiver, new IntentFilter(MyIntentService.INTENT_SERVICE_MESSAGE));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(getApplicationContext())
+                .unregisterReceiver(mReceiver);
     }
 
     public void runCode(View view) {

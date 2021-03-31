@@ -4,13 +4,18 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.androidbasics.MainActivity;
 
 //  Create & Run Intent Service It Helps To Simplify Started Service Intent Functionality(it create handler, thread , handleMessage StopSelf,etc Implicitly),Only One Thread Is Allocate To Process
 //  Implement Lifecycle of  a IntentService
+//  Send Data from Intent Service to UI/Main Thread
+
 public class MyIntentService extends IntentService {
 
     private static final String TAG = "MyTag";
+    public static final String INTENT_SERVICE_MESSAGE = "IntentServiceMessage";
 
     public MyIntentService() {
         super("MyIntentService");
@@ -32,9 +37,19 @@ public class MyIntentService extends IntentService {
 
         String songName=intent.getStringExtra(MainActivity.MESSAGE_KEY);
         downloadSong(songName);
+//        Send Data from Intent Service to UI/Main Thread
+        SendMessageToUi(songName);
 
         Log.d(TAG,"onHandleIntent : MyIntentService" );
         Log.d(TAG,"onHandleIntent : Thread Name : "+ Thread.currentThread().getName() );
+    }
+
+    private void SendMessageToUi(String songName) {
+        Intent intent=new Intent(INTENT_SERVICE_MESSAGE);
+        intent.putExtra(MainActivity.MESSAGE_KEY,songName);
+
+        LocalBroadcastManager.getInstance(getApplicationContext())
+                .sendBroadcast(intent);
     }
 
     private void downloadSong(String song) {
