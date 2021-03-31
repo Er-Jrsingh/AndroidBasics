@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.androidbasics.services.MyIntentService;
 
 //          Create & Run Intent Service It Helps To Simplify Started Service Intent Functionality(it create handler, thread , handleMessage StopSelf,etc Implicitly)
-
+//  Implement Lifecycle of  a IntentService
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MyTag";
