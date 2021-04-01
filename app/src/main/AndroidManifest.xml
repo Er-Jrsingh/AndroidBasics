@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.lifecycle.MusicPlayerService"
+        <service android:name=".services.playmusic.PlayMusicService"
             android:exported="false"/>
 
     </application>

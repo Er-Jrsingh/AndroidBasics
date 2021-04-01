@@ -3,4 +3,7 @@
     <string name="tv">Welcome To Bound Service</string>
     <string name="run">Run Code</string>
     <string name="clr">Clear Code</string>
+    <string name="header">Welcome To Music Player</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
 </resources>
