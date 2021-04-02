@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
+    <string name="enter_title">Enter Title</string>
+    <string name="enter_msg">Enter Message</string>
+    <string name="one">Channel One</string>
+    <string name="two">Channel Two</string>
 </resources>
