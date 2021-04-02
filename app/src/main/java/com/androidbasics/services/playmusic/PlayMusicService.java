@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Binder;
 import android.os.IBinder;
-
-import androidx.annotation.Nullable;
+import android.util.Log;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import com.androidbasics.MainActivity;
 import com.androidbasics.R;
 
 //           Play Music in Bound Service
+//          Use One Service as Bound & Started Service in Android
+
 
 public class PlayMusicService extends Service {
 
@@ -33,28 +33,34 @@ public class PlayMusicService extends Service {
                 intent.putExtra(MainActivity.MESSAGE_KEY, "done");
                 LocalBroadcastManager.getInstance(getApplicationContext())
                         .sendBroadcast(intent);
+                stopSelf();                 //stopSelf() Stop the service,if it was previously started.This is the same as calling Context.stopService(intent) for this particular service
             }
         });
+        Log.d(TAG, "onCreate : ");
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        Log.d(TAG, "onBind : ");
         return mBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        return super.onUnbind(intent);
+        Log.d(TAG, "onUnbind : ");
+        return true;            //  if false  onStart called & onRebind not Called
     }
 
-    public String getValue() {
-        return "Data From Service...";
+    @Override
+    public void onRebind(Intent intent) {
+        super.onRebind(intent);
+        Log.d(TAG, "onRebind : ");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d(TAG, "onDestroy : ");
         mPlayer.release();
     }
 
@@ -72,6 +78,12 @@ public class PlayMusicService extends Service {
     public void pause() {
 //        Play & Pause methods are sending data from MainActivity to Bound Service
         mPlayer.pause();
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG,"onStartCommand");
+        return START_NOT_STICKY;
     }
 
     public class MyServiceBinder extends Binder {

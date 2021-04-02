@@ -20,7 +20,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.androidbasics.services.playmusic.PlayMusicService;
 
 //          Create & Bind to Bound Service in Android & Its Lifecycle
-//           Play Music in Bound Service (ignore lifecycle Package)
+//          Play Music in Bound Service (ignore lifecycle Package)
+//          Use One Service as Bound & Started Service in Android
 
 public class MainActivity extends AppCompatActivity {
 
@@ -100,8 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 mPlayMusicService.pause();
                 mPlayBtn.setText(R.string.play);
             } else {
-                mPlayMusicService.play();
-                mPlayBtn.setText(R.string.pause);
+                Intent intent=new Intent(MainActivity.this,PlayMusicService.class);
+                startService(intent);
+                    mPlayMusicService.play();
+                    mPlayBtn.setText(R.string.pause);
             }
         }
     }
