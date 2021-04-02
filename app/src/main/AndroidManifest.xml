@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.androidbasics">
 
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,11 +21,13 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.playmusic.PlayMusicService"
-            android:exported="false"/>
+        <service
+            android:name=".services.foreground.ForegroundMusicService"
+            android:exported="false" />
 
-        <service android:name=".services.foreground.MyForegroundService"
-            android:exported="false"/>
+        <service
+            android:name=".services.foreground.MyForegroundService"
+            android:exported="false" />
 
     </application>
 

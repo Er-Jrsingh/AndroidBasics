@@ -17,13 +17,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.androidbasics.constants.Constants;
+import com.androidbasics.services.foreground.ForegroundMusicService;
 import com.androidbasics.services.foreground.MyForegroundService;
-import com.androidbasics.services.playmusic.PlayMusicService;
 
 //          Create & Bind to Bound Service in Android & Its Lifecycle
 //          Play Music in Bound Service (ignore lifecycle Package)
 //          Use One Service as Bound & Started Service in Android
 //          Create Foreground Service (with Notification) (ignore playmusic,lifecycle Package)
+//          Control Foreground Service from Notification(ignore playmusic,lifecycle,foreground.MyForegroundService Package)
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String MESSAGE_KEY = "message_key";
     private TextView nLog;
     private ScrollView mScrollView;
-    private PlayMusicService mPlayMusicService;
+    private ForegroundMusicService mForegroundMusicService;
     private boolean mBound = false;
     private Button mPlayBtn;
 
@@ -39,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         //        Called When Connection Is Established Between Service  & Activity
         @Override
         public void onServiceConnected(ComponentName name, IBinder iBinder) {
-            PlayMusicService.MyServiceBinder mServiceBinder = (PlayMusicService.MyServiceBinder) iBinder;
-            mPlayMusicService = mServiceBinder.getService();
+            ForegroundMusicService.MyServiceBinder mServiceBinder = (ForegroundMusicService.MyServiceBinder) iBinder;
+            mForegroundMusicService = mServiceBinder.getService();
             mBound = true;
 
             Log.d(TAG, "onServiceConnected : ");
@@ -77,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(MainActivity.this, PlayMusicService.class);
+        Intent intent = new Intent(MainActivity.this, ForegroundMusicService.class);
         bindService(intent, mServiceConnection, BIND_AUTO_CREATE);
 
         LocalBroadcastManager.getInstance(getApplicationContext())
-                .registerReceiver(mReceiver, new IntentFilter(PlayMusicService.MUSIC_COMPLETE));
+                .registerReceiver(mReceiver, new IntentFilter(ForegroundMusicService.MUSIC_COMPLETE));
     }
 
     @Override
@@ -97,13 +99,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void playBtn(View view) {
         if (mBound) {
-            if (mPlayMusicService.isPlaying()) {
-                mPlayMusicService.pause();
+            if (mForegroundMusicService.isPlaying()) {
+                mForegroundMusicService.pause();
                 mPlayBtn.setText(R.string.play);
             } else {
-                Intent intent = new Intent(MainActivity.this, PlayMusicService.class);
+                Intent intent = new Intent(MainActivity.this, ForegroundMusicService.class);
+                intent.setAction(Constants.MUSIC_SERVICE_ACTION_START);
                 startService(intent);
-                mPlayMusicService.play();
+                mForegroundMusicService.play();
                 mPlayBtn.setText(R.string.pause);
             }
         }
