@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //      Creating Notification Channel in Android Oreo(Styles-1)
+//      Notifications with Action Buttons (Styles-2)
 
 public class App extends Application {
 

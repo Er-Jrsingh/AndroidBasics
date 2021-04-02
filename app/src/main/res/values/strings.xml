@@ -4,4 +4,5 @@
     <string name="enter_msg">Enter Message</string>
     <string name="one">Channel One</string>
     <string name="two">Channel Two</string>
+    <string name="sec">I Am Second Activity</string>
 </resources>
