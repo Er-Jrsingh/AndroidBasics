@@ -22,6 +22,9 @@
         <service android:name=".services.playmusic.PlayMusicService"
             android:exported="false"/>
 
+        <service android:name=".services.foreground.MyForegroundService"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

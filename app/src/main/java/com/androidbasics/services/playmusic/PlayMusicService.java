@@ -13,7 +13,6 @@ import com.androidbasics.R;
 //           Play Music in Bound Service
 //          Use One Service as Bound & Started Service in Android
 
-
 public class PlayMusicService extends Service {
 
     private static final String TAG = "MyTag";

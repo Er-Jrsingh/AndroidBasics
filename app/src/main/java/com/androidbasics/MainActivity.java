@@ -17,11 +17,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.androidbasics.services.foreground.MyForegroundService;
 import com.androidbasics.services.playmusic.PlayMusicService;
 
 //          Create & Bind to Bound Service in Android & Its Lifecycle
 //          Play Music in Bound Service (ignore lifecycle Package)
 //          Use One Service as Bound & Started Service in Android
+//          Create Foreground Service (with Notification) (ignore playmusic,lifecycle Package)
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         nLog.setText(R.string.header);
     }
 
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String result = intent.getStringExtra(MESSAGE_KEY);
@@ -85,12 +87,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-
         if (mBound) {
             unbindService(mServiceConnection);
             mBound = false;
         }
-
         LocalBroadcastManager.getInstance(getApplicationContext())
                 .unregisterReceiver(mReceiver);
     }
@@ -101,16 +101,20 @@ public class MainActivity extends AppCompatActivity {
                 mPlayMusicService.pause();
                 mPlayBtn.setText(R.string.play);
             } else {
-                Intent intent=new Intent(MainActivity.this,PlayMusicService.class);
+                Intent intent = new Intent(MainActivity.this, PlayMusicService.class);
                 startService(intent);
-                    mPlayMusicService.play();
-                    mPlayBtn.setText(R.string.pause);
+                mPlayMusicService.play();
+                mPlayBtn.setText(R.string.pause);
             }
         }
     }
 
     public void runCode(View view) {
-        log("Playing Music Buddy");
+        //          Create Foreground Service (with Notification) (ignore playmusic,lifecycle Package)
+        log("Music Downloading Buddy");
+        Intent intent = new Intent(MainActivity.this, MyForegroundService.class);
+        startService(intent);
+
     }
 
     public void clearCode(View view) {
