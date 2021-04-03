@@ -13,6 +13,7 @@ import androidx.core.app.NotificationCompat;
 
 //      Creating Notification Channel in Android Oreo(Styles-1)
 //      Notifications with Action Buttons (Styles-2)
+//        Start Broadcast from Notification with Channels
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,11 +66,20 @@ public class MainActivity extends AppCompatActivity {
         String title = mTitle.getText().toString();
         String message = mMessage.getText().toString();
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, App.CHANNEL_TWO_ID)
+//        Start Broadcast from Notification with Channels
+        Intent broadcastIntent = new Intent(this, NotificationBroadcastReceiver.class);
+        broadcastIntent.putExtra(MESSAGE_KEY, message);
+        PendingIntent broadcastPendingIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder
+                builder = new NotificationCompat.Builder(this, App.CHANNEL_TWO_ID)
                 .setSmallIcon(R.drawable.ic_baseline_local_fire_department_24)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setPriority(NotificationCompat.PRIORITY_LOW); // Used By Less the 26 api Level Devices
+                .setPriority(NotificationCompat.PRIORITY_LOW) // Used By Less the 26 api Level Devices
+                .addAction(R.mipmap.ic_launcher,"Show Toast",broadcastPendingIntent)
+                .setColor(Color.MAGENTA);
+
 
         manager.notify(2, builder.build());
     }
