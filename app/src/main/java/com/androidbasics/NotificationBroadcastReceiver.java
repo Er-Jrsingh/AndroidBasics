@@ -13,8 +13,8 @@ public class NotificationBroadcastReceiver extends BroadcastReceiver {
 
         if (intent != null) {
             if (intent.hasExtra(MainActivity.MESSAGE_KEY)) {
-                String message =intent.getStringExtra(MainActivity.MESSAGE_KEY);
-                Toast.makeText(context, message+" From BroadcastReceiver Notification", Toast.LENGTH_SHORT).show();
+                String message = intent.getStringExtra(MainActivity.MESSAGE_KEY);
+                Toast.makeText(context, message + " From BroadcastReceiver Notification", Toast.LENGTH_SHORT).show();
             }
         }
 

@@ -1,5 +1,6 @@
 package com.androidbasics;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -13,7 +14,8 @@ import androidx.core.app.NotificationCompat;
 
 //      Creating Notification Channel in Android Oreo(Styles-1)
 //      Notifications with Action Buttons (Styles-2)
-//        Start Broadcast from Notification with Channels
+//       Start Broadcast from Notification with Channels
+//       Start Service  from Notification with Channels
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void btnChannelTwo(View view) {
-
         String title = mTitle.getText().toString();
         String message = mMessage.getText().toString();
 
@@ -71,17 +72,25 @@ public class MainActivity extends AppCompatActivity {
         broadcastIntent.putExtra(MESSAGE_KEY, message);
         PendingIntent broadcastPendingIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder
-                builder = new NotificationCompat.Builder(this, App.CHANNEL_TWO_ID)
+//        Start Service from Notification with Channels
+        Intent serviceIntent = new Intent(this, MyIntentService.class);
+        serviceIntent.putExtra(MESSAGE_KEY, message);
+        PendingIntent servicePendingIntent = PendingIntent.getService(this, 0, serviceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+//        Migrate To Notification Directly, Works similar as NotificationCompat.Builder
+        Notification
+                notification = new NotificationCompat.Builder(this, App.CHANNEL_TWO_ID)
                 .setSmallIcon(R.drawable.ic_baseline_local_fire_department_24)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_LOW) // Used By Less the 26 api Level Devices
-                .addAction(R.mipmap.ic_launcher,"Show Toast",broadcastPendingIntent)
-                .setColor(Color.MAGENTA);
+                .addAction(R.mipmap.ic_launcher, "Show Toast", broadcastPendingIntent)
+                .addAction(R.mipmap.ic_launcher, "Start Service", servicePendingIntent)
+                .setColor(Color.MAGENTA)
+                .build();
 
 
-        manager.notify(2, builder.build());
+        manager.notify(2, notification);
     }
 
     private void initViews() {
