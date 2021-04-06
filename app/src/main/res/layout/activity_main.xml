@@ -6,4 +6,34 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hola_broadcastreceiver"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textColor="#9381ff"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/con"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textColor="#9381ff"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/boot"
+        android:textSize="20sp"
+        android:gravity="center_horizontal"
+        android:textColor="#9381ff"
+        android:padding="10dp"
+        />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

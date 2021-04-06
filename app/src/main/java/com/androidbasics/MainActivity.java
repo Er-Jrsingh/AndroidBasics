@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+//      Working with Implicit & Static Broadcast Receiver
 public class MainActivity extends AppCompatActivity {
 
     @Override
