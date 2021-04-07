@@ -9,31 +9,28 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
         android:text="@string/hola_broadcastreceiver"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
         android:textColor="#9381ff"
-        android:padding="10dp"
-        />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
         android:text="@string/con"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
         android:textColor="#9381ff"
-        android:padding="10dp"
-        />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/boot"
-        android:textSize="20sp"
         android:gravity="center_horizontal"
-        android:textColor="#9381ff"
         android:padding="10dp"
-        />
+        android:text="@string/time"
+        android:textColor="#9381ff"
+        android:textSize="20sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

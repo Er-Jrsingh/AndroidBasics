@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
     <string name="hola_broadcastreceiver">Hola ! BroadcastReceiver</string>
-    <string name="con">Triggerd When Connection Status Change</string>
+    <string name="con">Triggered When Connection Status Change</string>
     <string name="boot">Called When Device Reboot</string>
+    <string name="time">Triggered At Every Min Change</string>
 </resources>

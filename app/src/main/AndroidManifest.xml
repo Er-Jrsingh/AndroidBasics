@@ -22,12 +22,13 @@
         </activity>
 
         <!--        It Is Implicit BroadcastReceiver because Not called with class name by Any app Although Triggered By Event(action)  or Os  & Static BroadcastReceiver  because Declared in manifest     -->
-        <receiver android:name=".MyBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
+        <!--       <receiver android:name=".MyBroadcastReceiver">
+                   <intent-filter>
+                       <action android:name="android.intent.action.BOOT_COMPLETED" />
+                       <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                   </intent-filter>
+               </receiver>
+       -->
     </application>
 
 </manifest>
