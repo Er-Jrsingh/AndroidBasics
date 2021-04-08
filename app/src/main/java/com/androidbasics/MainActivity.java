@@ -14,6 +14,7 @@ import android.view.View;
 //      Creating & Working with Dynamic & Sticky Broadcast Receiver Using Application Class  (It is  not Destroyed When Activity Destroy & Active Until App Close )
 //      Creating & Working with Custom Broadcast Receiver(Broadcast Sender Code is In CustomBroadcastSender Branch)
 //      Create Explicit Broadcast & Call In same App
+//      Explicit Broadcast- Send Broadcast from One App to Other (Receiver Code Written in Branch CustomBroadcastSender )
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,8 +42,16 @@ public class MainActivity extends AppCompatActivity {
 */
     }
 
-    //      Create Explicit Broadcast & Call In same App
     public void sendBroadcast(View view) {
+//      Explicit Broadcast- Send Broadcast from One App to Other (Receiver Code Written in Branch CustomBroadcastSender )
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.example.custombroadcastreceiver", "com.example.custombroadcastreceiver.AndroidBasicBroadcastReceiver");
+        intent.setComponent(componentName);
+        sendBroadcast(intent);
+
+/*
+//          Create Explicit Broadcast & Call In same App
+
 //        Intent intent = new Intent(this, MyExplicitBroadcast.class);
 //        sendBroadcast(intent);
 
@@ -52,16 +61,19 @@ public class MainActivity extends AppCompatActivity {
 //        sendBroadcast(intent);
 
 //        Similar as above code
-        Intent intent = new Intent();
-        ComponentName componentName = new ComponentName(this, MyExplicitBroadcast.class);
-        intent.setComponent(componentName);
-        sendBroadcast(intent);
+//        Intent intent = new Intent();
+//        ComponentName componentName = new ComponentName(this, MyExplicitBroadcast.class);
+//        intent.setComponent(componentName);
+//        sendBroadcast(intent);
+*/
     }
-
+/*
     @Override
     protected void onDestroy() {
         super.onDestroy();
 //        unregisterReceiver(dynamicBroadcastReceiver);
 //        unregisterReceiver(customReceiver);
     }
+*/
+
 }
