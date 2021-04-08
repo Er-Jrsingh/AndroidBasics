@@ -4,6 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     tools:context=".MainActivity">
+
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/broadcast_sender"
+        android:textColor="@color/black"
+         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="268dp"
+        android:onClick="sendBroadcast"
+        android:text="@string/send_broadcast"
+        />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
