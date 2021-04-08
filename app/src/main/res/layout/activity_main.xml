@@ -20,9 +20,17 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="@string/sender"
+        android:text="@string/send"
         android:textColor="#9381ff"
         android:textSize="20sp" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="250dp"
+        android:onClick="sendBroadcast"
+        android:text="@string/send_broadcast" />
 
     <!--
         <TextView

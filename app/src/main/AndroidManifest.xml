@@ -22,6 +22,8 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".MyExplicitBroadcast"/>
+
         <!--        It Is Implicit BroadcastReceiver because Not called with class name by Any app Although Triggered By Event(action)  or Os  & Static BroadcastReceiver  because Declared in manifest     -->
         <!--       <receiver android:name=".MyBroadcastReceiver">
                    <intent-filter>

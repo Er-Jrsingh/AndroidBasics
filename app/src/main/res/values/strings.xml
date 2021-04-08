@@ -5,4 +5,6 @@
     <string name="boot">Called When Device Reboot</string>
     <string name="time">Triggered At Every Min Change</string>
     <string name="sender">Triggered When Custom Sender App Send Broadacast</string>
+    <string name="send_broadcast">Send Broadcast</string>
+    <string name="send">Triggered On Send Broadcast Pressed</string>
 </resources>
