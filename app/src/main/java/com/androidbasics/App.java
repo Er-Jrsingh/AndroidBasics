@@ -1,4 +1,4 @@
-package com.androidbasics;
+/*package com.androidbasics;
 
 import android.app.Application;
 import android.content.Intent;
@@ -25,4 +25,4 @@ public class App extends Application {
         super.onTerminate();
         unregisterReceiver(dynamicBroadcastReceiver);
     }
-}
+}*/

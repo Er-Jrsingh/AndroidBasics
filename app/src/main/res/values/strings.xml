@@ -4,4 +4,5 @@
     <string name="con">Triggered When Connection Status Change</string>
     <string name="boot">Called When Device Reboot</string>
     <string name="time">Triggered At Every Min Change</string>
+    <string name="sender">Triggered When Custom Sender App Send Broadacast</string>
 </resources>

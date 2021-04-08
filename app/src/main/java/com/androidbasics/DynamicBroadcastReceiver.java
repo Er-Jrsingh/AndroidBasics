@@ -1,3 +1,4 @@
+/*
 package com.androidbasics;
 
 import android.content.BroadcastReceiver;
@@ -24,3 +25,4 @@ public class DynamicBroadcastReceiver extends BroadcastReceiver {
         }
     }
 }
+*/

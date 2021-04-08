@@ -20,17 +20,28 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:padding="10dp"
-        android:text="@string/con"
+        android:text="@string/sender"
         android:textColor="#9381ff"
         android:textSize="20sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:padding="10dp"
-        android:text="@string/time"
-        android:textColor="#9381ff"
-        android:textSize="20sp" />
+    <!--
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/con"
+            android:textColor="#9381ff"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="10dp"
+            android:text="@string/time"
+            android:textColor="#9381ff"
+            android:textSize="20sp" />
+    -->
 
 </androidx.appcompat.widget.LinearLayoutCompat>
