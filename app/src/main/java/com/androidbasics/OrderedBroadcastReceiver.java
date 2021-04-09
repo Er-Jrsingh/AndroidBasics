@@ -1,3 +1,4 @@
+/*
 package com.androidbasics;
 
 import android.content.BroadcastReceiver;
@@ -35,3 +36,4 @@ public class OrderedBroadcastReceiver extends BroadcastReceiver {
         setResult(initialCode, initialData, bundle);
     }
 }
+*/

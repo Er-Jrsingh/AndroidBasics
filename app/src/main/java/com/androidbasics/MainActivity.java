@@ -22,6 +22,7 @@ import java.util.List;
 //      Calling Implicit Broadcast as Explicit Broadcast In Android Oreo (Receiver Code Written in Branch CustomBroadcastSender Manifest File  & This  App Manifest File  )
 //      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver(Receiver Code Written in Branch CustomBroadcastSender )
 //      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers ,Get And Change Property
+//      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers ,Get And Change Property,Practical Scenario (Receive code written in Branch BroadcastPracticalScenario)(Test App - Open both App In Split Mode)
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 /*
 //        Creating & Working with Custom Broadcast Receiver
         IntentFilter intentFilter = new IntentFilter("com.androidbasics.ACTION_SEND");
@@ -52,12 +52,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendBroadcast(View view) {
 
+//      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers ,Get And Change Property,Practical Scenario
+        Intent intent = new Intent("com.example.custombroadcastsender.ACTION_SEND");
+        intent.setPackage("com.example.custombroadcastsender");
+        sendOrderedBroadcast(intent, null);
+/*
 //      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver
         Intent intent = new Intent("com.example.custombroadcastsender.ACTION_SEND");
         intent.setPackage("com.example.custombroadcastsender");
         Bundle bundle = new Bundle();
         bundle.putString("message_key", "Start");
         sendOrderedBroadcast(intent, null, new OrderedBroadcastReceiver(), null, RESULT_CANCELED, "Start", bundle);
+*/
 
 /*
 
