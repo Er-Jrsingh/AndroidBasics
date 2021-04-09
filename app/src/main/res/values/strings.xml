@@ -2,4 +2,6 @@
     <string name="app_name">AndroidBasics</string>
     <string name="tab_1">Tab 1</string>
     <string name="tab_2">Tab 2</string>
+    <string name="send_broadcast">Send Broadcast</string>
+    <string name="welcome_to_local_broadcastreceiver">Welcome To Local BroadcastReceiver</string>
 </resources>
