@@ -20,6 +20,7 @@ import java.util.List;
 //      Create Explicit Broadcast & Call In same App
 //      Explicit Broadcast- Send Broadcast from One App to Other (Receiver Code Written in Branch CustomBroadcastSender )
 //      Calling Implicit Broadcast as Explicit Broadcast In Android Oreo (Receiver Code Written in Branch CustomBroadcastSender Manifest File  & This  App Manifest File  )
+//      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver(Receiver Code Written in Branch CustomBroadcastSender )
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendBroadcast(View view) {
+
+//      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver
+        Intent intent = new Intent("com.example.custombroadcastsender.ACTION_SEND");
+        intent.setPackage("com.example.custombroadcastsender");
+        Bundle bundle = new Bundle();
+        bundle.putString("message_key", "Start");
+        sendOrderedBroadcast(intent, null, new OrderedBroadcastReceiver(), null, RESULT_CANCELED, "Start", bundle);
+
+/*
+
 //        Calling Implicit Broadcast as Explicit Broadcast
         Intent intent = new Intent("com.example.custombroadcastsender.ACTION_SEND");
 
@@ -60,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             intent.setComponent(componentName);
             sendBroadcast(intent);
         }
+*/
 
  /*
 //      Explicit Broadcast- Send Broadcast from One App to Other (Receiver Code Written in Branch CustomBroadcastSender )
