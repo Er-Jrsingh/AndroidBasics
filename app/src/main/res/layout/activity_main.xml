@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".MainActivity">
-
 
     <TextView
         android:id="@+id/tv"
@@ -14,8 +13,6 @@
         android:layout_height="wrap_content"
         android:text="@string/broadcast_receiver"
         android:textColor="@color/black"
-        android:textSize="30dp"
-         />
-
+        android:textSize="30sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
