@@ -15,9 +15,10 @@ import android.widget.TextView;
 //       Receiver Code for Branch BroadcastReceiver Written In Class AndroidBasicsBroadcastReceiver (Transfer AndroidBasicsBroadcastReceiver Code into Another Project )(ignore Previous Codes )
 //      Calling Implicit Broadcast as Explicit Broadcast - Receiver Code  ( Transfer This Code Into Another Project To Run Both App At a Time ) (Ignore Previous code )
 //      Receiver Code - Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver( Transfer This Code Into Another Project To Run Both App At a Time ) (Ignore Previous code )
+//       Receiver Code - Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers ,Get And Change Property
 
 public class MainActivity extends AppCompatActivity {
-    private TextView mTv;
+    //    private TextView mTv;
     //    private MyInnerReceiver myInnerReceiver;
     OrderedBReceiver3 mReceiver = new OrderedBReceiver3();
 
@@ -25,13 +26,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTv = findViewById(R.id.tv);
+//        mTv = findViewById(R.id.tv);
 //        myInnerReceiver = new MyInnerReceiver();
 
         //         Receiver Code - Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver
         //        Dynamic Registered(By Default priority high) so that not called when app closed
-        IntentFilter intentFilter = new IntentFilter("com.example.custombroadcastreceiver.ACTION_SEND");
-        intentFilter.setPriority(103);
+        IntentFilter intentFilter = new IntentFilter("com.example.custombroadcastsender.ACTION_SEND");
+        intentFilter.setPriority(21);
         registerReceiver(mReceiver, intentFilter);
     }
 

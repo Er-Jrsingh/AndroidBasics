@@ -20,7 +20,7 @@
         <!--        <receiver android:name=".AndroidBasicsBroadcastReceiver" android:exported="true"/>-->
 
         <!--     Receiver Code - Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver    -->
-        <!--Static Register  Order Set by Priority attribute (by default 1st Dynamic then According To Written Order In Manifest But Not guaranteed )-->
+        <!--    Static Register  Order Set by Priority attribute (by default 1st Dynamic then According To Written Order In Manifest But Not guaranteed )   -->
 
         <receiver android:name=".OrderedBReceiver1">
             <intent-filter android:priority="101">
@@ -29,13 +29,13 @@
         </receiver>
 
         <receiver android:name=".OrderedBReceiver4">
-            <intent-filter android:priority="104">
+            <intent-filter android:priority="11">
                 <action android:name="com.example.custombroadcastsender.ACTION_SEND" />
             </intent-filter>
         </receiver>
 
         <receiver android:name=".OrderedBReceiver2">
-            <intent-filter android:priority="102">
+            <intent-filter android:priority="51">
                 <action android:name="com.example.custombroadcastsender.ACTION_SEND" />
             </intent-filter>
         </receiver>
