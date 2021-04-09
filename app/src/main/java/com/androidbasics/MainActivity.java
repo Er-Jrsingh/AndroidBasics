@@ -14,19 +14,33 @@ import android.widget.TextView;
 //      This Is  Custom Broadcast Sender App's Code (Transfer This Code Into Another Project To Run Both App At a Time )
 //       Receiver Code for Branch BroadcastReceiver Written In Class AndroidBasicsBroadcastReceiver (Transfer AndroidBasicsBroadcastReceiver Code into Another Project )(ignore Previous Codes )
 //      Calling Implicit Broadcast as Explicit Broadcast - Receiver Code  ( Transfer This Code Into Another Project To Run Both App At a Time ) (Ignore Previous code )
-
+//      Receiver Code - Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver( Transfer This Code Into Another Project To Run Both App At a Time ) (Ignore Previous code )
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTv;
-    private MyInnerReceiver myInnerReceiver;
+    //    private MyInnerReceiver myInnerReceiver;
+    OrderedBReceiver3 mReceiver = new OrderedBReceiver3();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTv = findViewById(R.id.tv);
-        myInnerReceiver = new MyInnerReceiver();
+//        myInnerReceiver = new MyInnerReceiver();
+
+        //         Receiver Code - Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver
+        //        Dynamic Registered(By Default priority high) so that not called when app closed
+        IntentFilter intentFilter = new IntentFilter("com.example.custombroadcastreceiver.ACTION_SEND");
+        intentFilter.setPriority(103);
+        registerReceiver(mReceiver, intentFilter);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(mReceiver);
+    }
+/*
 
     public void sendBroadcast(View view) {
 
@@ -62,4 +76,5 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         unregisterReceiver(myInnerReceiver);
     }
+*/
 }

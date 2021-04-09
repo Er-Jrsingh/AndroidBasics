@@ -1,3 +1,4 @@
+/*
 package com.androidbasics;
 
 import android.content.BroadcastReceiver;
@@ -13,3 +14,4 @@ public class ImplicitBroadcastAsExplicit extends BroadcastReceiver {
         Toast.makeText(context, "ImplicitBroadcastAsExplicit Called : Receiver App", Toast.LENGTH_SHORT).show();
     }
 }
+*/
