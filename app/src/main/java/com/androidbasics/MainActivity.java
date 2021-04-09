@@ -23,7 +23,7 @@ import java.util.List;
 //      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver(Receiver Code Written in Branch CustomBroadcastSender )
 //      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers ,Get And Change Property
 //      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers ,Get And Change Property,Practical Scenario (Receive code written in Branch BroadcastPracticalScenario)(Test App - Open both App In Split Mode)
-
+//      Local BroadcastReceiver :- Go To Branch LocalBroadcastReceiver
 
 public class MainActivity extends AppCompatActivity {
 
