@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
-    <string name="tab_1">Tab 1</string>
-    <string name="tab_2">Tab 2</string>
-    <string name="broadcast_sender">Broadcast Sender</string>
-    <string name="send_broadcast">Send Broadcast</string>
+    <string name="broadcast_receiver">Broadcast Receiver</string>
 </resources>
