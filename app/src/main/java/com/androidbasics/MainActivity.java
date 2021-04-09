@@ -5,9 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
+
+import java.util.List;
 
 //      Working with Implicit & Static Broadcast Receiver
 //      Creating & Working with Dynamic & Sticky Broadcast Receiver ,Best Practice : Register in start() & Unregister at stop()(It is Destroyed When Activity Destroy )
@@ -15,6 +19,7 @@ import android.view.View;
 //      Creating & Working with Custom Broadcast Receiver(Broadcast Sender Code is In CustomBroadcastSender Branch)
 //      Create Explicit Broadcast & Call In same App
 //      Explicit Broadcast- Send Broadcast from One App to Other (Receiver Code Written in Branch CustomBroadcastSender )
+//      Calling Implicit Broadcast as Explicit Broadcast In Android Oreo (Receiver Code Written in Branch CustomBroadcastSender Manifest File  & This  App Manifest File  )
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,11 +48,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendBroadcast(View view) {
+//        Calling Implicit Broadcast as Explicit Broadcast
+        Intent intent = new Intent("com.example.custombroadcastsender.ACTION_SEND");
+
+        PackageManager packageManager = getPackageManager();
+
+        List<ResolveInfo> resolveInfo = packageManager.queryBroadcastReceivers(intent, 0);
+
+        for (ResolveInfo info : resolveInfo) {
+            ComponentName componentName = new ComponentName(info.activityInfo.packageName, info.activityInfo.name);
+            intent.setComponent(componentName);
+            sendBroadcast(intent);
+        }
+
+ /*
 //      Explicit Broadcast- Send Broadcast from One App to Other (Receiver Code Written in Branch CustomBroadcastSender )
         Intent intent = new Intent();
-        ComponentName componentName = new ComponentName("com.example.custombroadcastreceiver", "com.example.custombroadcastreceiver.AndroidBasicBroadcastReceiver");
+        ComponentName componentName = new ComponentName("com.example.custombroadcastreceiver", "com.example.custombroadcastreceiver.AndroidBasicsBroadcastReceiver");
         intent.setComponent(componentName);
         sendBroadcast(intent);
+*/
 
 /*
 //          Create Explicit Broadcast & Call In same App

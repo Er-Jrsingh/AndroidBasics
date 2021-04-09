@@ -22,7 +22,12 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".MyExplicitBroadcast"/>
+        <!--    Calling Implicit Broadcast as Explicit Broadcast    (Our App Is Also register For Broadcast )-->
+        <receiver android:name=".ImplicitBroadcastAsExplicit">
+            <intent-filter>
+                <action android:name="com.example.custombroadcastsender.ACTION_SEND" />
+            </intent-filter>
+        </receiver>
 
         <!--        It Is Implicit BroadcastReceiver because Not called with class name by Any app Although Triggered By Event(action)  or Os  & Static BroadcastReceiver  because Declared in manifest     -->
         <!--       <receiver android:name=".MyBroadcastReceiver">
