@@ -21,6 +21,8 @@ import java.util.List;
 //      Explicit Broadcast- Send Broadcast from One App to Other (Receiver Code Written in Branch CustomBroadcastSender )
 //      Calling Implicit Broadcast as Explicit Broadcast In Android Oreo (Receiver Code Written in Branch CustomBroadcastSender Manifest File  & This  App Manifest File  )
 //      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver(Receiver Code Written in Branch CustomBroadcastSender )
+//      Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers ,Get And Change Property
+
 
 public class MainActivity extends AppCompatActivity {
 

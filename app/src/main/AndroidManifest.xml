@@ -23,7 +23,7 @@
         </activity>
 
         <!--   Ordered Broadcast Receiver -Send One Broadcast to Multiple Receivers & Set Priority at Receiver  -->
-        <receiver android:name=".OrderedBroadcastReceiver"/>
+        <receiver android:name=".OrderedBroadcastReceiver" />
 
         <!--    Calling Implicit Broadcast as Explicit Broadcast    (Our App Is Also register For Broadcast )-->
         <!--    <receiver android:name=".ImplicitBroadcastAsExplicit">
