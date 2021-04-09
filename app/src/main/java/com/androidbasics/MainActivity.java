@@ -13,6 +13,8 @@ import android.widget.TextView;
 //      Creating & Working with Custom Broadcast Receiver
 //      This Is  Custom Broadcast Sender App's Code (Transfer This Code Into Another Project To Run Both App At a Time )
 //       Receiver Code for Branch BroadcastReceiver Written In Class AndroidBasicsBroadcastReceiver (Transfer AndroidBasicsBroadcastReceiver Code into Another Project )(ignore Previous Codes )
+//      Calling Implicit Broadcast as Explicit Broadcast - Receiver Code  ( Transfer This Code Into Another Project To Run Both App At a Time ) (Ignore Previous code )
+
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTv;

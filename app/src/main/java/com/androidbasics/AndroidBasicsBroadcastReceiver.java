@@ -1,3 +1,4 @@
+/*
 package com.androidbasics;
 
 import android.content.BroadcastReceiver;
@@ -12,3 +13,4 @@ public class AndroidBasicsBroadcastReceiver extends BroadcastReceiver {
         Toast.makeText(context, "MyBroadcastReceiver Called : Receiver App", Toast.LENGTH_SHORT).show();
     }
 }
+*/
