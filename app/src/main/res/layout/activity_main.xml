@@ -6,4 +6,23 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/txt_vw"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:gravity="center"
+        android:text="@string/welcome_to_network_programming"
+        android:textColor="@color/light"
+        android:textSize="20sp" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="runCode"
+        android:text="@string/run"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+
 </androidx.appcompat.widget.LinearLayoutCompat>
