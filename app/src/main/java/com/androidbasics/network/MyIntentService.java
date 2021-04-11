@@ -10,16 +10,15 @@ import com.androidbasics.model.CityItem;
 import com.androidbasics.utils.HttpHelper;
 import com.google.gson.Gson;
 
-import java.io.IOException;
-
 //          Create Intent Service for Network Request
 //          Download JSON on Android with GET Request from Internet
 //          Create POJO/Java Model Class from JSON
-
+//          Authenticate REST API with Username & Password, HTTP Basic Auth
 
 public class MyIntentService extends IntentService {
     public static final String SERVICE_PAYLOAD = "service_payload";
     public static final String SERVICE_MESSAGE = "service_message";
+    public static final String SERVICE_EXCEPTION = "service_exception";
 
     public MyIntentService() {
         super("MyIntentService");
@@ -30,16 +29,24 @@ public class MyIntentService extends IntentService {
         Uri uri = intent.getData();
         String data;
         try {
-            data = HttpHelper.downloadUrl(uri.toString());
-        } catch (IOException e) {
+            data = HttpHelper.downloadUrl(uri.toString(), "root", "root");
+        } catch (Exception e) {
             e.printStackTrace();
 //            data = e.getMessage();
+            sendMessageToUi(e);
             return;
         }
 //       Convert JSON into POJO/Java Objects using GSON Library
         Gson gson = new Gson();
         CityItem[] cityItems = gson.fromJson(data, CityItem[].class);
         sendMessageToUi(cityItems);
+    }
+
+    private void sendMessageToUi(Exception e) {
+        Intent intent = new Intent(SERVICE_MESSAGE);
+        intent.putExtra(SERVICE_EXCEPTION, e.getMessage());
+        LocalBroadcastManager.getInstance(this)
+                .sendBroadcast(intent);
     }
 
     private void sendMessageToUi(CityItem[] data) {

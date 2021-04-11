@@ -1,5 +1,7 @@
 package com.androidbasics.utils;
 
+import android.util.Base64;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -8,14 +10,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 //          Download JSON on Android with GET Request from Internet
+//          Authenticate REST API with Username & Password, HTTP Basic Auth
 
 public class HttpHelper {
 
-    public static String downloadUrl(String address) throws IOException {
+    //    public static String downloadUrl(String address) throws IOException {
+    public static String downloadUrl(String address, String userName, String password) throws Exception {
+
+//        Authorization:Basic{base64_encode()}
+        byte[] loginBytes = (userName + ":" + password).getBytes();
+        StringBuilder stringBuilder = new StringBuilder()
+                .append("Basic ")
+                .append(Base64.encodeToString(loginBytes, Base64.DEFAULT));
+
         InputStream inputStream = null;
         try {
             URL url = new URL(address);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("Authorization", stringBuilder.toString());
             connection.setReadTimeout(15000);
             connection.setReadTimeout(10000);
             connection.setDoInput(true);
@@ -28,15 +40,13 @@ public class HttpHelper {
             }
             inputStream = connection.getInputStream();
             return readStream(inputStream);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
         } finally {
             if (inputStream != null) {
                 inputStream.close();
             }
         }
-        return null;
     }
 
     private static String readStream(InputStream stream) throws IOException {
