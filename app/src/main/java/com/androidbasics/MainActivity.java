@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidbasics.model.CityItem;
 import com.androidbasics.network.MyIntentService;
 import com.androidbasics.utils.NetworkHelper;
 
@@ -21,6 +22,7 @@ import com.androidbasics.utils.NetworkHelper;
 //          Check Internet is Connected Or Not(Network Status)
 //          Download JSON on Android with GET Request from Internet
 //          Create POJO/Java Model Class from JSON
+//          Convert JSON into POJO/Java Objects using GSON Library
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
@@ -31,15 +33,20 @@ public class MainActivity extends AppCompatActivity {
 //    using localhost or 127.0.0.1  refers to emulator s localhost
 //    Using PC ip When Run On Real Device
 //    Real Url :- https://jsonplaceholder.typicode.com/posts/1/comments
-//    public static final String JSON_URL = "http://192.168.48.88/hamara_pyara_bharat/json/itemsfeed.php";
-    public static final String WEB_URL = "https://jsonplaceholder.typicode.com/posts/1/comments";
-
+//    public static final String WEB_URL = "https://jsonplaceholder.typicode.com/posts/1/comments";
+    public static final String JSON_URL = "http://192.168.47.88/hamara_pyara_bharat/json/itemsfeed.php";
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String data = intent.getStringExtra(MyIntentService.SERVICE_PAYLOAD);
-            logOutput(data);
+//            String data = intent.getStringExtra(MyIntentService.SERVICE_PAYLOAD);
+//            logOutput(data);
+
+//          Convert JSON into POJO/Java Objects using GSON Library
+            CityItem[] cityItems = (CityItem[]) intent.getParcelableArrayExtra(MyIntentService.SERVICE_PAYLOAD);
+            for (CityItem item:cityItems){
+                logOutput(item.getCityname());
+            }
         }
     };
 
@@ -55,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public void runCode(View view) {
         if (isNetworkOk) {
             Intent intent = new Intent(MainActivity.this, MyIntentService.class);
-            intent.setData(Uri.parse(WEB_URL));
+            intent.setData(Uri.parse(JSON_URL));
             startService(intent);
         } else {
             Toast.makeText(this, "Network Not Available ", Toast.LENGTH_SHORT).show();
