@@ -20,13 +20,14 @@ import com.androidbasics.utils.NetworkHelper;
 //          Create Intent Service for Network Request
 //          Check Internet is Connected Or Not(Network Status)
 //          Download JSON on Android with GET Request from Internet
+//          Create POJO/Java Model Class from JSON
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
     private TextView mLog;
     private boolean isNetworkOk;
 
-//     10.0.2.2 is used to refers to local machine's localhost
+    //     10.0.2.2 is used to refers to local machine's localhost
 //    using localhost or 127.0.0.1  refers to emulator s localhost
 //    Using PC ip When Run On Real Device
 //    Real Url :- https://jsonplaceholder.typicode.com/posts/1/comments
