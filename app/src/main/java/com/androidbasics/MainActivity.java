@@ -7,20 +7,32 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.androidbasics.network.MyIntentService;
 import com.androidbasics.utils.NetworkHelper;
 
 //          Create Intent Service for Network Request
 //          Check Internet is Connected Or Not(Network Status)
+//          Download JSON on Android with GET Request from Internet
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
     private TextView mLog;
     private boolean isNetworkOk;
+
+//     10.0.2.2 is used to refers to local machine's localhost
+//    using localhost or 127.0.0.1  refers to emulator s localhost
+//    Using PC ip When Run On Real Device
+//    Real Url :- https://jsonplaceholder.typicode.com/posts/1/comments
+//    public static final String JSON_URL = "http://192.168.48.88/hamara_pyara_bharat/json/itemsfeed.php";
+    public static final String WEB_URL = "https://jsonplaceholder.typicode.com/posts/1/comments";
+
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -37,12 +49,16 @@ public class MainActivity extends AppCompatActivity {
 
         initViews();
         isNetworkOk = NetworkHelper.isNetworkAvailable(this);
-        logOutput("Network : " + isNetworkOk);
     }
 
     public void runCode(View view) {
-        Intent intent = new Intent(MainActivity.this, MyIntentService.class);
-        startService(intent);
+        if (isNetworkOk) {
+            Intent intent = new Intent(MainActivity.this, MyIntentService.class);
+            intent.setData(Uri.parse(WEB_URL));
+            startService(intent);
+        } else {
+            Toast.makeText(this, "Network Not Available ", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

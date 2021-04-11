@@ -14,7 +14,7 @@
         android:theme="@style/Theme.AndroidBasics"
         tools:ignore="AllowBackup">
         <service
-            android:name=".MyIntentService"
+            android:name=".network.MyIntentService"
             android:exported="false" />
 
         <activity android:name=".MainActivity">

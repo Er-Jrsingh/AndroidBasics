@@ -1,11 +1,17 @@
-package com.androidbasics;
+package com.androidbasics.network;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.net.Uri;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import com.androidbasics.utils.HttpHelper;
+
+import java.io.IOException;
+
 //          Create Intent Service for Network Request
+//          Download JSON on Android with GET Request from Internet
 
 public class MyIntentService extends IntentService {
     public static final String SERVICE_PAYLOAD = "service_payload";
@@ -17,7 +23,15 @@ public class MyIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        sendMessageToUi("Hola Dummo");
+        Uri uri = intent.getData();
+        String data;
+        try {
+            data = HttpHelper.downloadUrl(uri.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+            data = e.getMessage();
+        }
+        sendMessageToUi(data);
     }
 
     private void sendMessageToUi(String data) {
