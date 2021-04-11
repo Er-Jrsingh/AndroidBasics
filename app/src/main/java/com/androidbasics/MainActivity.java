@@ -12,11 +12,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.androidbasics.utils.NetworkHelper;
+
 //          Create Intent Service for Network Request
+//          Check Internet is Connected Or Not(Network Status)
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
     private TextView mLog;
+    private boolean isNetworkOk;
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -32,10 +36,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViews();
+        isNetworkOk = NetworkHelper.isNetworkAvailable(this);
+        logOutput("Network : " + isNetworkOk);
     }
 
     public void runCode(View view) {
-        Intent intent=new Intent(MainActivity.this,MyIntentService.class);
+        Intent intent = new Intent(MainActivity.this, MyIntentService.class);
         startService(intent);
     }
 
