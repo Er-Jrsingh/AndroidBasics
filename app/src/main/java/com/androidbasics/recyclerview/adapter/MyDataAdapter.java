@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.androidbasics.R;
 import com.androidbasics.model.CityItem;
+import com.androidbasics.utils.CacheImageManager;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +33,7 @@ import java.util.Random;
 //          Get Data With Image From Api & Show in Recycler View
 //          Lazy Load (Download) Images & Show in RecyclerView
 //          Lazy Load (Download) Images & Show in RecyclerView, Watch Download Process
-
+//          Download & Save Images in Cache Storage of Android Device
 
 public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHolder> {
 
@@ -68,6 +69,21 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
 //        Image From Api
         holder.imageView.setImageBitmap(mBitmaps.get(cityItem.getCityname()));
 
+//        Download & Save Images in Cache Storage of Android Device
+        try {
+            Bitmap bitmap = CacheImageManager.getImage(context, cityItem);
+            if (bitmap == null) {
+                MyImageAsyncTask task = new MyImageAsyncTask();
+                task.setViewHolder(holder);
+                task.execute(cityItem);
+            } else {
+                holder.imageView.setImageBitmap(bitmap);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+/*
 //        Lazy Load (Download) Images & Show in RecyclerView
         if (mBitmaps.containsKey(cityItem.getCityname())) {
             holder.imageView.setImageBitmap(mBitmaps.get(cityItem.getCityname()));
@@ -76,6 +92,7 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
             task.setViewHolder(holder);
             task.execute(cityItem);
         }
+ */
 /*
 //        if We Want To Get Image From assets Directory
         InputStream inputStream = null;
@@ -161,7 +178,7 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            Log.d(TAG,"doInBackground : Image Downloaded... " +imgUrl);
+            Log.d(TAG, "doInBackground : Image Downloaded... " + imgUrl);
             return bitmap;
         }
 
@@ -169,7 +186,8 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             mViewHolder.imageView.setImageBitmap(bitmap);      // set Image In RecyclerView
-            mBitmaps.put(mCityItem.getCityname(), bitmap);      //  Hold data For future Use (Before App Destroy It Present In Memory)
+            CacheImageManager.putImage(context, mCityItem, bitmap);
+//            mBitmaps.put(mCityItem.getCityname(), bitmap);      //  Hold data For future Use (Before App Destroy It Present In Memory)
         }
     }
 }
