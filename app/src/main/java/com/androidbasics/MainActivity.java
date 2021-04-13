@@ -29,6 +29,7 @@ import com.androidbasics.utils.NetworkHelper;
 //          Get Images From assets & Data From Api & Show in Recycler View
 //          Get Data With Image From Api & Show in Recycler View
 //          Lazy Load (Download) Images & Show in RecyclerView
+//          Lazy Load (Download) Images & Show in RecyclerView, Watch Download Process
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";

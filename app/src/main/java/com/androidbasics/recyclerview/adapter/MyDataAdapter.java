@@ -25,18 +25,22 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
 //          Get Images From assets & Data From Api & Show in Recycler View
 //          Get Data With Image From Api & Show in Recycler View
 //          Lazy Load (Download) Images & Show in RecyclerView
+//          Lazy Load (Download) Images & Show in RecyclerView, Watch Download Process
+
 
 public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHolder> {
 
     public static final String TAG = "MyTag";
     private final List<CityItem> mDataList;
     private final Context context;
-    private final Map<String, Bitmap> mBitmaps =new HashMap<>();
+    private final Map<String, Bitmap> mBitmaps = new HashMap<>();
+    Random random = new Random();
 
     //    public MyDataAdapter(Context context, List<CityItem> mDataList, Map<String, Bitmap> mBitmaps) {
     public MyDataAdapter(Context context, List<CityItem> mDataList) {
@@ -149,6 +153,15 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
                     }
                 }
             }
+
+//          Lazy Load (Download) Images & Show in RecyclerView, Watch Download Process
+            int sleepTime = random.nextInt(400);
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Log.d(TAG,"doInBackground : Image Downloaded... " +imgUrl);
             return bitmap;
         }
 
