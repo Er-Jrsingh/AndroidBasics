@@ -14,6 +14,7 @@ import com.google.gson.Gson;
 //          Download JSON on Android with GET Request from Internet
 //          Create POJO/Java Model Class from JSON
 //          Authenticate REST API with Username & Password, HTTP Basic Auth
+//          Show Downloaded JSON Data(POJO Objects) in Recycler View
 
 public class MyIntentService extends IntentService {
     public static final String SERVICE_PAYLOAD = "service_payload";
@@ -29,7 +30,8 @@ public class MyIntentService extends IntentService {
         Uri uri = intent.getData();
         String data;
         try {
-            data = HttpHelper.downloadUrl(uri.toString(), "root", "root");
+//            data = HttpHelper.downloadUrl(uri.toString(), "root", "root");
+            data = HttpHelper.downloadUrl(uri.toString());
         } catch (Exception e) {
             e.printStackTrace();
 //            data = e.getMessage();

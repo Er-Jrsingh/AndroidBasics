@@ -6,14 +6,21 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/txt_vw"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:gravity="center"
-        android:text="@string/welcome_to_network_programming"
-        android:textColor="@color/light"
-        android:textSize="20sp" />
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/txt_vw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/welcome_to_network_programming"
+            android:textColor="@color/light"
+            android:textSize="20sp" />
+
+    </ScrollView>
 
     <Button
         android:layout_width="300dp"
@@ -21,6 +28,15 @@
         android:layout_gravity="center_horizontal"
         android:onClick="runCode"
         android:text="@string/run"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="showList"
+        android:text="@string/showList"
         android:textAllCaps="false"
         android:textColor="@color/white" />
 

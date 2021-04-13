@@ -11,10 +11,13 @@ import java.net.URL;
 
 //          Download JSON on Android with GET Request from Internet
 //          Authenticate REST API with Username & Password, HTTP Basic Auth
+//          Show Downloaded JSON Data(POJO Objects) in Recycler View
+//          Get Images From assets & Data From Api & Show in Recycler View
 
 public class HttpHelper {
 
-    //    public static String downloadUrl(String address) throws IOException {
+    public static String downloadUrl(String address) throws Exception {
+/*
     public static String downloadUrl(String address, String userName, String password) throws Exception {
 
 //        Authorization:Basic{base64_encode()}
@@ -22,12 +25,13 @@ public class HttpHelper {
         StringBuilder stringBuilder = new StringBuilder()
                 .append("Basic ")
                 .append(Base64.encodeToString(loginBytes, Base64.DEFAULT));
+*/
 
         InputStream inputStream = null;
         try {
             URL url = new URL(address);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Authorization", stringBuilder.toString());
+//            connection.setRequestProperty("Authorization", stringBuilder.toString());
             connection.setReadTimeout(15000);
             connection.setReadTimeout(10000);
             connection.setDoInput(true);

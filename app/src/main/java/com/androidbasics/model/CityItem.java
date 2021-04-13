@@ -3,7 +3,8 @@ package com.androidbasics.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-// Create POJO/Java Model Class from JSON
+//          Show Downloaded JSON Data(POJO Objects) in Recycler View
+//          Get Images From assets & Data From Api & Show in Recycler View
 public class CityItem implements Parcelable {
 
     private int id;

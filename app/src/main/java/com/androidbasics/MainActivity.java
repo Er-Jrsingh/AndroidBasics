@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.androidbasics.model.CityItem;
 import com.androidbasics.network.MyIntentService;
+import com.androidbasics.recyclerview.ui.ListActivity;
 import com.androidbasics.utils.NetworkHelper;
 
 //          Create Intent Service for Network Request
@@ -24,6 +25,8 @@ import com.androidbasics.utils.NetworkHelper;
 //          Create POJO/Java Model Class from JSON
 //          Convert JSON into POJO/Java Objects using GSON Library
 //          Authenticate REST API with Username & Password, HTTP Basic Auth
+//          Show Downloaded JSON Data(POJO Objects) in Recycler View
+//          Get Images From assets & Data From Api & Show in Recycler View
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
@@ -35,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
 //    Using PC ip When Run On Real Device
 //    Real Url :- https://jsonplaceholder.typicode.com/posts/1/comments
 //    public static final String WEB_URL = "https://jsonplaceholder.typicode.com/posts/1/comments";
-//    public static final String JSON_URL = "http://192.168.47.88/hamara_pyara_bharat/json/itemsfeed.php";
-    public static final String JSON_URL_AUTH = "http://192.168.47.88/hamara_pyara_bharat_auth/json/itemsfeed.php";
+    public static final String JSON_URL = "http://192.168.43.54/hamara_pyara_bharat/json/itemsfeed.php";
+//    public static final String JSON_URL_AUTH = "http://192.168.43.54/hamara_pyara_bharat/json/itemsfeed.php";
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -77,11 +80,16 @@ public class MainActivity extends AppCompatActivity {
     public void runCode(View view) {
         if (isNetworkOk) {
             Intent intent = new Intent(MainActivity.this, MyIntentService.class);
-            intent.setData(Uri.parse(JSON_URL_AUTH));
+            intent.setData(Uri.parse(JSON_URL));
             startService(intent);
         } else {
             Toast.makeText(this, "Network Not Available ", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void showList(View view) {
+        Intent intent = new Intent(MainActivity.this, ListActivity.class);
+        startActivity(intent);
     }
 
     @Override
