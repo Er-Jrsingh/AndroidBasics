@@ -27,6 +27,7 @@ import com.androidbasics.utils.NetworkHelper;
 //          Authenticate REST API with Username & Password, HTTP Basic Auth
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
 //          Get Images From assets & Data From Api & Show in Recycler View
+//          Get Data With Image From Api & Show in Recycler View
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";

@@ -13,6 +13,7 @@ import java.net.URL;
 //          Authenticate REST API with Username & Password, HTTP Basic Auth
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
 //          Get Images From assets & Data From Api & Show in Recycler View
+//          Get Data With Image From Api & Show in Recycler View
 
 public class HttpHelper {
 

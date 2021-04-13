@@ -39,6 +39,8 @@ import static com.androidbasics.MainActivity.JSON_URL;
 
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
 //          Get Images From assets & Data From Api & Show in Recycler View
+//          Get Data With Image From Api & Show in Recycler View
+
 public class ListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Map<String, Bitmap>> {
 
     public static final String TAG = "myTag";

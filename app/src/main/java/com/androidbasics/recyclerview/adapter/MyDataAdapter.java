@@ -24,6 +24,8 @@ import java.util.Map;
 
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
 //          Get Images From assets & Data From Api & Show in Recycler View
+//          Get Data With Image From Api & Show in Recycler View
+
 public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHolder> {
 
     public static final String TAG = "MyTag";
@@ -54,9 +56,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
 
         holder.textView.setText(cityItem.getCityname());
 //        Image From Api
-//        holder.imageView.setImageBitmap(mBitmaps.get(cityItem.getCityname()));
+        holder.imageView.setImageBitmap(mBitmaps.get(cityItem.getCityname()));
 
 
+/*
 //        if We Want To Get Image From assets Directory
         InputStream inputStream = null;
         try {
@@ -73,7 +76,10 @@ public class MyDataAdapter extends RecyclerView.Adapter<MyDataAdapter.MyViewHold
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-    }}}
+            }
+        }
+  */
+    }
 
     @Override
     public int getItemCount() {
