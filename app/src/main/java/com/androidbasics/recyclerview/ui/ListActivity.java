@@ -40,6 +40,7 @@ import static com.androidbasics.MainActivity.JSON_URL;
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
 //          Get Images From assets & Data From Api & Show in Recycler View
 //          Get Data With Image From Api & Show in Recycler View
+//          Lazy Load (Download) Images & Show in RecyclerView
 
 public class ListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Map<String, Bitmap>> {
 
@@ -60,10 +61,13 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
                 mDataList = Arrays.asList(cityItems);       //  Converting List As Array
                 Toast.makeText(context, "Items Downloaded: " + mDataList.size(), Toast.LENGTH_SHORT).show();
 
-                getSupportLoaderManager().initLoader(0, null, ListActivity.this)
-                        .forceLoad();
-
+//                getSupportLoaderManager().initLoader(0, null, ListActivity.this)
+//                        .forceLoad();
                 Log.d(TAG, "onReceive: called");
+
+//           Lazy Load (Download) Images & Show in RecyclerView
+                showRecyclerData();
+
             } else if (intent.hasExtra(MyIntentService.SERVICE_EXCEPTION)) {
                 String message = intent.getStringExtra(MyIntentService.SERVICE_EXCEPTION);
 
@@ -90,7 +94,8 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     private void showRecyclerData() {
-        mDataAdapter = new MyDataAdapter(this, mDataList, mBitmaps);
+//        mDataAdapter = new MyDataAdapter(this, mDataList, mBitmaps);
+        mDataAdapter = new MyDataAdapter(this, mDataList);
         mRecyclerView.setAdapter(mDataAdapter);
     }
 
@@ -110,6 +115,7 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
                 .unregisterReceiver(mReceiver);
     }
 
+//    Ignore Below Code Not Used In Lazy Loading
     @NonNull
     @Override
     public Loader<Map<String, Bitmap>> onCreateLoader(int id, @Nullable Bundle args) {
@@ -120,7 +126,8 @@ public class ListActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoadFinished(@NonNull Loader<Map<String, Bitmap>> loader, Map<String, Bitmap> bitmapMap) {
 
         mBitmaps = bitmapMap;
-        mDataAdapter = new MyDataAdapter(this, mDataList, mBitmaps);
+//        mDataAdapter = new MyDataAdapter(this, mDataList, mBitmaps);
+        mDataAdapter = new MyDataAdapter(this, mDataList);
         mRecyclerView.setAdapter(mDataAdapter);
         showRecyclerData();
     }
