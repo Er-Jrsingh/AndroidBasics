@@ -6,4 +6,30 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="450dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/txt_vw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/welcome_to_network_programming"
+            android:textColor="@color/dark"
+            android:textStyle="bold|italic"
+            android:textSize="16sp" />
+
+    </ScrollView>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="runCode"
+        android:text="@string/run"
+        android:textAllCaps="false"
+        android:textColor="@color/dark" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

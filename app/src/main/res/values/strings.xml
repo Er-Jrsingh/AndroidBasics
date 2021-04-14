@@ -2,4 +2,6 @@
     <string name="app_name">AndroidBasics</string>
     <string name="tab_1">Tab 1</string>
     <string name="tab_2">Tab 2</string>
+    <string name="welcome_to_network_programming">Welcome To Network Programming Using OkHttp</string>
+    <string name="run">Run Code</string>
 </resources>
