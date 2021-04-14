@@ -5,12 +5,12 @@ $sql = "SELECT * FROM cities";
 
 //Add province filter
 if (isset($_GET['state']))
-  $province = $_GET['state'];
+  $state = $_GET['state'];
 else if (isset($_POST['state']))
-  $province = $_POST['state'];
+  $state = $_POST['state'];
 
-if (isset($province)) {
-  $filter[] = " province = '$province'";
+if (isset($state)) {
+  $filter[] = " state = '$state'";
 }
 // end of cities filter
 

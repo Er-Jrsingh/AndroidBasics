@@ -14,10 +14,12 @@ import java.net.URL;
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
 //          Get Images From assets & Data From Api & Show in Recycler View
 //          Get Data With Image From Api & Show in Recycler View
+//          Send Parameters with GET Request in URL [HttpUrlConnection]
 
 public class HttpHelper {
 
-    public static String downloadUrl(String address) throws Exception {
+    public static String downloadUrl(RequestPackage requestPackage) throws Exception {
+//    public static String downloadUrl(String address) throws Exception {
 /*
     public static String downloadUrl(String address, String userName, String password) throws Exception {
 
@@ -27,7 +29,13 @@ public class HttpHelper {
                 .append("Basic ")
                 .append(Base64.encodeToString(loginBytes, Base64.DEFAULT));
 */
+//          Send Parameters with GET Request in URL [HttpUrlConnection]
+        String address = requestPackage.getEndPoint();
+        String encodedParams = requestPackage.getEncodeParams();
 
+        if (requestPackage.getMethod().equals("GET") && encodedParams.length() > 0) {
+            address = String.format("%s?%s", address, encodedParams);
+        }
         InputStream inputStream = null;
         try {
             URL url = new URL(address);
@@ -36,7 +44,8 @@ public class HttpHelper {
             connection.setReadTimeout(15000);
             connection.setReadTimeout(10000);
             connection.setDoInput(true);
-            connection.setRequestMethod("GET");
+//            connection.setRequestMethod("GET");
+            connection.setRequestMethod(requestPackage.getMethod());
             connection.connect();
 
             int responseCode = connection.getResponseCode();

@@ -18,6 +18,7 @@ import com.androidbasics.model.CityItem;
 import com.androidbasics.network.MyIntentService;
 import com.androidbasics.recyclerview.ui.ListActivity;
 import com.androidbasics.utils.NetworkHelper;
+import com.androidbasics.utils.RequestPackage;
 
 //          Create Intent Service for Network Request
 //          Check Internet is Connected Or Not(Network Status)
@@ -31,6 +32,7 @@ import com.androidbasics.utils.NetworkHelper;
 //          Lazy Load (Download) Images & Show in RecyclerView
 //          Lazy Load (Download) Images & Show in RecyclerView, Watch Download Process
 //          Download & Save Images in Cache Storage of Android Device
+//           Send Parameters with GET Request in URL [HttpUrlConnection] (ignore Previous Code (Recycler View Code))
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 //    Using PC ip When Run On Real Device
 //    Real Url :- https://jsonplaceholder.typicode.com/posts/1/comments
 //    public static final String WEB_URL = "https://jsonplaceholder.typicode.com/posts/1/comments";
+    public static final String JSON_URL_GET = "http://192.168.43.54/hamara_pyara_bharat_get_request/json/itemsfeed.php";
     public static final String JSON_URL = "http://192.168.43.54/hamara_pyara_bharat/json/itemsfeed.php";
 //    public static final String JSON_URL_AUTH = "http://192.168.43.54/hamara_pyara_bharat/json/itemsfeed.php";
 
@@ -83,9 +86,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void runCode(View view) {
         if (isNetworkOk) {
+//            Send Parameters with GET Request in URL [HttpUrlConnection]
+
+            RequestPackage requestPackage = new RequestPackage();
+            requestPackage.setEndPoint(JSON_URL_GET);
+            requestPackage.setParams("state", "Chhattisgarh");
+
             Intent intent = new Intent(MainActivity.this, MyIntentService.class);
-            intent.setData(Uri.parse(JSON_URL));
+            intent.putExtra(MyIntentService.SERVICE_REQUEST_PACKAGE, requestPackage);
             startService(intent);
+
+//            Intent intent = new Intent(MainActivity.this, MyIntentService.class);
+//            intent.setData(Uri.parse(JSON_URL));
+//            startService(intent);
         } else {
             Toast.makeText(this, "Network Not Available ", Toast.LENGTH_SHORT).show();
         }

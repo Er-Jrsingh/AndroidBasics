@@ -8,6 +8,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.androidbasics.model.CityItem;
 import com.androidbasics.utils.HttpHelper;
+import com.androidbasics.utils.RequestPackage;
 import com.google.gson.Gson;
 
 //          Create Intent Service for Network Request
@@ -15,11 +16,13 @@ import com.google.gson.Gson;
 //          Create POJO/Java Model Class from JSON
 //          Authenticate REST API with Username & Password, HTTP Basic Auth
 //          Show Downloaded JSON Data(POJO Objects) in Recycler View
+//          Send Parameters with GET Request in URL [HttpUrlConnection]
 
 public class MyIntentService extends IntentService {
     public static final String SERVICE_PAYLOAD = "service_payload";
     public static final String SERVICE_MESSAGE = "service_message";
     public static final String SERVICE_EXCEPTION = "service_exception";
+    public static final String SERVICE_REQUEST_PACKAGE = "service_request_package";
 
     public MyIntentService() {
         super("MyIntentService");
@@ -27,7 +30,8 @@ public class MyIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Uri uri = intent.getData();
+/*
+    Uri uri = intent.getData();
         String data;
         try {
 //            data = HttpHelper.downloadUrl(uri.toString(), "root", "root");
@@ -38,6 +42,21 @@ public class MyIntentService extends IntentService {
             sendMessageToUi(e);
             return;
         }
+*/
+
+//          Send Parameters with GET Request in URL [HttpUrlConnection]
+        RequestPackage requestPackage=intent.getParcelableExtra(SERVICE_REQUEST_PACKAGE);
+        String data;
+        try {
+//            data = HttpHelper.downloadUrl(uri.toString(), "root", "root");
+            data = HttpHelper.downloadUrl(requestPackage);
+        } catch (Exception e) {
+            e.printStackTrace();
+//            data = e.getMessage();
+            sendMessageToUi(e);
+            return;
+        }
+
 //       Convert JSON into POJO/Java Objects using GSON Library
         Gson gson = new Gson();
         CityItem[] cityItems = gson.fromJson(data, CityItem[].class);
