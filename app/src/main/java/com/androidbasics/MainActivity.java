@@ -19,6 +19,8 @@ import com.androidbasics.network.MyIntentService;
 import com.androidbasics.utility.RequestPackage;
 
 //      Make GET Request with Parameters using "OKHttp Library"
+//      Make POST Request with Parameters using "OKHttp Library"
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
     private TextView mLog;
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
             RequestPackage requestPackage = new RequestPackage();
             requestPackage.setEndPoint(JSON_URL_GET);
-            requestPackage.setMethod("GET");
+            requestPackage.setMethod("POST");
             requestPackage.setParams("state", "Chhattisgarh");
 
             Intent intent = new Intent(MainActivity.this, MyIntentService.class);
