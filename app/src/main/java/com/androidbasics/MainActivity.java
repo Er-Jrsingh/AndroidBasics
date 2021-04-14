@@ -32,7 +32,8 @@ import com.androidbasics.utils.RequestPackage;
 //          Lazy Load (Download) Images & Show in RecyclerView
 //          Lazy Load (Download) Images & Show in RecyclerView, Watch Download Process
 //          Download & Save Images in Cache Storage of Android Device
-//           Send Parameters with GET Request in URL [HttpUrlConnection] (ignore Previous Code (Recycler View Code))
+//          Send Parameters with GET Request in URL [HttpUrlConnection] (ignore Previous Code (Recycler View Code))
+//          Send Parameters with POST Request Body [HttpUrlConnection]
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MyTag";
@@ -86,10 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void runCode(View view) {
         if (isNetworkOk) {
-//            Send Parameters with GET Request in URL [HttpUrlConnection]
+//            Send Parameters with POST Request in URL [HttpUrlConnection]
 
             RequestPackage requestPackage = new RequestPackage();
             requestPackage.setEndPoint(JSON_URL_GET);
+            requestPackage.setMethod("POST");
             requestPackage.setParams("state", "Chhattisgarh");
 
             Intent intent = new Intent(MainActivity.this, MyIntentService.class);

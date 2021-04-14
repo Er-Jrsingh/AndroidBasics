@@ -6,6 +6,7 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -15,6 +16,7 @@ import java.net.URL;
 //          Get Images From assets & Data From Api & Show in Recycler View
 //          Get Data With Image From Api & Show in Recycler View
 //          Send Parameters with GET Request in URL [HttpUrlConnection]
+//          Send Parameters with POST Request Body [HttpUrlConnection]
 
 public class HttpHelper {
 
@@ -46,6 +48,15 @@ public class HttpHelper {
             connection.setDoInput(true);
 //            connection.setRequestMethod("GET");
             connection.setRequestMethod(requestPackage.getMethod());
+
+//            Send Parameters with POST Request Body [HttpUrlConnection]
+            if (requestPackage.getMethod().equals("POST") && encodedParams.length() > 0) {
+                OutputStreamWriter writer=new OutputStreamWriter(connection.getOutputStream());
+                writer.write(requestPackage.getEncodeParams());
+                writer.flush();
+                writer.close();
+            }
+
             connection.connect();
 
             int responseCode = connection.getResponseCode();
