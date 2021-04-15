@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">AndroidBasics</string>
+    <string name="welcome_to_restful_api_using_retrofit">Welcome To RESTful Api Using Retrofit</string>
+    <string name="run_code">Run Code</string>
+    <string name="clear">Clear</string>
 </resources>
