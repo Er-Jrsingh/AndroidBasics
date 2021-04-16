@@ -1,13 +1,12 @@
 package com.androidbasics.model;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 public interface MyWebService {
     String BASE_URL = "https://jsonplaceholder.typicode.com/";        //  Absolute url
@@ -30,7 +29,7 @@ public interface MyWebService {
     //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
     //    Query Parameter
 //    @GET("comments?postId=1")
-    @GET("comments")
+//    @GET("comments")
 //    Call<List<Comment>> getComments(@Query("postId") int postId);         // Single Query
 
 //    Call<List<Comment>> getComments(@Query("postId") int postid,           // Multiple Query
@@ -38,6 +37,10 @@ public interface MyWebService {
 //                                    @Query("_order") String orderBy
 //    );
 
-    Call<List<Comment>> getComments(@QueryMap Map<String,String> params                 // Map Query
-    );
+//    Call<List<Comment>> getComments(@QueryMap Map<String, String> params    );             // Map Query
+
+    // Direct Url
+    @GET()
+    Call<List<Comment>> getComments(@Url String url);
+
 }
