@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
-import retrofit2.http.Url;
+import retrofit2.http.Query;
 
 public interface MyWebService {
     String BASE_URL = "https://jsonplaceholder.typicode.com/";        //  Absolute url
@@ -29,18 +29,23 @@ public interface MyWebService {
     //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
     //    Query Parameter
 //    @GET("comments?postId=1")
-//    @GET("comments")
+    @GET("comments")
 //    Call<List<Comment>> getComments(@Query("postId") int postId);         // Single Query
 
-//    Call<List<Comment>> getComments(@Query("postId") int postid,           // Multiple Query
+    //    Call<List<Comment>> getComments(@Query("postId") int postid,           // Multiple Query
 //                                    @Query("_sort") String sortBy,
 //                                    @Query("_order") String orderBy
 //    );
 
+    Call<List<Comment>> getComments(@Query("postId") Integer[] ids,           // Multiple Variable In Single Query
+                                    @Query("_sort") String sortBy,
+                                    @Query("_order") String orderBy
+    );
+
 //    Call<List<Comment>> getComments(@QueryMap Map<String, String> params    );             // Map Query
 
     // Direct Url
-    @GET()
-    Call<List<Comment>> getComments(@Url String url);
+//    @GET()
+//    Call<List<Comment>> getComments(@Url String url);
 
 }

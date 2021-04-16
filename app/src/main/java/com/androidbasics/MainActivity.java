@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         params.put("_order", "desc");
 //        Call<List<Comment>> callCom = mWebService.getComments(3, "id", "desc");
 //        Call<List<Comment>> callCom = mWebService.getComments(params);
-        Call<List<Comment>> callCom = mWebService.getComments("https://jsonplaceholder.typicode.com/posts/13/comments");
+//        Call<List<Comment>> callCom = mWebService.getComments("https://jsonplaceholder.typicode.com/posts/13/comments");
+        Call<List<Comment>> callCom = mWebService.getComments(new Integer[]{2, 4, 6, 8}, null, null);
         callCom.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
