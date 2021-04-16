@@ -10,7 +10,9 @@ import com.androidbasics.model.Comment;
 import com.androidbasics.model.MyWebService;
 import com.androidbasics.model.Post;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +40,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getComments() {
-        Call<List<Comment>> callCom = mWebService.getComments(3, "id", "desc");
+        Map<String, String> params = new HashMap<>();
+        params.put("postId", "5");
+        params.put("_sort", "email");
+        params.put("_order", "desc");
+//        Call<List<Comment>> callCom = mWebService.getComments(3, "id", "desc");
+        Call<List<Comment>> callCom = mWebService.getComments(params);
         callCom.enqueue(new Callback<List<Comment>>() {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
