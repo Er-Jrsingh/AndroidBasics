@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.androidbasics.model.Comment;
 import com.androidbasics.model.MyWebService;
 import com.androidbasics.model.Post;
 
@@ -16,21 +17,57 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 //      Simple GET request with Retrofit, @GET Request
+//      URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView nLog;
+    MyWebService mWebService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        mWebService = MyWebService.retrofit.create(MyWebService.class);
     }
 
     public void runCode(View view) {
-        MyWebService myWebService = MyWebService.retrofit.create(MyWebService.class);
-        Call<List<Post>> call = myWebService.getPost();
+//        getPosts();     //      Simple GET request with Retrofit, @GET Request
+        getComments();      //URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
+    }
+
+    private void getComments() {
+        Call<List<Comment>> callCom = mWebService.getComments(3, "id", "desc");
+        callCom.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
+                if (response.isSuccessful()) {
+                    showComments(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void showComments(List<Comment> body) {
+        for (Comment comment : body) {
+            nLog.append("Id : " + comment.getId() + "\n");
+            nLog.append("PostId : " + comment.getPostId() + "\n");
+            nLog.append("User : " + comment.getName() + "\n");
+            nLog.append("Email : " + comment.getEmail() + "\n");
+            nLog.append("Body : " + comment.getBody() + "\n\n");
+        }
+    }
+
+
+    private void getPosts() {
+//      Simple GET request with Retrofit, @GET Request Modified
+        Call<List<Post>> call = mWebService.getPost();
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
@@ -41,12 +78,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+            /*
+           //      Simple GET request with Retrofit, @GET Request Old
+                          MyWebService myWebService = MyWebService.retrofit.create(MyWebService.class);
+                           Call<List<Post>> call = myWebService.getPost();
+                           call.enqueue(new Callback<List<Post>>() {
+                               @Override
+                               public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                                   if (response.isSuccessful()) {
+                                       for (Post post : response.body()) {
+                                       showPost(post);
+                                 }
+           }*/
             @Override
             public void onFailure(Call<List<Post>> call, Throwable t) {
-
             }
         });
-
     }
 
     private void showPost(Post post) {
