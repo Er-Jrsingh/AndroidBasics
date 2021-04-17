@@ -2,11 +2,13 @@ package com.androidbasics.model;
 
 import com.google.gson.annotations.SerializedName;
 
+//      Logging Retrofit Request & Response with HTTP Interceptor & Serialise Nulls
+
 public class Post {
 
     private int userId;
-    private int id;
-    //    private Integer id;                     // Used When It May null By Gson
+//    private int id;
+        private Integer id;                     // Used When It May null By Gson
     private String title;
     @SerializedName("body")       // To Give Custom Name In POJO
     private String text;
@@ -26,7 +28,10 @@ public class Post {
         this.userId = userId;
     }
 
-    public int getId() {
+//    public int getId() {
+//        return id;
+//    }
+    public Integer getId() {
         return id;
     }
 

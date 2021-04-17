@@ -28,7 +28,7 @@ import retrofit2.Response;
 //      PUT  Request with Retrofit, @PUT
 //     DELETE  Request with Retrofit, @DELETE
 //      Logging Retrofit Request & Response with HTTP Interceptor
-
+//      Logging Retrofit Request & Response with HTTP Interceptor & Serialise Nulls
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
 //        mWebService = MyWebService.retrofit.create(MyWebService.class);
-        mWebService= NetworkHelper.getRetrofit().create(MyWebService.class);
+        mWebService = NetworkHelper.getRetrofit().create(MyWebService.class);
     }
 
     public void runCode(View view) {
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updatePostByPatch() {
-        Post postPatch = new Post(15, "New Title", "New Body");
+        Post postPatch = new Post(15, "New Title", null);
         Call<Post> patchCall = mWebService.patchPost(5, postPatch);
         patchCall.enqueue(new Callback<Post>() {
             @SuppressLint("SetTextI18n")
