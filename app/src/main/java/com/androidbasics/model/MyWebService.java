@@ -1,11 +1,15 @@
 package com.androidbasics.model;
 
+//      POST Request with Retrofit, @Body, @FormUrlEncoded
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface MyWebService {
@@ -47,5 +51,9 @@ public interface MyWebService {
     // Direct Url
 //    @GET()
 //    Call<List<Comment>> getComments(@Url String url);
+
+    //      POST Request with Retrofit, @Body
+    @POST("posts")
+    Call<Post> createPost(@Body Post post);
 
 }

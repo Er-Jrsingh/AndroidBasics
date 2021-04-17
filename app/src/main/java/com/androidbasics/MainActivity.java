@@ -20,6 +20,7 @@ import retrofit2.Response;
 
 //      Simple GET request with Retrofit, @GET Request
 //      URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
+//      POST Request with Retrofit, @Body
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,8 +36,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runCode(View view) {
-//        getPosts();     //      Simple GET request with Retrofit, @GET Request
-        getComments();      //URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
+//        getPosts();               //    Simple GET request with Retrofit, @GET Request
+//        getComments();     //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
+        createPost();           //   POST Request with Retrofit, @Body
+    }
+
+    private void createPost() {
+        Post post = new Post(1, "Post Title", "This Is Post Body");
+        Call<Post> postCall = mWebService.createPost(post);
+        postCall.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()) {
+                    nLog.setText(String.valueOf(response.code()));
+                    showPost(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getComments() {
@@ -107,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showPost(Post post) {
         nLog.setTextColor(getResources().getColor(R.color.french_blue));
-        nLog.append("User Id : " + post.getUserId() + "\n");
+        nLog.append("\nUser Id : " + post.getUserId() + "\n");
         nLog.append("Id : " + post.getId() + "\n");
         nLog.append("Title : " + post.getTitle() + "\n");
         nLog.append("Body : " + post.getText() + "\n\n");
