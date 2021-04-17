@@ -25,6 +25,8 @@ import retrofit2.Response;
 //      POST Request with Retrofit, @FormUrlEncoded
 //      POST Request with Retrofit, @FieldMap
 //      PUT  Request with Retrofit, @PUT
+//     DELETE  Request with Retrofit, @DELETE
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -44,8 +46,26 @@ public class MainActivity extends AppCompatActivity {
 //        getComments();       //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
 //        createPost();            //   POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
 //        updatePost();           //  PUT  Request with Retrofit, @PUT
-        updatePostByPatch();  //  PATCH  Request with Retrofit @PATCH
+//        updatePostByPatch();  //  PATCH  Request with Retrofit @PATCH
+        deletePost();           //  DELETE  Request with Retrofit, @DELETE
+    }
 
+    private void deletePost() {
+        Call<Void> delCall = mWebService.deletePost(5);
+        delCall.enqueue(new Callback<Void>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    nLog.setText(getString(R.string.resp) + response.code() + "\n Mean Data Deleted Successfully ");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
     }
 
     private void updatePostByPatch() {

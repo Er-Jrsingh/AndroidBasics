@@ -2,6 +2,7 @@ package com.androidbasics.model;
 
 //      POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
 //     PUT,PATCH  Request with Retrofit, @PUT, @PATCH
+//     DELETE  Request with Retrofit, @DELETE
 
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -83,4 +85,8 @@ public interface MyWebService {
     //  PATCH  Request with Retrofit, @PATCH
     @PATCH("posts/{id}")
     Call<Post> patchPost(@Path("id") int id, @Body Post post);
+
+    //     DELETE  Request with Retrofit, @DELETE
+    @DELETE("posts/{id}")
+    Call<Void> deletePost(@Path("id") int id);
 }
