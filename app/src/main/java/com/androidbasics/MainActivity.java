@@ -1,5 +1,6 @@
 package com.androidbasics;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import retrofit2.Response;
 //      POST Request with Retrofit, @Body
 //      POST Request with Retrofit, @FormUrlEncoded
 //      POST Request with Retrofit, @FieldMap
+//      PUT  Request with Retrofit, @PUT
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,9 +40,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runCode(View view) {
-//        getPosts();               //    Simple GET request with Retrofit, @GET Request
-//        getComments();     //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
-        createPost();           //   POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
+//        getPosts();                //    Simple GET request with Retrofit, @GET Request
+//        getComments();       //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
+//        createPost();            //   POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
+        updatePost();              //  PUT  Request with Retrofit, @PUT
+
+    }
+
+    private void updatePost() {
+        Post post = new Post(15, "New Title", "New Text");
+        Call<Post> postCall = mWebService.putPost(5, post);
+        postCall.enqueue(new Callback<Post>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()) {
+                    nLog.setText(getString(R.string.resp) + response.code());
+                    showPost(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+
+            }
+        });
     }
 
     private void createPost() {
