@@ -1,14 +1,16 @@
 package com.androidbasics.model;
 
-//      POST Request with Retrofit, @Body, @FormUrlEncoded
+//      POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -64,4 +66,9 @@ public interface MyWebService {
     Call<Post> createPost(@Field("userId") int uId,
                           @Field("title") String title,
                           @Field("body") String text);
+
+    //    POST Request with Retrofit @FieldMap
+    @FormUrlEncoded
+    @POST("posts")
+    Call<Post> createPost(@FieldMap Map<String, String> postMap);
 }
