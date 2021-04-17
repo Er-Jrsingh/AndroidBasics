@@ -1,7 +1,7 @@
 package com.androidbasics.model;
 
 //      POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
-//      PUT  Request with Retrofit, @PUT
+//     PUT,PATCH  Request with Retrofit, @PUT, @PATCH
 
 import java.util.List;
 import java.util.Map;
@@ -80,4 +80,7 @@ public interface MyWebService {
     @PUT("posts/{id}")
     Call<Post> putPost(@Path("id") int id, @Body Post post);
 
+    //  PATCH  Request with Retrofit, @PATCH
+    @PATCH("posts/{id}")
+    Call<Post> patchPost(@Path("id") int id, @Body Post post);
 }

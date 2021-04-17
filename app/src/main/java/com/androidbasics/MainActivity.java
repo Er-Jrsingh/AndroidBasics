@@ -43,8 +43,29 @@ public class MainActivity extends AppCompatActivity {
 //        getPosts();                //    Simple GET request with Retrofit, @GET Request
 //        getComments();       //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
 //        createPost();            //   POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
-        updatePost();              //  PUT  Request with Retrofit, @PUT
+//        updatePost();           //  PUT  Request with Retrofit, @PUT
+        updatePostByPatch();  //  PATCH  Request with Retrofit @PATCH
 
+    }
+
+    private void updatePostByPatch() {
+        Post postPatch = new Post(15, "New Title", "New Body");
+        Call<Post> patchCall = mWebService.patchPost(5, postPatch);
+        patchCall.enqueue(new Callback<Post>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                if (response.isSuccessful()) {
+                    nLog.setText(getString(R.string.resp) + response.code());
+                    showPost(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+
+            }
+        });
     }
 
     private void updatePost() {
