@@ -21,6 +21,7 @@ import retrofit2.Response;
 //      Simple GET request with Retrofit, @GET Request
 //      URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
 //      POST Request with Retrofit, @Body
+//      POST Request with Retrofit, @FormUrlEncoded
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,12 +39,13 @@ public class MainActivity extends AppCompatActivity {
     public void runCode(View view) {
 //        getPosts();               //    Simple GET request with Retrofit, @GET Request
 //        getComments();     //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
-        createPost();           //   POST Request with Retrofit, @Body
+        createPost();           //   POST Request with Retrofit, @Body, @FormUrlEncoded
     }
 
     private void createPost() {
         Post post = new Post(1, "Post Title", "This Is Post Body");
-        Call<Post> postCall = mWebService.createPost(post);
+//        Call<Post> postCall = mWebService.createPost(post);                                                                             //@Body
+        Call<Post> postCall = mWebService.createPost(3, "Post Title", "This Is Post Body");     //@FormUrlEncoded
         postCall.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
