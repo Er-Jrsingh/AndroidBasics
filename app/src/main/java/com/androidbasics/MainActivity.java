@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.androidbasics.model.Comment;
 import com.androidbasics.model.MyWebService;
 import com.androidbasics.model.Post;
+import com.androidbasics.network.NetworkHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +27,7 @@ import retrofit2.Response;
 //      POST Request with Retrofit, @FieldMap
 //      PUT  Request with Retrofit, @PUT
 //     DELETE  Request with Retrofit, @DELETE
+//      Logging Retrofit Request & Response with HTTP Interceptor
 
 
 public class MainActivity extends AppCompatActivity {
@@ -38,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        mWebService = MyWebService.retrofit.create(MyWebService.class);
+//        mWebService = MyWebService.retrofit.create(MyWebService.class);
+        mWebService= NetworkHelper.getRetrofit().create(MyWebService.class);
     }
 
     public void runCode(View view) {
@@ -46,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 //        getComments();       //    URL Manipulation with Retrofit, @Path, @Query, @QueryMap, @Url
 //        createPost();            //   POST Request with Retrofit, @Body, @FormUrlEncoded, @FieldMap
 //        updatePost();           //  PUT  Request with Retrofit, @PUT
-//        updatePostByPatch();  //  PATCH  Request with Retrofit @PATCH
-        deletePost();           //  DELETE  Request with Retrofit, @DELETE
+        updatePostByPatch();  //  PATCH  Request with Retrofit @PATCH
+//        deletePost();           //  DELETE  Request with Retrofit, @DELETE
     }
 
     private void deletePost() {
