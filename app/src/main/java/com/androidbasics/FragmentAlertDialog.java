@@ -43,12 +43,18 @@ public class FragmentAlertDialog extends DialogFragment {
         return alertBuilder.create();
     }
 
-    //    Called When Clicked at Outside the Model Style Window(Pop Up Window) Not in Cancel Button, So setCancelable Must Not Be false
+    //    Called When Clicked at Outside the Model Style Window(Pop Up Window) Not in Cancel(setNeutralButton) Button, So setCancelable Must Not Be false
 
     @Override
     public void onCancel(@NonNull DialogInterface dialog) {
         super.onCancel(dialog);
         Toast.makeText(getActivity(), "onCancel Method Called", Toast.LENGTH_SHORT).show();
+    }
 
+    //    Always Called Mean Every Button Pressed (yes , no , cancel , outside pop up)
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        Toast.makeText(getActivity(), "onDismiss Method Called", Toast.LENGTH_SHORT).show();
     }
 }
