@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void createDialog(View view) {
         FragmentAlertDialog alertDialog = new FragmentAlertDialog();
-        alertDialog.setCancelable(false);
+//        alertDialog.setCancelable(false);
         alertDialog.show(getSupportFragmentManager(), "FragmentAlertDialog");
     }
 }
