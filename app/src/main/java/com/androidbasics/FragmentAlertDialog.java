@@ -22,7 +22,7 @@ public class FragmentAlertDialog extends DialogFragment {
         alertBuilder.setTitle("Please Pick Color");
 //        alertBuilder.setMessage("Are You Sure??");
 
-        alertBuilder.setMultiChoiceItems(mColors, null, new DialogInterface.OnMultiChoiceClickListener() {
+        alertBuilder.setMultiChoiceItems(mColors, new boolean[]{true, false, false, true}, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 if (isChecked) {
