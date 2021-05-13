@@ -21,7 +21,7 @@ public class FragmentAlertDialog extends DialogFragment {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
         alertBuilder.setTitle("Please Pick Color");
 //        alertBuilder.setMessage("Are You Sure??");
-        alertBuilder.setItems(mColors, new DialogInterface.OnClickListener() {
+        alertBuilder.setSingleChoiceItems(mColors, 2, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getActivity(), "You Selected " + mColors[which], Toast.LENGTH_SHORT).show();
@@ -29,26 +29,26 @@ public class FragmentAlertDialog extends DialogFragment {
         });
 
         // Add User Actions On AlertDialog
-//        alertBuilder.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(getActivity(), "Ohh Yesssss!!...", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//        alertBuilder.setNegativeButton("Nooop", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(getActivity(), "So Sorry !!...", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//        alertBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Toast.makeText(getActivity(), "Thik Hai Bhai", Toast.LENGTH_LONG).show();
-//                alertBuilder.create().dismiss();
-//            }
-//        });
-//
+        alertBuilder.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "Ohh Yesssss!!...", Toast.LENGTH_LONG).show();
+            }
+        });
+        alertBuilder.setNegativeButton("Nooop", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "So Sorry !!...", Toast.LENGTH_LONG).show();
+            }
+        });
+        alertBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "Thik Hai Bhai", Toast.LENGTH_LONG).show();
+                alertBuilder.create().dismiss();
+            }
+        });
+
         return alertBuilder.create();
     }
 
