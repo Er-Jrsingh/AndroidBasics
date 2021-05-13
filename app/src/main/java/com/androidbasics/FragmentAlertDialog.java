@@ -21,12 +21,24 @@ public class FragmentAlertDialog extends DialogFragment {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(getActivity());
         alertBuilder.setTitle("Please Pick Color");
 //        alertBuilder.setMessage("Are You Sure??");
-        alertBuilder.setSingleChoiceItems(mColors, 2, new DialogInterface.OnClickListener() {
+
+        alertBuilder.setMultiChoiceItems(mColors, null, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "You Selected " + mColors[which], Toast.LENGTH_SHORT).show();
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(getActivity(), "Color Added " + mColors[which], Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Color Removed " + mColors[which], Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+//        alertBuilder.setSingleChoiceItems(mColors, 2, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                Toast.makeText(getActivity(), "You Selected " + mColors[which], Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         // Add User Actions On AlertDialog
         alertBuilder.setPositiveButton("Yup", new DialogInterface.OnClickListener() {
