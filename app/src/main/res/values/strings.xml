@@ -2,7 +2,7 @@
     <string name="app_name">AndroidBasics</string>
     <string name="inbox">Inbox</string>
     <string name="outbox">Outbox</string>
-    <string name="trash">trash</string>
+    <string name="trash">Trash</string>
     <string name="spam">Spam</string>
     <string name="me_drawer">Me Drawer!</string>
     <string name="forums">Forums</string>
@@ -14,4 +14,7 @@
     <string name="my_navigation_demo">My Navigation Demo</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="this_is_inbox_fragment">This is Inbox Fragment</string>
+    <string name="this_is_outbox_fragment">This is Outbox Fragment</string>
+    <string name="this_is_trash_fragment">This is Trash Fragment</string>
 </resources>
